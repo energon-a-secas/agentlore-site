@@ -1,0 +1,12 @@
+# ── Playwright MCP session data (screenshots and logs, not source code) ───────
+.playwright-mcp/
+
+# ── Node dependencies ─────────────────────────────────────────────────────────
+node_modules/
+
+# ── Secrets ───────────────────────────────────────────────────────────────────
+.env
+.env.*
+
+# ── macOS metadata (binary, not useful to read) ───────────────────────────────
+.DS_Store
