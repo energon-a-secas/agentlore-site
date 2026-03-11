@@ -289,7 +289,7 @@ This shows input, output, and cache tokens after each turn. Useful for spotting 
 
 Claude Code stores token usage in session files at \`~/.claude/projects/\`. A Python script can read them and estimate costs across all billing methods.
 
-Full script: [claude-costs.py on GitHub](https://github.com/energon-a-secas/codex-site/blob/main/scripts/claude-costs.py)
+Full script: [claude-costs.py on GitHub](https://github.com/energon-a-secas/agentlore-site/blob/main/scripts/claude-costs.py)
 
 \`\`\`bash
 python3 claude-costs.py                          # API pricing, last 30 days
@@ -365,11 +365,11 @@ Claude Code stores token usage (input, output, cache write, cache read) in JSONL
 ## Download
 
 \`\`\`bash
-curl -o claude-costs.py https://raw.githubusercontent.com/energon-a-secas/codex-site/main/scripts/claude-costs.py
+curl -o claude-costs.py https://raw.githubusercontent.com/energon-a-secas/agentlore-site/main/scripts/claude-costs.py
 chmod +x claude-costs.py
 \`\`\`
 
-Or copy the full script from the [source file](https://github.com/energon-a-secas/codex-site/blob/main/scripts/claude-costs.py).
+Or copy the full script from the [source file](https://github.com/energon-a-secas/agentlore-site/blob/main/scripts/claude-costs.py).
 
 Requires Python 3.8+. No external dependencies.
 
@@ -1349,7 +1349,7 @@ C4Context
     title System Context
 
     Person(user, "Developer", "Uses the tool")
-    System(app, "Codex", "AI tutorial hub")
+    System(app, "Agent Lore", "AI tutorial hub")
     System_Ext(github, "GitHub Pages", "Static hosting")
 
     Rel(user, app, "Browses tutorials")

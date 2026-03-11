@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'codex-completed';
+const STORAGE_KEY = 'agentlore-completed';
 
 function loadCompleted() {
   try {

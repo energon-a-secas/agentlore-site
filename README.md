@@ -1,6 +1,6 @@
 <div align="center">
 
-# Codex
+# Agent Lore
 
 **Browse AI agent tutorials for Claude and Cursor**
 
@@ -17,9 +17,9 @@
 
 ## Overview
 
-Codex is a searchable tutorial hub for AI-assisted development workflows. It covers agent skills, slash commands, context switching strategies, Mermaid diagrams, and MCP configuration -- with quick reference cards that expand into full tutorials on click.
+Agent Lore is a searchable tutorial hub for AI-assisted development workflows. It covers agent skills, slash commands, context switching strategies, Mermaid diagrams, and MCP configuration -- with quick reference cards that expand into full tutorials on click.
 
-**Live:** [codex.neorgon.com](https://codex.neorgon.com/)
+**Live:** [agentlore.neorgon.com](https://agentlore.neorgon.com/)
 
 ## Features
 
@@ -36,7 +36,7 @@ Codex is a searchable tutorial hub for AI-assisted development workflows. It cov
 ## Running locally
 
 ```bash
-cd codex-site
+cd agentlore-site
 make serve    # → http://localhost:8818
 ```
 
@@ -53,7 +53,7 @@ ES modules require an HTTP server -- `file://` won't work.
 ![Architecture](docs/architecture.svg)
 
 ```
-codex-site/
+agentlore-site/
 ├── index.html           # App shell -- header, search, filters, grid
 ├── path/
 │   └── index.html       # Learning path page (path-app.js), URL: /path/
@@ -71,7 +71,7 @@ codex-site/
 │   ├── architecture.mmd # Mermaid source
 │   └── architecture.svg # Generated diagram
 ├── Makefile             # PORT = 8818
-├── CNAME                # codex.neorgon.com
+├── CNAME                # agentlore.neorgon.com
 ├── robots.txt
 └── sitemap.xml
 ```
@@ -92,7 +92,7 @@ Part of [Neorgon](https://neorgon.com/)
 [badge-claude]:  https://img.shields.io/badge/Claude_Code-CC785C?style=for-the-badge&logo=anthropic&logoColor=white
 [badge-license]: https://img.shields.io/badge/license-MIT-404040?style=for-the-badge
 
-[url-site]:   https://codex.neorgon.com/
+[url-site]:   https://agentlore.neorgon.com/
 [url-html]:   #
 [url-css]:    #
 [url-js]:     #
