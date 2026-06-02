@@ -42,7 +42,7 @@ body {
 
 /* ── Header ────────────────────────────────────────────────── */
 .header-bar {
-  background: linear-gradient(135deg, #B015B0 0%, #3D0080 45%, #080010 100%);
+  background: linear-gradient(135deg, #B015B0 0%, #3D0080 50%, #080010 100%);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-subtle);
   padding: 0 var(--space-6);
@@ -979,4 +979,26 @@ body {
   .path-row--shared { padding: var(--space-2) var(--space-3); }
   .path-cell--claude { border-left-width: 3px; }
   .path-cell--cursor { border-left-width: 3px; }
+}
+
+/* ── Template alignment (header title link + footer) ── */
+.header-title-link { text-decoration: none; color: inherit; }
+.info-footer {
+  text-align: center;
+  padding: 24px 24px 28px;
+  color: rgba(255,255,255,.45);
+  font-size: .78em;
+  line-height: 1.8;
+  border-top: 1px solid rgba(255,255,255,.08);
+  margin-top: 32px;
+}
+.footer-link {
+  color: rgba(255,255,255,.45);
+  text-decoration: none;
+  transition: color 200ms;
+}
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: rgba(255,255,255,.72);
+  text-decoration: underline;
 }
