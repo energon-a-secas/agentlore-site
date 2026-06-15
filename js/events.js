@@ -121,6 +121,15 @@ function bindCardClicks(s) {
       return;
     }
   });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('.tutorial-card');
+    if (card) {
+      e.preventDefault();
+      openModal(s, card.dataset.id);
+    }
+  });
 }
 
 function bindModal(s) {
