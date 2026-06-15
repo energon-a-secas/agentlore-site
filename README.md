@@ -2,7 +2,7 @@
 
 # Agent Lore
 
-**Browse AI agent tutorials for Claude and Cursor**
+**Browse AI agent tutorials for Claude Code, Cursor, and local AI**
 
 [![Live][badge-site]][url-site]
 [![HTML5][badge-html]][url-html]
@@ -17,20 +17,22 @@
 
 ## Overview
 
-Agent Lore is a searchable tutorial hub for AI-assisted development workflows. It covers agent skills, slash commands, context switching strategies, Mermaid diagrams, and MCP configuration -- with quick reference cards that expand into full tutorials on click.
+**Agent Lore** is a fast, searchable field guide for developers who want to stop treating AI as a chatbot and start using it as a reliable coding partner. It focuses on the most capable agentic coding tools — **Claude Code**, **Cursor**, and **local AI stacks** — and turns their sprawling feature sets into short, copy-paste-ready tutorials you can actually use at your desk.
+
+The site is built for working developers, indie builders, and technical leads who already write code but want to move faster with AI. Every tutorial is a card first and a deep guide second: scan for the topic, click to expand, copy the commands, and go. The value proposition is **practical fluency** — not marketing fluff, just the exact flags, files, prompts, and workflows that make AI agents produce better output with fewer tokens and fewer surprises.
 
 **Live:** [agentlore.neorgon.com](https://agentlore.neorgon.com/)
 
 ## Features
 
-- **17 tutorials** across 6 categories -- Skills, Commands, Context, Diagrams, Tips, MCPs
+- **40+ tutorials** across 8 categories -- Setup, Skills, Commands, Context, Diagrams, Tips, MCPs, and Local AI
 - **Hybrid cards** -- scan titles at a glance, click to expand into full step-by-step guides
-- **Tool badges** -- filter by Claude, Cursor, or both
+- **Tool badges** -- filter by Claude, Cursor, or local AI tools
 - **Difficulty levels** -- beginner, intermediate, advanced with color-coded badges
 - **Category filters** -- dropdown filtering with result count
 - **Live search** -- instant keyword matching with `/` keyboard shortcut
 - **Code blocks** -- fenced code with one-click copy buttons
-- **MCP dimming** -- MCP tutorials are visually deprioritized (lower opacity)
+- **Learning paths** -- guided Core Agent Skills and Local AI tracks with progress tracking
 - **Markdown-lite renderer** -- headings, lists, tables, bold, inline code, links
 
 ## Running locally
@@ -65,7 +67,7 @@ agentlore-site/
 │   ├── state.js         # Filter state (search, category, tool, difficulty)
 │   ├── render.js        # Card rendering, dropdown population
 │   ├── events.js        # Search, filter, expand/collapse, copy delegation
-│   ├── data.js          # 17 tutorial entries with markdown content
+│   ├── data.js          # 40+ tutorial entries with markdown content
 │   └── utils.js         # escHtml, showToast, debounce, renderMarkdown
 ├── docs/
 │   ├── architecture.mmd # Mermaid source

@@ -18,14 +18,22 @@ config:
     fontSize: "13px"
 ---
 flowchart TB
-    User([User]) --> HTML["index.html\nApp shell"]
+    User([User]) --> Browse["index.html\nBrowse page"]
+    User --> PathPage["path/index.html\nLearning paths page"]
 
     subgraph App["ES Modules"]
-        HTML --> app["app.js\nEntry point"]
-        app --> state["state.js\nFilter state"]
-        app --> render["render.js\nCard grid + dropdowns"]
-        app --> events["events.js\nSearch, filter, expand, copy"]
-        render --> data["data.js\n17 tutorials across 6 categories"]
+        Browse --> app["app.js\nBrowse entry point"]
+        PathPage --> pathApp["path-app.js\nPath entry point"]
+        app --> state
+        pathApp --> state
+        app --> render
+        pathApp --> render
+        app --> events
+        pathApp --> events
+        render --> data["data.js\n52 tutorials across 8 categories + PATHS"]
         render --> utils["utils.js\nMarkdown renderer + helpers"]
         events --> utils
     end
+
+    state["state.js\nFilters, active path, completed set"] --> render
+    events["events.js\nSearch, filter, modal, progress"] --> state
