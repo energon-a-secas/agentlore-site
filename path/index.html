@@ -28,6 +28,12 @@
   <meta name="theme-color" content="#040714">
   <link rel="icon" type="image/x-icon" href="../favicon.ico" />
   <link rel="stylesheet" href="../css/style.css">
+  <!-- Neorgon Header Kit (vendored; ?header=live swaps CSS to CDN) -->
+  <script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+  <link rel="stylesheet" href="../css/neorgon-header.css">
+  <link rel="stylesheet" href="../css/neorgon-themes.css">
+  <link rel="stylesheet" href="https://pub-b597cd281a384f98a47e1f043a6c4160.r2.dev/v1.0.0/header/season.css">
+  <script defer src="../js/neorgon-header.js"></script>
   <link rel="modulepreload" href="../js/data.js">
   <link rel="modulepreload" href="../js/render.js">
   <link rel="modulepreload" href="../js/events.js">
@@ -38,7 +44,7 @@
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="header-bar">
+  <header class="header-bar" data-header-mode="content">
     <div class="header-logo">
       <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
         <img src="../energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
@@ -48,15 +54,18 @@
         <div class="header-subtitle">AI agent tutorials for Claude, Cursor & local AI</div>
       </a>
     </div>
-    <nav class="header-nav">
-      <a class="nav-tab" href="../">Browse</a>
-      <a class="nav-tab active" href="./">Learning Path</a>
-    </nav>
-    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+    <div class="header-right">
+      <nav class="header-actions header-nav">
+        <a data-keep-mobile class="nav-tab" href="../">Browse</a>
+        <a data-keep-mobile class="nav-tab active" href="./">Learning Path</a>
+    
+      </nav>
+      <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
       <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
       </svg>
-    </a>
+      </a>
+    </div>
   </header>
 
   <main id="main">
