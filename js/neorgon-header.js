@@ -10,7 +10,7 @@
   if (window.__neoHeaderInit) return;
   window.__neoHeaderInit = true;
 
-  var CDN = 'https://pub-b597cd281a384f98a47e1f043a6c4160.r2.dev/v1.0.0';
+  var CDN = 'https://cdn.neorgon.org/v1.0.0';
   var MOBILE = '(max-width: 700px)';
   var COOKIE = 'neo_theme';
 
@@ -296,9 +296,12 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
-  /* Public API — sites and the hub can hook in (e.g. sync page effects) */
+  /* Public API — sites and the hub can hook in (e.g. sync page effects).
+     `list` carries labels/swatches so the footer kit can render its own
+     theme menu from this one registry instead of copying it. */
   window.NeoHeader = {
     themes: THEMES.map(function (t) { return t.id; }),
+    list: THEMES,
     getTheme: currentTheme,
     setTheme: function (name) { applyTheme(name); }
   };
