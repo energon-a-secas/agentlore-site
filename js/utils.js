@@ -37,96 +37,182 @@ export function debounce(fn, ms) {
   };
 }
 
+export async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:absolute;left:-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch { ok = false; }
+    ta.remove();
+    return ok;
+  }
+}
+
+export function slugify(text) {
+  return String(text)
+    .toLowerCase()
+    .replace(/`/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .slice(0, 60);
+}
+
+export function formatNumber(n) {
+  return new Intl.NumberFormat('en-US').format(n);
+}
+
+/** Compact token counts: 200000 → "200K", 1000000 → "1M". */
+export function formatTokens(n) {
+  if (n >= 1_000_000) return `${+(n / 1_000_000).toFixed(n % 1_000_000 ? 1 : 0)}M`;
+  if (n >= 1_000) return `${Math.round(n / 1_000)}K`;
+  return String(n);
+}
+
+export function formatUSD(n, { precise = false } = {}) {
+  if (n === 0) return '$0';
+  if (precise || n < 10) {
+    return `$${n.toFixed(n < 1 ? 3 : 2)}`.replace(/\.?0+$/, m => (m.includes('.') ? '' : m));
+  }
+  return `$${Math.round(n).toLocaleString('en-US')}`;
+}
+
+export function daysSince(isoDate) {
+  const then = Date.parse(isoDate + 'T00:00:00Z');
+  if (Number.isNaN(then)) return Infinity;
+  return Math.floor((Date.now() - then) / 86_400_000);
+}
+
 const COPY_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
 
+const CALLOUTS = {
+  note:   { label: 'Note',        icon: 'i' },
+  tip:    { label: 'Tip',         icon: '★' },
+  warn:   { label: 'Watch out',   icon: '!' },
+  danger: { label: 'Do not',      icon: '✕' },
+  cost:   { label: 'Cost impact', icon: '$' },
+};
+
 /**
- * Render markdown-like content to HTML.
- * Supports: ## headings, ### headings, ```code blocks```, **bold**,
- * `inline code`, [links](url), - bullet lists, numbered lists, | tables, paragraphs.
+ * Render markdown-like content to HTML. Deliberately small — no dependency,
+ * no build step — but the block set is fixed by what the content needs:
+ * headings, fenced code, tables, nested lists, blockquotes, callouts, rules.
+ *
+ * Code-block ids are positional, not random, so generated pages are stable
+ * across builds.
  */
 export function renderMarkdown(src) {
-  const lines = src.split('\n');
+  const lines = String(src).split('\n');
   const out = [];
   let i = 0;
-  let inList = false;
-  let listType = '';
-  let inTable = false;
+  let codeCount = 0;
 
-  function closeList() {
-    if (inList) { out.push(listType === 'ul' ? '</ul>' : '</ol>'); inList = false; }
-  }
-  function closeTable() {
-    if (inTable) { out.push('</tbody></table>'); inTable = false; }
+  const listStack = [];
+  function closeLists(toDepth = 0) {
+    while (listStack.length > toDepth) out.push(listStack.pop() === 'ul' ? '</li></ul>' : '</li></ol>');
   }
 
   while (i < lines.length) {
     const line = lines[i];
 
     if (line.startsWith('```')) {
-      closeList();
-      closeTable();
+      closeLists();
+      const lang = line.slice(3).trim();
       const codeLines = [];
       i++;
       while (i < lines.length && !lines[i].startsWith('```')) {
-        codeLines.push(escHtml(lines[i]));
+        codeLines.push(lines[i]);
         i++;
       }
       i++;
-      const codeId = 'cb-' + Math.random().toString(36).slice(2, 8);
-      out.push(`<div class="code-block-wrap"><pre class="code-block" id="${codeId}">${codeLines.join('\n')}</pre>`);
-      out.push(`<button class="code-copy-btn" data-target="${codeId}" title="Copy">${COPY_SVG}</button></div>`);
+      const codeId = `cb-${++codeCount}`;
+      out.push(`<div class="code-block-wrap"${lang ? ` data-lang="${escHtml(lang)}"` : ''}>`);
+      out.push(`<pre class="code-block" id="${codeId}">${escHtml(codeLines.join('\n'))}</pre>`);
+      out.push(`<button class="code-copy-btn" data-target="${codeId}" title="Copy" aria-label="Copy code" type="button">${COPY_SVG}</button></div>`);
       continue;
     }
 
-    if (line.startsWith('## ')) {
-      closeList(); closeTable();
-      out.push(`<h2>${inlineFormat(line.slice(3))}</h2>`);
-      i++; continue;
-    }
-    if (line.startsWith('### ')) {
-      closeList(); closeTable();
-      out.push(`<h3>${inlineFormat(line.slice(4))}</h3>`);
+    const heading = line.match(/^(#{2,4})\s+(.+)$/);
+    if (heading) {
+      closeLists();
+      const level = heading[1].length;
+      const text = heading[2].trim();
+      out.push(`<h${level} id="${slugify(text)}">${inlineFormat(text)}</h${level}>`);
       i++; continue;
     }
 
-    if (/^\|(.+\|)+\s*$/.test(line)) {
-      closeList();
-      if (!inTable) {
-        const headers = line.split('|').filter(c => c.trim());
-        const sep = (i + 1 < lines.length && /^\|[\s-:|]+\|$/.test(lines[i + 1].trim()));
-        out.push('<table><thead><tr>');
-        for (const h of headers) out.push(`<th>${inlineFormat(h.trim())}</th>`);
-        out.push('</tr></thead><tbody>');
-        inTable = true;
-        if (sep) i++;
-      } else {
-        const cells = line.split('|').filter(c => c.trim());
-        out.push('<tr>');
-        for (const c of cells) out.push(`<td>${inlineFormat(c.trim())}</td>`);
-        out.push('</tr>');
+    if (/^(---+|\*\*\*+)\s*$/.test(line)) {
+      closeLists();
+      out.push('<hr>');
+      i++; continue;
+    }
+
+    if (line.startsWith('>')) {
+      closeLists();
+      const quote = [];
+      while (i < lines.length && lines[i].startsWith('>')) {
+        quote.push(lines[i].replace(/^>\s?/, ''));
+        i++;
       }
-      i++; continue;
-    }
-    if (inTable && !/^\|/.test(line)) closeTable();
-
-    const bullet = line.match(/^[-*] (.+)/);
-    if (bullet) {
-      closeTable();
-      if (!inList || listType !== 'ul') { closeList(); out.push('<ul>'); inList = true; listType = 'ul'; }
-      out.push(`<li>${inlineFormat(bullet[1])}</li>`);
-      i++; continue;
-    }
-
-    const numbered = line.match(/^\d+\.\s+(.+)/);
-    if (numbered) {
-      closeTable();
-      if (!inList || listType !== 'ol') { closeList(); out.push('<ol>'); inList = true; listType = 'ol'; }
-      out.push(`<li>${inlineFormat(numbered[1])}</li>`);
-      i++; continue;
+      const tag = quote[0].match(/^\[!(\w+)\]\s*(.*)$/);
+      if (tag && CALLOUTS[tag[1].toLowerCase()]) {
+        const kind = tag[1].toLowerCase();
+        const meta = CALLOUTS[kind];
+        const title = tag[2].trim() || meta.label;
+        const body = quote.slice(1).filter(l => l.trim()).map(l => `<p>${inlineFormat(l)}</p>`).join('');
+        out.push(`<aside class="callout callout--${kind}"><p class="callout-title"><span class="callout-icon" aria-hidden="true">${meta.icon}</span>${escHtml(title)}</p>${body}</aside>`);
+      } else {
+        const body = quote.filter(l => l.trim()).map(l => `<p>${inlineFormat(l)}</p>`).join('');
+        out.push(`<blockquote>${body}</blockquote>`);
+      }
+      continue;
     }
 
-    closeList();
-    closeTable();
+    if (/^\s*\|.*\|\s*$/.test(line)) {
+      closeLists();
+      const rows = [];
+      while (i < lines.length && /^\s*\|.*\|\s*$/.test(lines[i])) {
+        rows.push(splitRow(lines[i]));
+        i++;
+      }
+      const hasHeader = rows.length > 1 && rows[1].every(c => /^:?-{2,}:?$/.test(c.trim()));
+      const bodyRows = hasHeader ? rows.slice(2) : rows.slice(1);
+      out.push('<div class="table-wrap"><table>');
+      out.push('<thead><tr>' + rows[0].map(c => `<th>${inlineFormat(c)}</th>`).join('') + '</tr></thead>');
+      out.push('<tbody>' + bodyRows.map(r => '<tr>' + r.map(c => `<td>${inlineFormat(c)}</td>`).join('') + '</tr>').join('') + '</tbody>');
+      out.push('</table></div>');
+      continue;
+    }
+
+    const item = line.match(/^(\s*)([-*]|\d+\.)\s+(.+)$/);
+    if (item) {
+      const depth = Math.floor(item[1].length / 2) + 1;
+      const type = item[2] === '-' || item[2] === '*' ? 'ul' : 'ol';
+
+      if (depth > listStack.length) {
+        out.push(`<${type}>`);
+        listStack.push(type);
+      } else {
+        closeLists(depth);
+        if (listStack.length === depth) out.push('</li>');
+        if (listStack[depth - 1] !== type) {
+          out.push(listStack.pop() === 'ul' ? '</ul>' : '</ol>');
+          out.push(`<${type}>`);
+          listStack.push(type);
+        }
+      }
+      out.push(`<li>${inlineFormat(item[3])}`);
+      i++; continue;
+    }
+
+    closeLists();
 
     if (line.trim() === '') { i++; continue; }
 
@@ -134,14 +220,36 @@ export function renderMarkdown(src) {
     i++;
   }
 
-  closeList();
-  closeTable();
+  closeLists();
   return out.join('\n');
 }
 
+function splitRow(line) {
+  const cells = line.trim().split('|');
+  if (cells[0].trim() === '') cells.shift();
+  if (cells.length && cells[cells.length - 1].trim() === '') cells.pop();
+  return cells.map(c => c.trim());
+}
+
+/** Headings for a page outline. Shares slugify() with the renderer so ids match. */
+export function extractHeadings(src) {
+  const out = [];
+  let inCode = false;
+  for (const line of String(src).split('\n')) {
+    if (line.startsWith('```')) { inCode = !inCode; continue; }
+    if (inCode) continue;
+    const m = line.match(/^(#{2,3})\s+(.+)$/);
+    if (m) out.push({ level: m[1].length, text: m[2].trim(), id: slugify(m[2].trim()) });
+  }
+  return out;
+}
+
 function inlineFormat(str) {
-  return str
+  return escHtml(str)
+    .replace(/`([^`]+)`/g, (_m, code) => `<code>${code}</code>`)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/`([^`]+)`/g, (_m, code) => `<code>${escHtml(code)}</code>`)
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, text, url) =>
+      /^https?:\/\//.test(url)
+        ? `<a href="${url}" target="_blank" rel="noopener noreferrer">${text}</a>`
+        : `<a href="${url}">${text}</a>`);
 }
