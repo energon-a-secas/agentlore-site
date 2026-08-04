@@ -76,12 +76,19 @@ export function formatTokens(n) {
   return String(n);
 }
 
+/**
+ * Follows the convention providers use in their own pricing tables: whole
+ * dollars stay whole ($5), fractions keep at least two places ($0.50), and a
+ * third place survives only when it carries information ($0.125).
+ */
 export function formatUSD(n, { precise = false } = {}) {
   if (n === 0) return '$0';
-  if (precise || n < 10) {
-    return `$${n.toFixed(n < 1 ? 3 : 2)}`.replace(/\.?0+$/, m => (m.includes('.') ? '' : m));
-  }
-  return `$${Math.round(n).toLocaleString('en-US')}`;
+  if (!precise && n >= 10) return `$${Math.round(n).toLocaleString('en-US')}`;
+  if (Number.isInteger(n)) return `$${n.toLocaleString('en-US')}`;
+
+  const body = n.toFixed(n < 1 ? 3 : 2).replace(/(\.\d{2}\d*?)0+$/, '$1');
+  const [whole, fraction] = body.split('.');
+  return `$${Number(whole).toLocaleString('en-US')}.${fraction}`;
 }
 
 export function daysSince(isoDate) {

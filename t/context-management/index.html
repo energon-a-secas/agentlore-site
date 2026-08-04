@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Context Management &amp; Compaction | Agent Lore</title>
+<meta name="description" content="How to manage conversation context in Claude Code and Cursor to save tokens and stay productive">
+<meta property="og:title" content="Context Management &amp; Compaction — Agent Lore">
+<meta property="og:description" content="How to manage conversation context in Claude Code and Cursor to save tokens and stay productive">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/context-management/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Context Management &amp; Compaction">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Context Management &amp; Compaction — Agent Lore">
+<meta name="twitter:description" content="How to manage conversation context in Claude Code and Cursor to save tokens and stay productive">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/context-management/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/verify-agent-output/">
+<link rel="next" href="https://agentlore.neorgon.com/t/parallel-agents-pattern/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Context Management & Compaction",
+    "description": "How to manage conversation context in Claude Code and Cursor to save tokens and stay productive",
+    "url": "https://agentlore.neorgon.com/t/context-management/",
+    "inLanguage": "en",
+    "articleSection": "Tips",
+    "proficiencyLevel": "Foundations",
+    "keywords": "Tips, Claude, Cursor, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tips",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=tips"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Context Management & Compaction",
+        "item": "https://agentlore.neorgon.com/t/context-management/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="context-management">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=tips">Tips</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Context Management &amp; Compaction</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#c9a035">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#c9a035">Tips</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool cursor">Cursor</span>
+          <span class="badge badge-difficulty beginner">Foundations</span>
+        </div>
+        <h2 class="reader-title">Context Management &amp; Compaction</h2>
+        <p class="reader-desc">How to manage conversation context in Claude Code and Cursor to save tokens and stay productive</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">39 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#why-context-matters">Why context matters</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#claude-code-compaction">Claude Code: compaction</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#auto-compact">Auto-compact</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#micro-compact">Micro-compact</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#manual-compact">Manual /compact</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#other-context-commands">Other context commands</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#cursor-no-compaction">Cursor: no compaction</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#workarounds">Workarounds</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#side-by-side-comparison">Side-by-side comparison</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#best-practices-for-both-tools">Best practices for both tools</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="why-context-matters">Why context matters</h2>
+<p>Every message you send includes the full conversation history. A 50-turn conversation sends far more tokens than a 5-turn one. Managing context keeps costs down and responses focused.</p>
+<h2 id="claude-code-compaction">Claude Code: compaction</h2>
+<p>Claude Code offers three levels of context management.</p>
+<h3 id="auto-compact">Auto-compact</h3>
+<p>Triggers automatically when you approach the context limit. Claude summarizes the conversation, preserving key decisions, code patterns, and recent changes while condensing older history.</p>
+<p>You can see when it happens — Claude prints a compaction notice in the terminal.</p>
+<h3 id="micro-compact">Micro-compact</h3>
+<p>A lighter pass that removes old tool call results (file reads, command outputs) without summarizing the conversation itself. Frees space with minimal information loss.</p>
+<h3 id="manual-compact">Manual /compact</h3>
+<p>Run <code>/compact</code> to trigger compaction on demand. Add instructions to control what gets kept:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-1">/compact
+/compact only keep the architecture decisions
+/compact preserve the API schema we designed
+/compact forget the debugging — keep the final solution</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>This is useful mid-session when you finish one phase (e.g., debugging) and want to reclaim context for the next phase (e.g., writing tests).</p>
+<h3 id="other-context-commands">Other context commands</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Command</th><th>Effect</th></tr></thead>
+<tbody><tr><td><code>/clear</code></td><td>Wipe the conversation entirely and start fresh</td></tr><tr><td><code>/compact [instructions]</code></td><td>Summarize with custom focus</td></tr><tr><td><code>--resume</code></td><td>Restore a previous session (its compacted state)</td></tr></tbody>
+</table></div>
+<h2 id="cursor-no-compaction">Cursor: no compaction</h2>
+<p>Cursor does not offer compaction. When context fills up, you see a warning and must start a new chat. You cannot summarize mid-conversation or selectively trim context.</p>
+<h3 id="workarounds">Workarounds</h3>
+<p><strong>Notepads</strong> — Store key decisions, schemas, or context in Notepads. They persist across chats and load on demand with <code>@notepad-name</code>.</p>
+<p><strong>Rules files</strong> — Put project conventions in <code>.cursor/rules/</code> as <code>.mdc</code> files. These load automatically based on glob patterns, so every new chat starts with the right context.</p>
+<p><strong>Manual summary</strong> — Before closing a long chat, ask the AI to summarize the conversation. Copy the summary and paste it into a new chat as the first message.</p>
+<p><strong>Shorter chats</strong> — Start a new chat for each distinct task. This is the most reliable way to keep context manageable.</p>
+<h2 id="side-by-side-comparison">Side-by-side comparison</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>Claude Code</th><th>Cursor</th></tr></thead>
+<tbody><tr><td>Auto-compaction</td><td>Yes — triggers near context limit</td><td>No</td></tr><tr><td>Manual compaction</td><td><code>/compact [instructions]</code></td><td>No</td></tr><tr><td>Selective trimming</td><td>Micro-compact (tool results)</td><td>No</td></tr><tr><td>Clear conversation</td><td><code>/clear</code></td><td>Start new chat</td></tr><tr><td>Persist across chats</td><td>Memory files, CLAUDE.md</td><td>Notepads, rules files</td></tr><tr><td>Context limit signal</td><td>Auto-compact kicks in</td><td>Warning banner</td></tr></tbody>
+</table></div>
+<h2 id="best-practices-for-both-tools">Best practices for both tools</h2>
+<ol>
+<li><strong>One task per chat</strong> — the single most effective cost-saving habit
+</li>
+<li><strong>Front-load context</strong> — put important info in CLAUDE.md or rules files, not repeated messages
+</li>
+<li><strong>Compact before pivoting</strong> — in Claude Code, run <code>/compact</code> when switching from exploration to implementation
+</li>
+<li><strong>Don't fight context limits</strong> — if a conversation feels sluggish or unfocused, start fresh
+</li></ol>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/verify-agent-output/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Verify What the Agent Tells You</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/parallel-agents-pattern/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Parallel Agents Pattern</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Context Management &amp; Compaction — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

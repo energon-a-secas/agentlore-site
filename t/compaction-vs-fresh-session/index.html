@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Compaction or a Fresh Session? | Agent Lore</title>
+<meta name="description" content="Both reset the window. They lose very different things">
+<meta property="og:title" content="Compaction or a Fresh Session? — Agent Lore">
+<meta property="og:description" content="Both reset the window. They lose very different things">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/compaction-vs-fresh-session/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Compaction or a Fresh Session?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compaction or a Fresh Session? — Agent Lore">
+<meta name="twitter:description" content="Both reset the window. They lose very different things">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/compaction-vs-fresh-session/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/what-fills-context/">
+<link rel="next" href="https://agentlore.neorgon.com/t/retrieval-vs-stuffing/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Compaction or a Fresh Session?",
+    "description": "Both reset the window. They lose very different things",
+    "url": "https://agentlore.neorgon.com/t/compaction-vs-fresh-session/",
+    "inLanguage": "en",
+    "articleSection": "Context",
+    "proficiencyLevel": "Intermediate",
+    "keywords": "Context, Claude, Cursor, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Context",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=context"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Compaction or a Fresh Session?",
+        "item": "https://agentlore.neorgon.com/t/compaction-vs-fresh-session/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="compaction-vs-fresh-session">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=context">Context</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Compaction or a Fresh Session?</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#34d399">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#34d399">Context</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool cursor">Cursor</span>
+          <span class="badge badge-difficulty intermediate">Intermediate</span>
+        </div>
+        <h2 class="reader-title">Compaction or a Fresh Session?</h2>
+        <p class="reader-desc">Both reset the window. They lose very different things</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">14 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#what-each-one-does">What each one does</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#when-to-compact">When to compact</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#when-to-start-fresh">When to start fresh</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-handoff-that-makes-fresh-sessions-cheap">The handoff that makes fresh sessions cheap</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#what-compaction-reliably-loses">What compaction reliably loses</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#a-working-rhythm">A working rhythm</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="what-each-one-does">What each one does</h2>
+<p><strong>Compaction</strong> summarises the conversation so far and continues with the summary in place of the history. Continuity is preserved; detail is lost, and you do not choose which detail.</p>
+<p><strong>A fresh session</strong> starts empty. Nothing is preserved except what you deliberately carry over.</p>
+<p>The difference that matters: compaction decides for you what was important. A fresh session makes you decide — which is worse when you are in flow, and better when you are stuck.</p>
+<h2 id="when-to-compact">When to compact</h2>
+<ul>
+<li>You are mid-task and the thread genuinely matters
+</li>
+<li>The remaining work is a continuation, not a new direction
+</li>
+<li>The conversation holds decisions that are not written down anywhere else
+</li></ul>
+<h2 id="when-to-start-fresh">When to start fresh</h2>
+<ul>
+<li><strong>The task changed.</strong> New feature, new bug, new area of the codebase. Old context is now pure cost.
+</li>
+<li><strong>You are going in circles.</strong> Compaction preserves a confused thread. If the model has misunderstood something structural, summarising the misunderstanding carries it forward. Starting over removes it.
+</li>
+<li><strong>Answers are getting vaguer.</strong> A reliable sign that signal has drowned in noise.
+</li>
+<li><strong>You have compacted twice already.</strong> A summary of a summary keeps very little. That is the point to write things down properly and restart.
+</li></ul>
+<h2 id="the-handoff-that-makes-fresh-sessions-cheap">The handoff that makes fresh sessions cheap</h2>
+<p>The reason people avoid restarting is losing their place. Solve it by writing state to a file rather than keeping it in the conversation:</p>
+<div class="code-block-wrap" data-lang="markdown">
+<pre class="code-block" id="cb-1"># notes/current-task.md
+
+## Goal
+Migrate the billing service off the legacy parser.
+
+## Established
+- Legacy parser lives at src/legacy/parse.ts:1-340
+- Only two callers: billing.ts:88 and reports.ts:210
+- The new parser handles all cases except multi-currency (issue #412)
+
+## Next
+Wire billing.ts:88 to the new parser, keep the legacy path behind
+a flag until #412 lands.
+
+## Do not
+Touch reports.ts yet — it has its own test gap.</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Then a fresh session starts with: *&quot;Read notes/current-task.md and continue.&quot;* That costs a few hundred tokens and carries more usable state than a compaction of fifty turns.</p>
+<aside class="callout callout--tip"><p class="callout-title"><span class="callout-icon" aria-hidden="true">★</span>This is the habit worth building</p><p>Durable state belongs in files, not in conversation history. Files survive compaction, session restarts, tool crashes, and tomorrow. History survives none of those reliably.</p></aside>
+<h2 id="what-compaction-reliably-loses">What compaction reliably loses</h2>
+<p>Worth knowing before you rely on it:</p>
+<ul>
+<li><strong>Exact code you looked at.</strong> Summaries keep conclusions, not line numbers.
+</li>
+<li><strong>Things you rejected.</strong> &quot;We tried X and it didn't work&quot; often does not survive, so the agent proposes X again.
+</li>
+<li><strong>Precise constraints.</strong> &quot;Don't touch the auth module&quot; becomes &quot;be careful with auth&quot;, which is not the same instruction.
+</li></ul>
+<p>If any of those matter, write them down before compacting.</p>
+<h2 id="a-working-rhythm">A working rhythm</h2>
+<ol>
+<li>Start a session with a clear, bounded goal
+</li>
+<li>When the goal is met, write what you learned to a file
+</li>
+<li>Start fresh for the next goal
+</li>
+<li>Compact only when a single goal genuinely outgrows the window
+</li></ol>
+<p>Sessions are cheap. The instinct to keep one alive all day is a habit from chat interfaces, and it is expensive in both money and answer quality.</p>
+<p>See also: <a href="/t/context-management/">Context Management &amp; Compaction</a> · <a href="/t/what-fills-context/">What Actually Fills a Context Window</a></p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/what-fills-context/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">What Actually Fills a Context Window</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/retrieval-vs-stuffing/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Retrieval or Just Put It In Context?</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Compaction or a Fresh Session? — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

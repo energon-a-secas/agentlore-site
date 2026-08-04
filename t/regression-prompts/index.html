@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Regression Prompts | Agent Lore</title>
+<meta name="description" content="Catch the quality drift that happens when nothing on your side changed">
+<meta property="og:title" content="Regression Prompts — Agent Lore">
+<meta property="og:description" content="Catch the quality drift that happens when nothing on your side changed">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/regression-prompts/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Regression Prompts">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Regression Prompts — Agent Lore">
+<meta name="twitter:description" content="Catch the quality drift that happens when nothing on your side changed">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/regression-prompts/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/golden-task-set/">
+<link rel="next" href="https://agentlore.neorgon.com/t/verify-agent-output/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Regression Prompts",
+    "description": "Catch the quality drift that happens when nothing on your side changed",
+    "url": "https://agentlore.neorgon.com/t/regression-prompts/",
+    "inLanguage": "en",
+    "articleSection": "Evaluation",
+    "proficiencyLevel": "Intermediate",
+    "keywords": "Evaluation, Claude, Cursor, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Evaluation",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=evaluation"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Regression Prompts",
+        "item": "https://agentlore.neorgon.com/t/regression-prompts/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="regression-prompts">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=evaluation">Evaluation</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Regression Prompts</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#2dd4bf">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#2dd4bf">Evaluation</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool cursor">Cursor</span>
+          <span class="badge badge-difficulty intermediate">Intermediate</span>
+        </div>
+        <h2 class="reader-title">Regression Prompts</h2>
+        <p class="reader-desc">Catch the quality drift that happens when nothing on your side changed</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">37 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#why-output-changes-when-you-didnt-change-anything">Why output changes when you didn't change anything</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-set">The set</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#assertions-that-hold-up">Assertions that hold up</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#wiring-it-up">Wiring it up</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#when-it-fires">When it fires</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="why-output-changes-when-you-didnt-change-anything">Why output changes when you didn't change anything</h2>
+<p>Your prompt is the same. Your code is the same. The output is different. Legitimate causes:</p>
+<ul>
+<li>The provider updated the model behind an alias you pinned loosely
+</li>
+<li>You upgraded a tool or SDK that alters the system prompt
+</li>
+<li>Your <code>CLAUDE.md</code> grew and pushed something important out of attention
+</li>
+<li>A skill's description started matching requests it shouldn't
+</li>
+<li>Temperature, or genuine sampling variance
+</li></ul>
+<p>Most teams find out from a user. A regression set finds out first.</p>
+<h2 id="the-set">The set</h2>
+<p>Different from a golden set. A golden set asks *is this correct?* A regression set asks *is this the same as last time?* Fewer cases, tighter checks, higher frequency.</p>
+<div class="code-block-wrap" data-lang="json">
+<pre class="code-block" id="cb-1">[
+  {
+    &quot;id&quot;: &quot;commit-message-format&quot;,
+    &quot;prompt&quot;: &quot;Write a commit message for this diff&quot;,
+    &quot;fixture&quot;: &quot;fixtures/small-refactor.diff&quot;,
+    &quot;assert&quot;: {
+      &quot;matches&quot;: &quot;^(feat|fix|chore|docs|refactor)\\([a-z-]+\\): .{10,72}$&quot;,
+      &quot;max_output_tokens&quot;: 120
+    }
+  },
+  {
+    &quot;id&quot;: &quot;refuses-without-context&quot;,
+    &quot;prompt&quot;: &quot;What does the deploy script do?&quot;,
+    &quot;fixture&quot;: &quot;fixtures/empty-repo/&quot;,
+    &quot;assert&quot;: {
+      &quot;contains_any&quot;: [&quot;could not find&quot;, &quot;no deploy script&quot;, &quot;does not exist&quot;],
+      &quot;not_contains&quot;: [&quot;typically&quot;, &quot;usually&quot;, &quot;generally&quot;]
+    }
+  }
+]</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>That second case is worth dwelling on. It asserts the agent says *&quot;I couldn't find it&quot;* rather than describing what a deploy script usually does. Hedging words like &quot;typically&quot; are a reliable signal that the model has stopped reading your repo and started reciting. Catching that drift early is most of the value.</p>
+<h2 id="assertions-that-hold-up">Assertions that hold up</h2>
+<p><strong>Structural, not semantic.</strong> Assert the format, the length, the presence of a citation — not the exact prose. Prose varies run to run without anything being wrong.</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-2">Good:  output matches /^(feat|fix|chore)\(.+\): /
+Good:  output cites at least one file:line
+Good:  output is under 200 tokens
+Bad:   output equals &quot;fix(parser): handle empty input&quot;</pre>
+<button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p><strong>Negative assertions catch the most.</strong> What should *never* appear is often sharper than what should:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-3">not_contains: [&quot;As an AI&quot;, &quot;I don't have access&quot;, &quot;typically&quot;, &quot;in general&quot;]</pre>
+<button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p><strong>Pin the model exactly.</strong> <code>claude-haiku-4-5-20251001</code>, not <code>claude-haiku-latest</code>. An alias that silently moves is the drift you are trying to detect.</p>
+<h2 id="wiring-it-up">Wiring it up</h2>
+<div class="code-block-wrap" data-lang="yaml">
+<pre class="code-block" id="cb-4">name: prompt-regression
+on:
+  pull_request:
+    paths: ['prompts/**', 'CLAUDE.md', '.claude/skills/**']
+  schedule:
+    - cron: '0 6 * * 1'   # weekly, to catch provider-side drift
+
+jobs:
+  regress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 evals/regress.py --set regression.json
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}</pre>
+<button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Two triggers matter and they catch different things. The <strong>path filter</strong> catches your changes. The <strong>schedule</strong> catches everyone else's.</p>
+<aside class="callout callout--tip"><p class="callout-title"><span class="callout-icon" aria-hidden="true">★</span>Run it on the cheap tier</p><p>A regression set is about consistency, not capability. Running it against the fast tier costs almost nothing and detects prompt-side drift just as well. Save the expensive runs for the golden set.</p></aside>
+<h2 id="when-it-fires">When it fires</h2>
+<p>Do not immediately fix the prompt. First establish which kind of change it was:</p>
+<ol>
+<li><strong>Re-run.</strong> Once is variance; three times is a change.
+</li>
+<li><strong>Diff the inputs.</strong> Did <code>CLAUDE.md</code> grow? Did a skill get installed? Check git.
+</li>
+<li><strong>Pin harder.</strong> If the model alias moved, that is your answer.
+</li>
+<li><strong>Only then</strong> adjust the prompt — and add the failing case to the golden set.
+</li></ol>
+<p>See also: <a href="/t/golden-task-set/">Build a Golden Task Set</a> · <a href="/t/write-effective-claude-md/">Write an Effective CLAUDE.md</a></p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/golden-task-set/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Build a Golden Task Set</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/verify-agent-output/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Verify What the Agent Tells You</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Regression Prompts — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

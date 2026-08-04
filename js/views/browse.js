@@ -91,7 +91,7 @@ function resultsMarkup(s) {
 export function renderBrowse(s) {
   const filtered = filteredTutorials(s);
 
-  return `${pageHead('Browse the archive', `Every guide in Agent Lore, grouped by depth.`, 'The Path')}
+  return `${pageHead('Browse the archive', 'Every guide in Agent Lore, grouped by depth. Filter, search, or share the URL — your filters travel with it.', 'Archive')}
 
 <div class="toolbar">
   <div class="toolbar-inner">

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Skill Discovery: Claude vs Cursor | Agent Lore</title>
+<meta name="description" content="Where each tool looks for skills and how discovery differs">
+<meta property="og:title" content="Skill Discovery: Claude vs Cursor — Agent Lore">
+<meta property="og:description" content="Where each tool looks for skills and how discovery differs">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/skill-discovery-differences/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Skill Discovery: Claude vs Cursor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Skill Discovery: Claude vs Cursor — Agent Lore">
+<meta name="twitter:description" content="Where each tool looks for skills and how discovery differs">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/skill-discovery-differences/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/install-skills-registry/">
+<link rel="next" href="https://agentlore.neorgon.com/t/write-slash-command/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Skill Discovery: Claude vs Cursor",
+    "description": "Where each tool looks for skills and how discovery differs",
+    "url": "https://agentlore.neorgon.com/t/skill-discovery-differences/",
+    "inLanguage": "en",
+    "articleSection": "Skills",
+    "proficiencyLevel": "Intermediate",
+    "keywords": "Skills, Claude, Cursor, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Skills",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=skills"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Skill Discovery: Claude vs Cursor",
+        "item": "https://agentlore.neorgon.com/t/skill-discovery-differences/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="skill-discovery-differences">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=skills">Skills</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Skill Discovery: Claude vs Cursor</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#a78bfa">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#a78bfa">Skills</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool cursor">Cursor</span>
+          <span class="badge badge-difficulty intermediate">Intermediate</span>
+        </div>
+        <h2 class="reader-title">Skill Discovery: Claude vs Cursor</h2>
+        <p class="reader-desc">Where each tool looks for skills and how discovery differs</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">26 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#discovery-paths">Discovery paths</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#claude-code">Claude Code</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#cursor">Cursor</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#cross-tool-compatibility">Cross-tool compatibility</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#key-differences">Key differences</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#recommendation">Recommendation</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="discovery-paths">Discovery paths</h2>
+<p>Each tool scans different directories for skills:</p>
+<h3 id="claude-code">Claude Code</h3>
+<ol>
+<li><code>~/.claude/skills/*/SKILL.md</code> -- global user skills
+</li>
+<li><code>.claude/skills/*/SKILL.md</code> -- project-level skills
+</li>
+<li><code>.agents/skills/*/SKILL.md</code> -- shared convention
+</li></ol>
+<h3 id="cursor">Cursor</h3>
+<ol>
+<li><code>~/.cursor/skills/*/SKILL.md</code> -- global user skills
+</li>
+<li><code>.cursor/skills/*/SKILL.md</code> -- project-level (via rules)
+</li>
+<li><code>.agents/skills/*/SKILL.md</code> -- shared convention
+</li></ol>
+<h2 id="cross-tool-compatibility">Cross-tool compatibility</h2>
+<p>The <code>.agents/skills/</code> directory works with both tools. Use it for skills you want portable across Claude and Cursor.</p>
+<h2 id="key-differences">Key differences</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Aspect</th><th>Claude Code</th><th>Cursor</th></tr></thead>
+<tbody><tr><td>Invocation</td><td>Reads SKILL.md on demand</td><td>Listed in agent skills panel</td></tr><tr><td>Triggers</td><td>Pattern-matched from skill description</td><td>Matched via skill metadata</td></tr><tr><td>Scope</td><td>Session-based</td><td>Persistent across sessions</td></tr></tbody>
+</table></div>
+<h2 id="recommendation">Recommendation</h2>
+<p>For maximum portability, always place skills in <code>.agents/skills/</code>. Add symlinks or copies to tool-specific directories only when the skill uses tool-specific features.</p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/install-skills-registry/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Install Skills from a Registry</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/write-slash-command/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Write a Slash Command</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Skill Discovery: Claude vs Cursor — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

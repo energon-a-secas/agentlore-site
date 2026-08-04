@@ -88,14 +88,20 @@ export function calculatorOutput(s) {
 <p class="calc-note">${formatNumber(workload.calls)} calls/month · ${formatNumber(workload.inputTokens)} input and ${formatNumber(workload.outputTokens)} output tokens per call · ${Math.round(workload.cacheHitRate * 100)}% cache hits. Cache <em>write</em> cost is excluded: where caching is worth enabling at all, writes amortise across many reads. Standard rates, not batch.</p>`;
 }
 
-export function renderCalculator(s) {
-  const workload = activeWorkload(s);
-  const ids = comparisonIds(s);
-
-  const presets = WORKLOADS.map(w => {
+function presetsMarkup(s) {
+  const chips = WORKLOADS.map(w => {
     const active = !s.codex.inputs && s.codex.workload === w.id;
     return `<button class="preset-chip${active ? ' active' : ''}" data-workload="${w.id}" aria-pressed="${active}" type="button" title="${escHtml(w.blurb)}">${escHtml(w.label)}</button>`;
   }).join('');
+
+  return s.codex.inputs
+    ? `${chips}<span class="preset-chip is-custom active">Custom</span><button class="btn-secondary btn-tiny" data-calc-reset type="button">Reset</button>`
+    : chips;
+}
+
+export function renderCalculator(s) {
+  const workload = activeWorkload(s);
+  const ids = comparisonIds(s);
 
   const modelToggles = MODELS.map(m => {
     const on = ids.includes(m.id);
@@ -108,10 +114,7 @@ export function renderCalculator(s) {
     <p class="section-sub">Pick a workload shape, adjust it to match yours, and compare. The absolute numbers depend on your usage — the spread between models is the part that holds.</p>
   </div>
 
-  <div class="calc-presets" role="group" aria-label="Workload presets">
-    ${presets}
-    ${s.codex.inputs ? '<span class="preset-chip is-custom active">Custom</span><button class="btn-secondary btn-tiny" data-calc-reset type="button">Reset</button>' : ''}
-  </div>
+  <div class="calc-presets" id="calc-presets" role="group" aria-label="Workload presets">${presetsMarkup(s)}</div>
 
   <p class="calc-derivation" id="calc-derivation">${escHtml(workload.blurb)}${workload.derivation ? ` <span class="calc-derivation-math">${escHtml(workload.derivation)}</span>` : ''}</p>
 
@@ -135,6 +138,11 @@ export function patchCalculator(s) {
   const output = document.getElementById('calc-output');
   if (!output) return;
   output.innerHTML = calculatorOutput(s);
+
+  // Chips are never the focused element while typing in a field, so replacing
+  // them wholesale is safe — and it is how "Custom" and Reset appear.
+  const presets = document.getElementById('calc-presets');
+  if (presets) presets.innerHTML = presetsMarkup(s);
 
   const workload = activeWorkload(s);
   const derivation = document.getElementById('calc-derivation');

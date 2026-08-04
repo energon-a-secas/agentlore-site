@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Output Discipline | Agent Lore</title>
+<meta name="description" content="Output costs five to six times input — and it is the part you control most directly">
+<meta property="og:title" content="Output Discipline — Agent Lore">
+<meta property="og:description" content="Output costs five to six times input — and it is the part you control most directly">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/output-token-discipline/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Output Discipline">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Output Discipline — Agent Lore">
+<meta name="twitter:description" content="Output costs five to six times input — and it is the part you control most directly">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/output-token-discipline/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/batch-api-savings/">
+<link rel="next" href="https://agentlore.neorgon.com/t/subagent-cost-model/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Output Discipline",
+    "description": "Output costs five to six times input — and it is the part you control most directly",
+    "url": "https://agentlore.neorgon.com/t/output-token-discipline/",
+    "inLanguage": "en",
+    "articleSection": "Cost",
+    "proficiencyLevel": "Foundations",
+    "keywords": "Cost, Claude, Cursor, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Cost",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=cost"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Output Discipline",
+        "item": "https://agentlore.neorgon.com/t/output-token-discipline/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="output-token-discipline">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=cost">Cost</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Output Discipline</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#fbbf24">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#fbbf24">Cost</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool cursor">Cursor</span>
+          <span class="badge badge-difficulty beginner">Foundations</span>
+        </div>
+        <h2 class="reader-title">Output Discipline</h2>
+        <p class="reader-desc">Output costs five to six times input — and it is the part you control most directly</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">21 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#the-asymmetry">The asymmetry</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-single-highest-value-habit">The single highest-value habit</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#patterns-that-cut-output">Patterns that cut output</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-counter-case">The counter-case</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#measuring-it">Measuring it</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="the-asymmetry">The asymmetry</h2>
+<p>Look down any provider's price list and the same ratio appears:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Model</th><th>Input $/M</th><th>Output $/M</th><th>Ratio</th></tr></thead>
+<tbody><tr><td>Claude Opus 5</td><td>$5</td><td>$25</td><td>5×</td></tr><tr><td>Claude Sonnet 5</td><td>$2</td><td>$10</td><td>5×</td></tr><tr><td>Claude Haiku 4.5</td><td>$1</td><td>$5</td><td>5×</td></tr><tr><td>GPT-5.6 Sol</td><td>$5</td><td>$30</td><td>6×</td></tr><tr><td>Gemini 3.6 Flash</td><td>$1.50</td><td>$7.50</td><td>5×</td></tr></tbody>
+</table></div>
+<p>Output is where the money goes. And unlike input — which is largely determined by your codebase and history — output is set by how you ask.</p>
+<h2 id="the-single-highest-value-habit">The single highest-value habit</h2>
+<p><strong>Ask for the diff, not the file.</strong></p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-1">Bad:  &quot;Update the config and show me the file.&quot;
+Good: &quot;Update the config. Show only the changed lines.&quot;</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>On a 400-line config that is the difference between ~5,000 output tokens and ~40.</p>
+<h2 id="patterns-that-cut-output">Patterns that cut output</h2>
+<p><strong>Bound the format explicitly.</strong></p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-2">Answer in at most 3 bullet points. No preamble, no summary.</pre>
+<button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p><strong>Ask for a decision, not an essay.</strong></p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-3">Bad:  &quot;What are the trade-offs between these three approaches?&quot;
+Good: &quot;Which of these three should I use? One sentence of reasoning.&quot;</pre>
+<button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>You can always ask for the long version. You cannot un-pay for it.</p>
+<p><strong>Suppress restatement.</strong> Models often echo your question back before answering. A line in your system prompt stops it:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-4">Do not restate the question or summarise what you are about to do.
+Answer directly.</pre>
+<button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p><strong>Use <code>max_tokens</code> as a real budget</strong>, not as a safety limit set to the maximum. If a classification answer should be one word, <code>max_tokens: 8</code> both saves money and catches prompt bugs loudly.</p>
+<h2 id="the-counter-case">The counter-case</h2>
+<p>Reasoning output is not waste. When a model thinks through a hard problem, those tokens are what buys the correct answer — clamping them produces a cheap wrong answer, which is the most expensive kind.</p>
+<p>The discipline is: <strong>short output for mechanical work, room to think for hard work.</strong> Not &quot;short output always&quot;.</p>
+<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Do not optimise the wrong direction</p><p>Cutting a frontier model's reasoning to save $0.30 and then spending an hour debugging its rushed answer is a bad trade. Output discipline is for the high-volume, well-specified end of your workload.</p></aside>
+<h2 id="measuring-it">Measuring it</h2>
+<p>Pull the ratio from your own usage before you decide anything:</p>
+<div class="code-block-wrap" data-lang="bash">
+<pre class="code-block" id="cb-5"># Claude Code session costs, if you use it
+python3 scripts/claude-costs.py</pre>
+<button class="code-copy-btn" data-target="cb-5" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>If output tokens are under 10% of input, you are already disciplined and caching is your lever. If output is 30%+ of input, start here.</p>
+<p>See also: <a href="/t/session-cost-report/">Session Cost Report Script</a> · <a href="/#/codex">The Codex</a></p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/batch-api-savings/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Halve the Bill with the Batch API</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/subagent-cost-model/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">What Subagents Actually Cost</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Output Discipline — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

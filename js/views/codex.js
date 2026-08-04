@@ -12,14 +12,13 @@ const COLUMNS = [
   { key: 'blended',   label: 'Blended',    sortable: true, num: true, unit: '$/M' },
 ];
 
+const PRICE_KEYS = new Set(['in', 'out', 'cacheRead', 'blended']);
+
 function sortValue(model, key) {
-  const price = priceOn(model);
-  switch (key) {
-    case 'name': return model.name.toLowerCase();
-    case 'context': return model.context || 0;
-    case 'blended': return blendedPrice(model);
-    default: return price[key] ?? 0;
-  }
+  if (key === 'name') return model.name.toLowerCase();
+  if (key === 'context') return model.context || 0;
+  if (key === 'blended') return blendedPrice(model);
+  return priceOn(model)[key] ?? 0;
 }
 
 function visibleModels(s) {
@@ -29,7 +28,15 @@ function visibleModels(s) {
     (!tiers.size || tiers.has(m.tier))
   );
   const factor = dir === 'desc' ? -1 : 1;
+
   return rows.sort((a, b) => {
+    // Local models have no per-token price; $0 is an absence, not a bargain,
+    // so they sink to the bottom of any price sort rather than topping it.
+    if (PRICE_KEYS.has(sort)) {
+      const aLocal = a.provider === 'local';
+      const bLocal = b.provider === 'local';
+      if (aLocal !== bLocal) return aLocal ? 1 : -1;
+    }
     const av = sortValue(a, sort);
     const bv = sortValue(b, sort);
     if (av === bv) return a.name.localeCompare(b.name);

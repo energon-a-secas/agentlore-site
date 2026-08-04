@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Retrieval or Just Put It In Context? | Agent Lore</title>
+<meta name="description" content="Long windows made this a real decision instead of a foregone one">
+<meta property="og:title" content="Retrieval or Just Put It In Context? — Agent Lore">
+<meta property="og:description" content="Long windows made this a real decision instead of a foregone one">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/retrieval-vs-stuffing/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Retrieval or Just Put It In Context?">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Retrieval or Just Put It In Context? — Agent Lore">
+<meta name="twitter:description" content="Long windows made this a real decision instead of a foregone one">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/retrieval-vs-stuffing/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/compaction-vs-fresh-session/">
+<link rel="next" href="https://agentlore.neorgon.com/t/check-ai-costs/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Retrieval or Just Put It In Context?",
+    "description": "Long windows made this a real decision instead of a foregone one",
+    "url": "https://agentlore.neorgon.com/t/retrieval-vs-stuffing/",
+    "inLanguage": "en",
+    "articleSection": "Context",
+    "proficiencyLevel": "Intermediate",
+    "keywords": "Context, Claude, Local AI, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Context",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=context"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Retrieval or Just Put It In Context?",
+        "item": "https://agentlore.neorgon.com/t/retrieval-vs-stuffing/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="retrieval-vs-stuffing">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=context">Context</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Retrieval or Just Put It In Context?</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#34d399">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#34d399">Context</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool local">Local AI</span>
+          <span class="badge badge-difficulty intermediate">Intermediate</span>
+        </div>
+        <h2 class="reader-title">Retrieval or Just Put It In Context?</h2>
+        <p class="reader-desc">Long windows made this a real decision instead of a foregone one</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">15 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#the-decision-changed">The decision changed</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#just-put-it-in-context-when">Just put it in context when…</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#retrieve-when">Retrieve when…</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-arithmetic">The arithmetic</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-hybrid-worth-knowing">The hybrid worth knowing</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#start-simple">Start simple</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="the-decision-changed">The decision changed</h2>
+<p>When windows were 8K tokens, retrieval was mandatory. At 1M tokens, stuffing everything in is often simpler, more accurate, and — accounting for engineering time — cheaper.</p>
+<p>But not always, and the boundary is worth knowing.</p>
+<h2 id="just-put-it-in-context-when">Just put it in context when…</h2>
+<ul>
+<li><strong>The corpus fits with room to spare.</strong> Under ~100K tokens against a 1M window, retrieval is machinery you do not need.
+</li>
+<li><strong>The question needs the whole thing.</strong> &quot;Is this API design consistent?&quot; cannot be answered from three retrieved chunks. Neither can &quot;what changed between these two versions?&quot;
+</li>
+<li><strong>Relationships between distant parts matter.</strong> Retrieval fetches locally relevant pieces and severs the connections between them.
+</li>
+<li><strong>The corpus is stable and the queries repeat.</strong> Cache the whole thing as a prefix and each query costs a tenth of the input price. This is often cheaper *and* better than retrieval.
+</li></ul>
+<h2 id="retrieve-when">Retrieve when…</h2>
+<ul>
+<li><strong>The corpus does not fit.</strong> Millions of tokens. No window solves this.
+</li>
+<li><strong>Only a tiny slice is ever relevant.</strong> One support article out of fifty thousand. Sending all fifty thousand to answer one question is enormously wasteful.
+</li>
+<li><strong>Freshness matters per-query.</strong> Content changing hourly cannot be a cached prefix.
+</li>
+<li><strong>Volume is high and cost dominates.</strong> At a million queries, the difference between 2,000 retrieved tokens and 200,000 stuffed tokens is the whole budget.
+</li></ul>
+<h2 id="the-arithmetic">The arithmetic</h2>
+<p>50,000 queries a month against a 200,000-token corpus, on a model at $2/M input:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-1">Stuffed, no caching:   200,000 × 50,000 × $2/M  = $20,000
+Stuffed, cached:       ~10% of input             ≈  $2,000
+Retrieved (~3k/query):   3,000 × 50,000 × $2/M  =    $300</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Retrieval wins by a lot here. Now the same corpus at 500 queries a month:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-2">Stuffed, cached:  $20
+Retrieved:        $3   (plus an embedding pipeline you now maintain)</pre>
+<button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Seventeen dollars is not worth a vector database. <strong>Query volume, not corpus size, is what usually decides.</strong></p>
+<h2 id="the-hybrid-worth-knowing">The hybrid worth knowing</h2>
+<p>Retrieve generously, then let the model read properly. Instead of 5 tight chunks, pull 30 loose ones and give the model the surrounding file when it asks.</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-3">1. Embed the query, pull 30 candidates
+2. Put all 30 in context (long windows make this affordable)
+3. Give the agent a read_file tool so it can pull full context on
+   anything that looks relevant</pre>
+<button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>This gets retrieval's cost profile with much of stuffing's accuracy, and it degrades gracefully when the embedding misses — the agent can go and look.</p>
+<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>The failure mode of tight retrieval</p><p>Chunking cuts documents at arbitrary boundaries. A rule and its exception end up in different chunks; you retrieve the rule, miss the exception, and get a confidently wrong answer. If your retrieved context is under a couple of thousand tokens, you are probably losing exceptions.</p></aside>
+<h2 id="start-simple">Start simple</h2>
+<p>Put it in context. Measure. Add retrieval when the numbers say to — not because retrieval is what serious systems do. Most corpora people build pipelines for would fit in a cached prefix.</p>
+<p>See also: <a href="/t/ollama-embeddings/">Local Embeddings</a> · <a href="/t/what-fills-context/">What Actually Fills a Context Window</a> · <a href="/t/prompt-caching-economics/">Prompt Caching Economics</a></p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/compaction-vs-fresh-session/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Compaction or a Fresh Session?</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/check-ai-costs/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Check Your AI Costs</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Retrieval or Just Put It In Context? — a guide for Claude, Local AI. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

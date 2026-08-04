@@ -45,7 +45,7 @@ function outline(headings) {
 </nav>`;
 }
 
-function jsonLd(t, position) {
+function jsonLd(t) {
   return JSON.stringify([
     {
       '@context': 'https://schema.org',
@@ -122,7 +122,7 @@ function page(t) {
 ${prev ? `<link rel="prev" href="${ORIGIN}/t/${prev.id}/">` : ''}
 ${next ? `<link rel="next" href="${ORIGIN}/t/${next.id}/">` : ''}
 <script type="application/ld+json">
-${jsonLd(t, position)}
+${jsonLd(t)}
 </script>
 </head>
 <body data-tutorial="${escHtml(t.id)}">
@@ -141,8 +141,8 @@ ${jsonLd(t, position)}
   </div>
   <div class="header-right">
     <nav class="header-actions header-nav" aria-label="Sections">
-      <a data-keep-mobile class="nav-tab" href="/#/learn">Path</a>
-      <a data-keep-mobile class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
@@ -273,15 +273,17 @@ function sitemap() {
     { loc: `${ORIGIN}/`, priority: '1.0' },
     ...tutorials.map(t => ({ loc: `${ORIGIN}/t/${t.id}/`, priority: '0.8' })),
   ];
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9".replace">
-${urls.map(u => `  <url>
+  const body = urls.map(u => `  <url>
     <loc>${u.loc}</loc>
     <lastmod>${TODAY}</lastmod>
     <priority>${u.priority}</priority>
-  </url>`).join('\n')}
+  </url>`).join('\n');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${body}
 </urlset>
-`.replace('http://www.sitemap.org/schemas/sitemap/0.9".replace', 'http://www.sitemaps.org/schemas/sitemap/0.9"');
+`;
 }
 
 function llmsTxt() {

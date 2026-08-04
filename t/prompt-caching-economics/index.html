@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Prompt Caching Economics | Agent Lore</title>
+<meta name="description" content="Why caching is the single biggest lever on an agentic bill, and when it stops paying">
+<meta property="og:title" content="Prompt Caching Economics — Agent Lore">
+<meta property="og:description" content="Why caching is the single biggest lever on an agentic bill, and when it stops paying">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/prompt-caching-economics/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Prompt Caching Economics">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prompt Caching Economics — Agent Lore">
+<meta name="twitter:description" content="Why caching is the single biggest lever on an agentic bill, and when it stops paying">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/prompt-caching-economics/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/keep-ai-costs-low/">
+<link rel="next" href="https://agentlore.neorgon.com/t/batch-api-savings/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Prompt Caching Economics",
+    "description": "Why caching is the single biggest lever on an agentic bill, and when it stops paying",
+    "url": "https://agentlore.neorgon.com/t/prompt-caching-economics/",
+    "inLanguage": "en",
+    "articleSection": "Cost",
+    "proficiencyLevel": "Foundations",
+    "keywords": "Cost, Claude, Cursor, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Cost",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=cost"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Prompt Caching Economics",
+        "item": "https://agentlore.neorgon.com/t/prompt-caching-economics/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="prompt-caching-economics">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=cost">Cost</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Prompt Caching Economics</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#fbbf24">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#fbbf24">Cost</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool cursor">Cursor</span>
+          <span class="badge badge-difficulty beginner">Foundations</span>
+        </div>
+        <h2 class="reader-title">Prompt Caching Economics</h2>
+        <p class="reader-desc">Why caching is the single biggest lever on an agentic bill, and when it stops paying</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">19 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#the-shape-of-the-problem">The shape of the problem</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-multipliers">The multipliers</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#when-it-pays-off">When it pays off</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#getting-hits">Getting hits</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#checking-your-hit-rate">Checking your hit rate</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#when-caching-does-not-help">When caching does not help</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="the-shape-of-the-problem">The shape of the problem</h2>
+<p>An agentic loop is wasteful in one very specific way: every turn re-sends everything that came before. Your system prompt, your tool definitions, the file you read four turns ago, the whole conversation. Turn 30 might send 60,000 input tokens of which 58,000 are byte-for-byte identical to turn 29.</p>
+<p>Prompt caching bills that repeated prefix at a fraction of the normal rate.</p>
+<h2 id="the-multipliers">The multipliers</h2>
+<p>Prices differ by provider, but the structure is consistent:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Operation</th><th>Multiplier vs base input</th><th>Meaning</th></tr></thead>
+<tbody><tr><td>Cache write (5 min)</td><td>1.25×</td><td>Storing the prefix</td></tr><tr><td>Cache write (1 hour)</td><td>2×</td><td>Storing it for longer</td></tr><tr><td>Cache read (hit)</td><td>0.1×</td><td>Reusing it</td></tr></tbody>
+</table></div>
+<p>A hit costs a tenth of fresh input. That is the whole game.</p>
+<h2 id="when-it-pays-off">When it pays off</h2>
+<p>Because a 5-minute write costs 1.25× and a hit saves 0.9×, the write pays for itself after <strong>one</strong> hit:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-1">write cost:  1.25 × base
+saving/hit:  0.90 × base
+break-even:  1.25 / 0.90 ≈ 1.4 hits</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>For the 1-hour cache at 2×, break-even is a bit over two hits. In an agentic session you will get dozens.</p>
+<aside class="callout callout--cost"><p class="callout-title"><span class="callout-icon" aria-hidden="true">$</span>What this is worth</p><p>A coding session sending 45,000 input tokens per turn, 1,500 turns a month, on a model at $2/M input:</p><p>- No caching: 45,000 × 1,500 × $2/M = <strong>$135/month</strong></p><p>- 80% hit rate: (9,000 × $2 + 36,000 × $0.20) × 1,500 / 1M = <strong>$38/month</strong></p><p>Same work. Same model. Same output.</p></aside>
+<h2 id="getting-hits">Getting hits</h2>
+<p>Caching only works on an <strong>exact prefix match</strong>. The rules that follow from that:</p>
+<ol>
+<li><strong>Put stable content first.</strong> System prompt, tool definitions, and long reference documents go at the top. Anything that changes per-turn goes at the bottom.
+</li>
+<li><strong>Do not interpolate volatile values into the prefix.</strong> A timestamp, a random id, or a &quot;current time&quot; line at the top of your system prompt invalidates the entire cache on every single call. This is the most common cause of a 0% hit rate.
+</li>
+<li><strong>Watch the 5-minute window.</strong> The cache expires on idle. A developer thinking for ten minutes between prompts pays the write cost again. That is fine — it is still cheaper than not caching.
+</li>
+<li><strong>Batch your reads.</strong> Reading six files in one turn caches them together. Reading them across six turns writes the cache six times.
+</li></ol>
+<h2 id="checking-your-hit-rate">Checking your hit rate</h2>
+<p>The API reports it per call:</p>
+<div class="code-block-wrap" data-lang="json">
+<pre class="code-block" id="cb-2">{
+  &quot;usage&quot;: {
+    &quot;input_tokens&quot;: 9012,
+    &quot;cache_read_input_tokens&quot;: 36104,
+    &quot;cache_creation_input_tokens&quot;: 0,
+    &quot;output_tokens&quot;: 1180
+  }
+}</pre>
+<button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Hit rate is <code>cache_read / (cache_read + input_tokens)</code>. Here that is 80%.</p>
+<p>If you see <code>cache_creation</code> high and <code>cache_read</code> near zero on every call, something in your prefix is changing. Find it — it is almost always a timestamp.</p>
+<h2 id="when-caching-does-not-help">When caching does not help</h2>
+<ul>
+<li><strong>Every call is genuinely different.</strong> Bulk classification over unrelated documents shares only the system prompt. Cache that, expect a modest saving, and reach for the Batch API instead.
+</li>
+<li><strong>Your prefix is tiny.</strong> Below roughly a thousand tokens the bookkeeping is not worth it, and some providers set a minimum.
+</li></ul>
+<p>See also: <a href="/t/keep-ai-costs-low/">Keep AI Costs Low</a> · <a href="/#/codex">The Codex</a></p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/keep-ai-costs-low/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Keep AI Costs Low</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/batch-api-savings/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Halve the Bill with the Batch API</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Prompt Caching Economics — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

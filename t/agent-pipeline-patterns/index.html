@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Agent Pipelines | Agent Lore</title>
+<meta name="description" content="Four shapes for composing agent steps, and when each one is the right one">
+<meta property="og:title" content="Agent Pipelines — Agent Lore">
+<meta property="og:description" content="Four shapes for composing agent steps, and when each one is the right one">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/agent-pipeline-patterns/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Agent Pipelines">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent Pipelines — Agent Lore">
+<meta name="twitter:description" content="Four shapes for composing agent steps, and when each one is the right one">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/agent-pipeline-patterns/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/single-agent-vs-subagents/">
+<link rel="next" href="https://agentlore.neorgon.com/t/golden-task-set/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Agent Pipelines",
+    "description": "Four shapes for composing agent steps, and when each one is the right one",
+    "url": "https://agentlore.neorgon.com/t/agent-pipeline-patterns/",
+    "inLanguage": "en",
+    "articleSection": "Architecture",
+    "proficiencyLevel": "Advanced",
+    "keywords": "Architecture, Claude, Local AI, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Architecture",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=architecture"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Agent Pipelines",
+        "item": "https://agentlore.neorgon.com/t/agent-pipeline-patterns/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="agent-pipeline-patterns">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=architecture">Architecture</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Agent Pipelines</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#818cf8">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#818cf8">Architecture</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool local">Local AI</span>
+          <span class="badge badge-difficulty advanced">Advanced</span>
+        </div>
+        <h2 class="reader-title">Agent Pipelines</h2>
+        <p class="reader-desc">Four shapes for composing agent steps, and when each one is the right one</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">35 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#four-shapes">Four shapes</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#1-chain-each-step-feeds-the-next">1. Chain — each step feeds the next</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#2-fan-out-fan-in-independent-work-then-synthesis">2. Fan-out / fan-in — independent work, then synthesis</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#3-loop-with-a-critic-generate-check-revise">3. Loop with a critic — generate, check, revise</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#4-router-classify-first-then-dispatch">4. Router — classify first, then dispatch</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#choosing">Choosing</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#rules-that-apply-to-all-four">Rules that apply to all four</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="four-shapes">Four shapes</h2>
+<p>Most multi-step agent work is one of these. Picking the wrong one is where systems get slow, expensive, or unreliable.</p>
+<h3 id="1-chain-each-step-feeds-the-next">1. Chain — each step feeds the next</h3>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-1">extract → normalise → validate → write</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Use when each step genuinely depends on the last. Simple, debuggable, no coordination.</p>
+<p>The failure mode is <strong>error propagation</strong>: a bad extraction produces a confidently normalised, validated, written wrong answer. Put the cheapest possible check between steps.</p>
+<div class="code-block-wrap" data-lang="python">
+<pre class="code-block" id="cb-2">data = extract(doc)
+assert data.get(&quot;total&quot;) is not None, &quot;extraction produced no total&quot;
+clean = normalise(data)</pre>
+<button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<h3 id="2-fan-out-fan-in-independent-work-then-synthesis">2. Fan-out / fan-in — independent work, then synthesis</h3>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-3">        ┌── analyse security  ──┐
+plan ───┼── analyse perf      ──┼── synthesise
+        └── analyse tests     ──┘</pre>
+<button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Use when subtasks are genuinely independent. The synthesis step is the one that needs capability — run the branches on a cheap tier and the join on a good one.</p>
+<p>The failure mode is <strong>contradictory branches</strong>. Two agents reach opposite conclusions from different slices. The synthesiser must be told to surface disagreement rather than average it:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-4">If the reports conflict, say so explicitly and state which one has
+stronger evidence. Do not merge contradictory claims into a single
+confident answer.</pre>
+<button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<h3 id="3-loop-with-a-critic-generate-check-revise">3. Loop with a critic — generate, check, revise</h3>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-5">generate → validate ──fail──&gt; revise ──┐
+              │                        │
+             pass                      └──&gt; (max 3 attempts)
+              ↓
+            done</pre>
+<button class="code-copy-btn" data-target="cb-5" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>The most reliable shape for anything that must be correct. The critic should be a <strong>program</strong>, not a model, wherever possible — a test suite, a linter, a schema validator. A deterministic critic cannot be talked around.</p>
+<div class="code-block-wrap" data-lang="python">
+<pre class="code-block" id="cb-6">for attempt in range(3):
+    code = generate(spec, feedback=last_error)
+    ok, last_error = run_tests(code)
+    if ok:
+        return code
+raise PipelineError(f&quot;failed after 3 attempts: {last_error}&quot;)</pre>
+<button class="code-copy-btn" data-target="cb-6" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Always bound the loop. An unbounded revise cycle is how a $0.40 task becomes a $40 one.</p>
+<h3 id="4-router-classify-first-then-dispatch">4. Router — classify first, then dispatch</h3>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-7">                ┌── simple  → fast tier
+request ── classify ── standard → balanced tier
+                └── hard    → frontier tier</pre>
+<button class="code-copy-btn" data-target="cb-7" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>The highest-leverage cost pattern there is. A fast-tier classifier costs almost nothing and routes most traffic away from the expensive tier.</p>
+<div class="code-block-wrap" data-lang="python">
+<pre class="code-block" id="cb-8">tier = classify(request)          # haiku: ~$0.0002
+model = TIERS[tier]
+return run(model, request)</pre>
+<button class="code-copy-btn" data-target="cb-8" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>The failure mode is <strong>misrouting downward</strong> — a hard request sent to the fast tier returns a confident wrong answer. Build in escalation:</p>
+<div class="code-block-wrap" data-lang="python">
+<pre class="code-block" id="cb-9">result = run(TIERS[tier], request)
+if result.low_confidence or validation_failed(result):
+    result = run(TIERS[&quot;hard&quot;], request)   # escalate, don't retry the same tier</pre>
+<button class="code-copy-btn" data-target="cb-9" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<h2 id="choosing">Choosing</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>If…</th><th>Use</th></tr></thead>
+<tbody><tr><td>Steps depend on each other</td><td>Chain</td></tr><tr><td>Steps are independent</td><td>Fan-out / fan-in</td></tr><tr><td>Correctness is checkable by a program</td><td>Loop with a critic</td></tr><tr><td>Requests vary a lot in difficulty</td><td>Router</td></tr><tr><td>Two of the above apply</td><td>Compose them — router in front of a critic loop is very common</td></tr></tbody>
+</table></div>
+<h2 id="rules-that-apply-to-all-four">Rules that apply to all four</h2>
+<p><strong>Bound everything.</strong> Max attempts, max tokens, max wall-clock. An agent pipeline without limits will eventually find a way to spend all your money on one request.</p>
+<p><strong>Log the boundaries.</strong> Store the input and output of every step. When the pipeline produces something wrong, you need to know which step went wrong, and reconstructing that from the final output is impossible.</p>
+<p><strong>Fail loudly.</strong> A step that cannot do its job should stop the pipeline, not pass through a plausible default. Silent degradation in an agent pipeline produces output that looks fine and is not.</p>
+<p><strong>Make the critic deterministic where you can.</strong> A test suite, a schema, an exit code. Model-as-critic is a fallback, not a first choice.</p>
+<p>See also: <a href="/t/single-agent-vs-subagents/">Single Agent or Subagents?</a> · <a href="/t/chain-commands-agents/">Chain Commands with Agents</a> · <a href="/t/golden-task-set/">Build a Golden Task Set</a></p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/single-agent-vs-subagents/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Single Agent or Subagents?</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/golden-task-set/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Build a Golden Task Set</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Agent Pipelines — a guide for Claude, Local AI. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org; font-src 'self'; img-src 'self' data: https://cdn.neorgon.org; connect-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<title>Ignore Files for AI | Agent Lore</title>
+<meta name="description" content="Use .claudeignore and .cursorignore to exclude files from AI context">
+<meta property="og:title" content="Ignore Files for AI — Agent Lore">
+<meta property="og:description" content="Use .claudeignore and .cursorignore to exclude files from AI context">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://agentlore.neorgon.com/t/ignore-files/">
+<meta property="og:site_name" content="Neorgon">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agent Lore — Ignore Files for AI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ignore Files for AI — Agent Lore">
+<meta name="twitter:description" content="Use .claudeignore and .cursorignore to exclude files from AI context">
+<meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://agentlore.neorgon.com/t/ignore-files/">
+<meta name="theme-color" content="#040714">
+<meta name="neo-theme-switcher" content="footer">
+<meta name="neo-repo" content="https://github.com/energon-a-secas/agentlore-site">
+<meta name="neo-version" content="v2.0.0">
+<meta name="neo-updated" content="updated Aug 2026">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="/css/style.css">
+<script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+<link rel="stylesheet" href="/css/neorgon-header.css">
+<link rel="stylesheet" href="/css/neorgon-themes.css">
+<link rel="stylesheet" href="/css/neorgon-footer.css">
+<link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+<script defer src="/js/neorgon-header.js"></script>
+<script defer src="/js/neorgon-footer.js"></script>
+<link rel="prev" href="https://agentlore.neorgon.com/t/explore-unfamiliar-codebase/">
+<link rel="next" href="https://agentlore.neorgon.com/t/cursor-at-references/">
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Ignore Files for AI",
+    "description": "Use .claudeignore and .cursorignore to exclude files from AI context",
+    "url": "https://agentlore.neorgon.com/t/ignore-files/",
+    "inLanguage": "en",
+    "articleSection": "Context",
+    "proficiencyLevel": "Foundations",
+    "keywords": "Context, Claude, Cursor, AI agents",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Agent Lore",
+      "url": "https://agentlore.neorgon.com/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Neorgon",
+      "url": "https://neorgon.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Agent Lore",
+        "item": "https://agentlore.neorgon.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Context",
+        "item": "https://agentlore.neorgon.com/#/browse?cat=context"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Ignore Files for AI",
+        "item": "https://agentlore.neorgon.com/t/ignore-files/"
+      }
+    ]
+  }
+]
+</script>
+</head>
+<body data-tutorial="ignore-files">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="header-bar" data-header-mode="content">
+  <div class="header-logo">
+    <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
+      <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
+    </a>
+    <a href="/#/" class="header-title-link">
+      <h1>Agent Lore</h1>
+      <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+    </a>
+  </div>
+  <div class="header-right">
+    <nav class="header-actions header-nav" aria-label="Sections">
+      <a class="nav-tab" href="/#/learn">Path</a>
+      <a class="nav-tab" href="/#/codex">Codex</a>
+      <a class="nav-tab" href="/#/armory">Armory</a>
+      <a class="nav-tab" href="/#/browse">Browse</a>
+    </nav>
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <kbd>/</kbd>
+    </button>
+    <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container reader-container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/#/">Agent Lore</a>
+      <span aria-hidden="true">/</span>
+      <a href="/#/browse?cat=context">Context</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Ignore Files for AI</span>
+    </nav>
+
+    <article class="reader" style="--card-cat:#34d399">
+      <header class="reader-head">
+        <div class="reader-badges">
+          <span class="badge badge-category" style="--badge-accent:#34d399">Context</span>
+          <span class="badge badge-tool claude">Claude</span><span class="badge badge-tool cursor">Cursor</span>
+          <span class="badge badge-difficulty beginner">Foundations</span>
+        </div>
+        <h2 class="reader-title">Ignore Files for AI</h2>
+        <p class="reader-desc">Use .claudeignore and .cursorignore to exclude files from AI context</p>
+        <div class="reader-actions">
+          <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="done-label">Mark complete</span>
+          </button>
+          <span class="reader-position">10 of 66</span>
+        </div>
+      </header>
+
+      <nav class="reader-outline" aria-label="On this page">
+  <p class="outline-title">On this page</p>
+  <ul class="outline-list">
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#why-ignore-files">Why ignore files?</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#claudeignore">.claudeignore</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#cursorignore">.cursorignore</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#what-to-ignore">What to ignore</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#tip">Tip</a></li>
+  </ul>
+</nav>
+
+      <div class="reader-body prose">
+<h2 id="why-ignore-files">Why ignore files?</h2>
+<p>AI agents read your project files for context. Large or irrelevant files waste tokens, slow responses, and can confuse the agent.</p>
+<h2 id="claudeignore">.claudeignore</h2>
+<p>Works like <code>.gitignore</code>. Place at your project root:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-1">node_modules/
+dist/
+build/
+*.min.js
+*.lock
+.env
+coverage/</pre>
+<button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Claude Code skips these files when reading your project.</p>
+<h2 id="cursorignore">.cursorignore</h2>
+<p>Same syntax, same purpose for Cursor:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-2">node_modules/
+dist/
+*.min.js
+.env</pre>
+<button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>Place at your project root. Cursor will not index or read these files.</p>
+<h2 id="what-to-ignore">What to ignore</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Always ignore</th><th>Consider ignoring</th></tr></thead>
+<tbody><tr><td>node_modules, dist, build</td><td>Large data files (.csv, .json dumps)</td></tr><tr><td>.env, credentials</td><td>Generated code</td></tr><tr><td>Lock files</td><td>Binary assets (images, fonts)</td></tr><tr><td>coverage/</td><td>Vendored dependencies</td></tr></tbody>
+</table></div>
+<h2 id="tip">Tip</h2>
+<p>Start with your <code>.gitignore</code> as a base, then add project-specific exclusions. Both tools respect their own ignore file independently of git.</p>
+<p>Source: <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" rel="noopener noreferrer">docs.anthropic.com/en/docs/claude-code/overview</a></p>
+      </div>
+    </article>
+
+    <nav class="reader-nav" aria-label="Guide navigation">
+      <a class="reader-nav-link reader-nav-link--prev" data-nav="prev" href="/t/explore-unfamiliar-codebase/">
+        <span class="reader-nav-dir">← Previous</span>
+        <span class="reader-nav-title">Explore Unfamiliar Codebases</span>
+      </a>
+      <a class="reader-nav-link reader-nav-link--next" data-nav="next" href="/t/cursor-at-references/">
+        <span class="reader-nav-dir">Next →</span>
+        <span class="reader-nav-title">Cursor @ References</span>
+      </a>
+    </nav>
+
+    <p class="reader-foot">Working out which model to run this on? See <a href="/#/codex">The Codex</a>. Packaging it as a reusable skill? See <a href="/#/armory">The Armory</a>.</p>
+  </div>
+</main>
+
+<footer class="neo-footer" data-footer-mode="content">
+  <p class="neo-footer-note">Ignore Files for AI — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+</footer>
+
+<script type="module" src="/js/reader.js"></script>
+</body>
+</html>

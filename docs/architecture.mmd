@@ -18,22 +18,44 @@ config:
     fontSize: "13px"
 ---
 flowchart TB
-    User([User]) --> Browse["index.html\nBrowse page"]
-    User --> PathPage["path/index.html\nLearning paths page"]
+    User([User]) --> Shell["index.html\nApp shell — hash routed"]
+    User --> Reader["t/&lt;id&gt;/index.html\nGenerated reader page"]
 
-    subgraph App["ES Modules"]
-        Browse --> app["app.js\nBrowse entry point"]
-        PathPage --> pathApp["path-app.js\nPath entry point"]
-        app --> state
-        pathApp --> state
-        app --> render
-        pathApp --> render
-        app --> events
-        pathApp --> events
-        render --> data["data.js\n52 tutorials across 8 categories + PATHS"]
-        render --> utils["utils.js\nMarkdown renderer + helpers"]
-        events --> utils
+    subgraph AppShell["App shell — SPA"]
+        Shell --> app["app.js\nEntry point"]
+        app --> state["state.js\nRoute, filters, progress"]
+        app --> events["events.js\nDelegated handlers"]
+        events --> router["router.js\nRoute → view"]
+        router --> views["views/\nhome · browse · learn\ncodex · calculator · armory"]
     end
 
-    state["state.js\nFilters, active path, completed set"] --> render
-    events["events.js\nSearch, filter, modal, progress"] --> state
+    subgraph ReaderPage["Reader page — works without JS"]
+        Reader --> readerjs["reader.js\nProgress, outline, keyboard nav"]
+    end
+
+    events -.-> palette
+    readerjs -.-> palette["palette.js\n/ or ⌘K"]
+    palette --> index["search-index.json\nlazy-fetched"]
+
+    subgraph Content["js/content/"]
+        tutorials["tutorials/\n66 guides, 11 categories"]
+        models["models.js\n13 models, dated prices"]
+        workloads["workloads.js\nCalculator presets + formula"]
+        armory["armory.js\nSkill patterns + templates"]
+        glossary["glossary.js\n28 terms"]
+        paths["paths.js\n4 training tracks"]
+    end
+
+    views --> Content
+    Content --> utils["utils.js\nrenderMarkdown + formatting"]
+    readerjs --> utils
+
+    subgraph Build["make pages"]
+        gen["scripts/build-pages.mjs"]
+    end
+
+    Content --> gen
+    utils --> gen
+    gen --> Reader
+    gen --> index
+    gen --> seo["sitemap.xml\nllms.txt"]

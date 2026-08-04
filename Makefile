@@ -8,6 +8,7 @@ help:
 	@echo ""
 	@echo "  make serve    Start dev server → http://localhost:$(PORT)"
 	@echo "  make kill     Kill this project's HTTP server"
+	@echo "  make pages    Regenerate t/<id>/ reader pages, search index, sitemap, llms.txt"
 	@echo ""
 
 # ── Dev server ────────────────────────────────────────────────────────────────
@@ -15,6 +16,12 @@ help:
 serve:
 	@echo "Serving → http://localhost:$(PORT)"
 	@python3 -m http.server $(PORT)
+
+# ── Static reader pages ───────────────────────────────────────────────────────
+# Run after any change under js/content/. Output is committed; serving stays zero-build.
+.PHONY: pages
+pages:
+	@node scripts/build-pages.mjs
 
 # ── Kill ──────────────────────────────────────────────────────────────────────
 .PHONY: kill

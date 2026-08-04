@@ -1,55 +1,6 @@
 export const tips = [
 
   {
-    id: 'keep-ai-costs-low',
-    title: 'Keep AI Costs Low',
-    description: 'Practical strategies to reduce token usage and API spend',
-    category: 'tips',
-    tools: ['claude', 'cursor'],
-    difficulty: 'beginner',
-    content: `## Why costs add up
-
-Every message to an AI agent sends your entire conversation context. Longer conversations = more tokens = higher costs.
-
-## Cost reduction strategies
-
-### 1. Start fresh for new tasks
-
-Don't reuse a long conversation for unrelated tasks. Open a new chat to reset context.
-
-### 2. Write good CLAUDE.md
-
-A clear CLAUDE.md eliminates back-and-forth questions. Agents that understand your project on the first try cost less. Use \`claude /init\` to generate one automatically.
-
-### 3. Be specific in prompts
-
-Bad: "Fix the bug"
-Good: "Fix the null pointer in src/auth.js line 42 where user.email is accessed before checking if user exists"
-
-### 4. Use smaller models for simple tasks
-
-Both Claude and Cursor let you select models. Use faster/cheaper models for straightforward tasks (rename, format, simple edits).
-
-### 5. Batch related changes
-
-Instead of 5 separate requests, describe all 5 changes in one message. The agent processes them together with shared context.
-
-### 6. Use .claudeignore and .cursorignore
-
-Exclude large files, build artifacts, and node_modules from agent context:
-
-\`\`\`
-node_modules/
-dist/
-*.min.js
-\`\`\`
-
-### 7. Monitor usage
-
-Check your cost dashboard regularly. See the "Check Your AI Costs" tutorial for exact URLs and steps.`,
-  },
-
-  {
     id: 'context-management',
     title: 'Context Management & Compaction',
     description: 'How to manage conversation context in Claude Code and Cursor to save tokens and stay productive',
