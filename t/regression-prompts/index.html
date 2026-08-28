@@ -152,12 +152,12 @@
       <nav class="reader-outline" aria-label="On this page">
   <p class="outline-title">On this page</p>
   <ul class="outline-list">
-    <li class="outline-item outline-item--h2"><a class="outline-link" href="#why-output-changes-when-you-didnt-change-anything">Why output changes when you didn't change anything</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-set">The set</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#assertions-that-hold-up">Assertions that hold up</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#wiring-it-up">Wiring it up</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#when-it-fires">When it fires</a></li>
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#why-output-changes-when-you-didnt-change-anything">Why output changes when you didn&#39;t change anything</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-set">The set</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#assertions-that-hold-up">Assertions that hold up</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#wiring-it-up">Wiring it up</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#when-it-fires">When it fires</a></li>
   </ul>
 </nav>
 
       <div class="reader-body prose">
-<h2 id="why-output-changes-when-you-didnt-change-anything">Why output changes when you didn't change anything</h2>
+<h2 id="why-output-changes-when-you-didnt-change-anything">Why output changes when you didn&#39;t change anything</h2>
 <p>Your prompt is the same. Your code is the same. The output is different. Legitimate causes:</p>
 <ul>
 <li>The provider updated the model behind an alias you pinned loosely
@@ -166,7 +166,7 @@
 </li>
 <li>Your <code>CLAUDE.md</code> grew and pushed something important out of attention
 </li>
-<li>A skill's description started matching requests it shouldn't
+<li>A skill&#39;s description started matching requests it shouldn&#39;t
 </li>
 <li>Temperature, or genuine sampling variance
 </li></ul>
@@ -195,7 +195,7 @@
   }
 ]</pre>
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>That second case is worth dwelling on. It asserts the agent says *&quot;I couldn't find it&quot;* rather than describing what a deploy script usually does. Hedging words like &quot;typically&quot; are a reliable signal that the model has stopped reading your repo and started reciting. Catching that drift early is most of the value.</p>
+<p>That second case is worth dwelling on. It asserts the agent says *&quot;I couldn&#39;t find it&quot;* rather than describing what a deploy script usually does. Hedging words like &quot;typically&quot; are a reliable signal that the model has stopped reading your repo and started reciting. Catching that drift early is most of the value.</p>
 <h2 id="assertions-that-hold-up">Assertions that hold up</h2>
 <p><strong>Structural, not semantic.</strong> Assert the format, the length, the presence of a citation — not the exact prose. Prose varies run to run without anything being wrong.</p>
 <div class="code-block-wrap">
@@ -206,7 +206,7 @@ Bad:   output equals &quot;fix(parser): handle empty input&quot;</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p><strong>Negative assertions catch the most.</strong> What should *never* appear is often sharper than what should:</p>
 <div class="code-block-wrap">
-<pre class="code-block" id="cb-3">not_contains: [&quot;As an AI&quot;, &quot;I don't have access&quot;, &quot;typically&quot;, &quot;in general&quot;]</pre>
+<pre class="code-block" id="cb-3">not_contains: [&quot;As an AI&quot;, &quot;I don&#39;t have access&quot;, &quot;typically&quot;, &quot;in general&quot;]</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p><strong>Pin the model exactly.</strong> <code>claude-haiku-4-5-20251001</code>, not <code>claude-haiku-latest</code>. An alias that silently moves is the drift you are trying to detect.</p>
 <h2 id="wiring-it-up">Wiring it up</h2>
@@ -214,9 +214,9 @@ Bad:   output equals &quot;fix(parser): handle empty input&quot;</pre>
 <pre class="code-block" id="cb-4">name: prompt-regression
 on:
   pull_request:
-    paths: ['prompts/**', 'CLAUDE.md', '.claude/skills/**']
+    paths: [&#39;prompts/**&#39;, &#39;CLAUDE.md&#39;, &#39;.claude/skills/**&#39;]
   schedule:
-    - cron: '0 6 * * 1'   # weekly, to catch provider-side drift
+    - cron: &#39;0 6 * * 1&#39;   # weekly, to catch provider-side drift
 
 jobs:
   regress:
@@ -227,7 +227,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}</pre>
 <button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Two triggers matter and they catch different things. The <strong>path filter</strong> catches your changes. The <strong>schedule</strong> catches everyone else's.</p>
+<p>Two triggers matter and they catch different things. The <strong>path filter</strong> catches your changes. The <strong>schedule</strong> catches everyone else&#39;s.</p>
 <aside class="callout callout--tip"><p class="callout-title"><span class="callout-icon" aria-hidden="true">★</span>Run it on the cheap tier</p><p>A regression set is about consistency, not capability. Running it against the fast tier costs almost nothing and detects prompt-side drift just as well. Save the expensive runs for the golden set.</p></aside>
 <h2 id="when-it-fires">When it fires</h2>
 <p>Do not immediately fix the prompt. First establish which kind of change it was:</p>

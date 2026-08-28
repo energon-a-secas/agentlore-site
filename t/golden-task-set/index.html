@@ -193,7 +193,7 @@
 </li>
 <li><strong>Near-misses.</strong> Two cases that look similar but need different answers. These are what separate a model that understands from one that pattern-matches.
 </li>
-<li><strong>Cases where the right answer is &quot;I don't know&quot;.</strong> Models are bad at this and it matters enormously for agentic work. Include a few where the correct behaviour is refusing to guess.
+<li><strong>Cases where the right answer is &quot;I don&#39;t know&quot;.</strong> Models are bad at this and it matters enormously for agentic work. Include a few where the correct behaviour is refusing to guess.
 </li></ul>
 <p>A set of thirty easy cases that every model passes tells you nothing. You want a set where the fast tier fails a few.</p>
 <h2 id="the-three-check-types">The three check types</h2>
@@ -204,7 +204,7 @@
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>This is the strongest check available. Where you can express the expectation as a passing command, do.</p>
 <p><strong>Contains</strong> — the output is prose and you are checking that key points appear. Weakest and the most prone to false passes, but sometimes the only option.</p>
-<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Be sceptical of model-graded evals</p><p>Using a model to grade another model's output is convenient and correlates poorly with what you actually care about, especially near the decision boundary. Use it as a first-pass filter, never as the thing you make a model-selection decision on.</p></aside>
+<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Be sceptical of model-graded evals</p><p>Using a model to grade another model&#39;s output is convenient and correlates poorly with what you actually care about, especially near the decision boundary. Use it as a first-pass filter, never as the thing you make a model-selection decision on.</p></aside>
 <h2 id="running-it">Running it</h2>
 <div class="code-block-wrap" data-lang="bash">
 <pre class="code-block" id="cb-3"># Run the set against each tier and compare

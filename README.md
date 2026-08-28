@@ -88,8 +88,7 @@ agentlore-site/
 │       ├── glossary.js     # Glossary, feeds the palette
 │       └── tutorials/      # One file per category
 ├── scripts/
-│   ├── build-pages.mjs     # Generates reader pages, search index, sitemap, llms.txt
-│   └── claude-costs.py     # Standalone session cost report
+│   └── build-pages.mjs     # Generates reader pages, search index, sitemap, llms.txt
 ├── search-index.json       # Generated — lazy-loaded by the palette
 ├── sitemap.xml             # Generated
 ├── llms.txt                # Generated

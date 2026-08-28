@@ -158,7 +158,7 @@
 
       <div class="reader-body prose">
 <h2 id="the-asymmetry">The asymmetry</h2>
-<p>Look down any provider's price list and the same ratio appears:</p>
+<p>Look down any provider&#39;s price list and the same ratio appears:</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Model</th><th>Input $/M</th><th>Output $/M</th><th>Ratio</th></tr></thead>
 <tbody><tr><td>Claude Opus 5</td><td>$5</td><td>$25</td><td>5×</td></tr><tr><td>Claude Sonnet 5</td><td>$2</td><td>$10</td><td>5×</td></tr><tr><td>Claude Haiku 4.5</td><td>$1</td><td>$5</td><td>5×</td></tr><tr><td>GPT-5.6 Sol</td><td>$5</td><td>$30</td><td>6×</td></tr><tr><td>Gemini 3.6 Flash</td><td>$1.50</td><td>$7.50</td><td>5×</td></tr></tbody>
@@ -191,12 +191,13 @@ Answer directly.</pre>
 <h2 id="the-counter-case">The counter-case</h2>
 <p>Reasoning output is not waste. When a model thinks through a hard problem, those tokens are what buys the correct answer — clamping them produces a cheap wrong answer, which is the most expensive kind.</p>
 <p>The discipline is: <strong>short output for mechanical work, room to think for hard work.</strong> Not &quot;short output always&quot;.</p>
-<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Do not optimise the wrong direction</p><p>Cutting a frontier model's reasoning to save $0.30 and then spending an hour debugging its rushed answer is a bad trade. Output discipline is for the high-volume, well-specified end of your workload.</p></aside>
+<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Do not optimise the wrong direction</p><p>Cutting a frontier model&#39;s reasoning to save $0.30 and then spending an hour debugging its rushed answer is a bad trade. Output discipline is for the high-volume, well-specified end of your workload.</p></aside>
 <h2 id="measuring-it">Measuring it</h2>
 <p>Pull the ratio from your own usage before you decide anything:</p>
 <div class="code-block-wrap" data-lang="bash">
 <pre class="code-block" id="cb-5"># Claude Code session costs, if you use it
-python3 scripts/claude-costs.py</pre>
+curl -O https://releve.neorgon.com/scripts/releve-mini.py
+python3 releve-mini.py --days 30</pre>
 <button class="code-copy-btn" data-target="cb-5" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>If output tokens are under 10% of input, you are already disciplined and caching is your lever. If output is 30%+ of input, start here.</p>
 <p>See also: <a href="/t/session-cost-report/">Session Cost Report Script</a> · <a href="/#/codex">The Codex</a></p>

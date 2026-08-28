@@ -167,11 +167,11 @@
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <h2 id="generate-with-curl">Generate with curl</h2>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-3">curl http://localhost:11434/api/generate -d '{
+<pre class="code-block" id="cb-3">curl http://localhost:11434/api/generate -d &#39;{
   &quot;model&quot;: &quot;llama3.2&quot;,
   &quot;prompt&quot;: &quot;Write a Python function that reverses a string&quot;,
   &quot;stream&quot;: false
-}'</pre>
+}&#39;</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <h2 id="generate-with-python">Generate with Python</h2>
 <div class="code-block-wrap" data-lang="python">
@@ -193,13 +193,13 @@ print(r.json()[&quot;response&quot;])</pre>
 <h2 id="chat-endpoint">Chat endpoint</h2>
 <p>For multi-turn conversations, use the chat API:</p>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-6">curl http://localhost:11434/api/chat -d '{
+<pre class="code-block" id="cb-6">curl http://localhost:11434/api/chat -d &#39;{
   &quot;model&quot;: &quot;llama3.2&quot;,
   &quot;messages&quot;: [
     {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello&quot;}
   ],
   &quot;stream&quot;: false
-}'</pre>
+}&#39;</pre>
 <button class="code-copy-btn" data-target="cb-6" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <h2 id="connect-your-ide">Connect your IDE</h2>
 <p>Both Claude Code and Cursor accept a custom OpenAI-compatible URL. Point them to:</p>

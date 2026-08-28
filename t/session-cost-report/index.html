@@ -7,9 +7,9 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Session Cost Report Script | Agent Lore</title>
-<meta name="description" content="Track per-session Claude Code spending with a Python script — supports API, Bedrock, and Vertex pricing with budget alerts">
+<meta name="description" content="Price your Claude Code transcripts at real API rates, and the six rules that decide whether the number is right">
 <meta property="og:title" content="Session Cost Report Script — Agent Lore">
-<meta property="og:description" content="Track per-session Claude Code spending with a Python script — supports API, Bedrock, and Vertex pricing with budget alerts">
+<meta property="og:description" content="Price your Claude Code transcripts at real API rates, and the six rules that decide whether the number is right">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/session-cost-report/">
 <meta property="og:site_name" content="Neorgon">
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="Agent Lore — Session Cost Report Script">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Session Cost Report Script — Agent Lore">
-<meta name="twitter:description" content="Track per-session Claude Code spending with a Python script — supports API, Bedrock, and Vertex pricing with budget alerts">
+<meta name="twitter:description" content="Price your Claude Code transcripts at real API rates, and the six rules that decide whether the number is right">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://agentlore.neorgon.com/t/session-cost-report/">
@@ -46,7 +46,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "Session Cost Report Script",
-    "description": "Track per-session Claude Code spending with a Python script — supports API, Bedrock, and Vertex pricing with budget alerts",
+    "description": "Price your Claude Code transcripts at real API rates, and the six rules that decide whether the number is right",
     "url": "https://agentlore.neorgon.com/t/session-cost-report/",
     "inLanguage": "en",
     "articleSection": "Cost",
@@ -139,7 +139,7 @@
           <span class="badge badge-difficulty beginner">Foundations</span>
         </div>
         <h2 class="reader-title">Session Cost Report Script</h2>
-        <p class="reader-desc">Track per-session Claude Code spending with a Python script — supports API, Bedrock, and Vertex pricing with budget alerts</p>
+        <p class="reader-desc">Price your Claude Code transcripts at real API rates, and the six rules that decide whether the number is right</p>
         <div class="reader-actions">
           <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -152,82 +152,86 @@
       <nav class="reader-outline" aria-label="On this page">
   <p class="outline-title">On this page</p>
   <ul class="outline-list">
-    <li class="outline-item outline-item--h2"><a class="outline-link" href="#what-it-does">What it does</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#download">Download</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#basic-usage">Basic usage</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#provider-pricing">Provider pricing</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#budget-alerts">Budget alerts</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#os-notifications">OS notifications</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#automate-with-cron">Automate with cron</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#model-pricing-march-2026">Model pricing (March 2026)</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#limitations">Limitations</a></li>
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#what-it-does">What it does</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#download">Download</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#basic-usage">Basic usage</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-six-rules">The six rules</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#the-whole-tree-not-one-directory-deep">The whole tree, not one directory deep</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#budget-alerts">Budget alerts</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#automate-with-cron">Automate with cron</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#reading-the-breakdown">Reading the breakdown</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#limitations">Limitations</a></li>
   </ul>
 </nav>
 
       <div class="reader-body prose">
 <h2 id="what-it-does">What it does</h2>
-<p>This script reads Claude Code session files from <code>~/.claude/projects/</code> and calculates estimated costs per session. It supports API, Bedrock, and Vertex pricing with optional budget alerts and OS notifications.</p>
-<p>Claude Code stores token usage (input, output, cache write, cache read) in JSONL files for every session. The script parses those files, matches each session's model to its published per-token rate, and outputs a cost report.</p>
+<p>Claude Code writes a JSONL transcript for every session under <code>~/.claude/projects/</code>, and every assistant turn in it carries a <code>usage</code> object: input, output, thinking, cache writes split by TTL, and cache reads. That is enough to price the work at published API rates without an account, an API key, or a network call.</p>
+<p><a href="https://releve.neorgon.com/" target="_blank" rel="noopener noreferrer">Releve</a> is that, as three Python scripts and a dashboard. The scripts are standard library only.</p>
+<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>This page used to teach a script that got the answer wrong</p><p>The earlier version of this guide shipped <code>claude-costs.py</code>. Its rate table had no entry for the current model generation, and it fell back to the nearest substring match, so every session was priced at an older, cheaper model&#39;s rate and nothing said so. It is retired. The rules below are the ones it broke.</p></aside>
 <h2 id="download">Download</h2>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-1">curl -o claude-costs.py https://raw.githubusercontent.com/energon-a-secas/agentlore-site/main/scripts/claude-costs.py
-chmod +x claude-costs.py</pre>
+<pre class="code-block" id="cb-1"># one number
+curl -O https://releve.neorgon.com/scripts/releve-mini.py
+python3 releve-mini.py --days 30
+
+# the full scan, which writes the file the dashboard loads
+curl -O https://releve.neorgon.com/scripts/releve-scan.py
+curl -O https://releve.neorgon.com/scripts/releve_cost.py
+python3 releve-scan.py --days 30 --out releve.json</pre>
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Or copy the full script from the <a href="https://github.com/energon-a-secas/agentlore-site/blob/main/scripts/claude-costs.py" target="_blank" rel="noopener noreferrer">source file</a>.</p>
-<p>Requires Python 3.8+. No external dependencies.</p>
+<p>Requires Python 3.8+. No external dependencies. Each script prints the date of the rate card it used.</p>
 <h2 id="basic-usage">Basic usage</h2>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-2">python3 claude-costs.py                # last 30 days, API pricing
-python3 claude-costs.py --days 7       # last week only
-python3 claude-costs.py --days 1       # today only</pre>
+<pre class="code-block" id="cb-2">python3 releve-mini.py --days 7        # last week
+python3 releve-mini.py --days 1        # today only</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<h2 id="provider-pricing">Provider pricing</h2>
-<p>The default uses Anthropic API rates. Switch to Bedrock or Vertex:</p>
-<div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-3">python3 claude-costs.py --pricing bedrock       # AWS Bedrock global endpoint
-python3 claude-costs.py --pricing vertex        # Google Vertex global endpoint
-python3 claude-costs.py --pricing bedrock --regional  # +10% regional premium</pre>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-3">Releve  ·  7 days  ·  22 sessions  ·  13,621 turns
+API-equivalent   $2,659.18
+  excluded       113 turns, never billed
+rates as of 2026-08-27. A counterfactual at list rates, not an invoice.</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Regional endpoints on Bedrock and Vertex charge 10% more for Claude 4.5+ models. Use <code>--regional</code> to include that premium in the estimate.</p>
-<h2 id="budget-alerts">Budget alerts</h2>
-<p>Set a spending threshold. The script prints a warning and exits with code 1 if exceeded:</p>
-<div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-4">python3 claude-costs.py --budget 50              # warn if over $50
-python3 claude-costs.py --days 7 --budget 100    # weekly $100 cap</pre>
+<h2 id="the-six-rules">The six rules</h2>
+<p>Reading a transcript naively is wrong in six specific ways. Each of these is a real defect the first attempt shipped.</p>
+<div class="table-wrap"><table>
+<thead><tr><th></th><th>Rule</th></tr></thead>
+<tbody><tr><td>1</td><td>Resolve the rate <strong>per turn</strong>, from that turn&#39;s own <code>message.model</code>. A session that switched models is not priced by whichever model appears last in the file.</td></tr><tr><td>2</td><td><strong>Never substitute another model&#39;s rates.</strong> Exact id, then longest declared prefix, then *unpriced*. An unpriced model is named and counted in its own bucket, never folded into a total and never rendered as zero.</td></tr><tr><td>3</td><td><strong>Split the cache writes.</strong> A 5-minute write bills at 1.25x base input, a 1-hour write at 2x. A turn carrying only the flat counter is an assumption, and should be flagged as one.</td></tr><tr><td>4</td><td><strong>Honour <code>usage.speed</code>.</strong> Fast mode bills double, so a fast session must not be priced as standard.</td></tr><tr><td>5</td><td>A non-empty <code>usage.iterations</code> <strong>replaces</strong> the top-level counters rather than adding to them. Adding double-counts; ignoring it under-reports every multi-iteration turn.</td></tr><tr><td>6</td><td><strong>Count each response once, keyed on <code>message.id</code>.</strong> A response is written one entry per content block and every entry repeats the same <code>usage</code>, so a turn that thought, spoke and called a tool appears three times and is billed once.</td></tr></tbody>
+</table></div>
+<p>Rule 6 decides whether the answer is right or roughly triple. On one real machine, 116,402 transcript entries are 52,078 responses, and counting entries reports 30.0B cache-read tokens against a true 12.9B.</p>
+<p>Rule 3 is the one people skip, and the cache is usually most of the bill: cache reads at 0.1x base input are cheap per token and enormous in aggregate.</p>
+<h2 id="the-whole-tree-not-one-directory-deep">The whole tree, not one directory deep</h2>
+<p>Transcripts nest three ways, and a single-level glob misses the third:</p>
+<div class="code-block-wrap">
+<pre class="code-block" id="cb-4">~/.claude/projects/&lt;project&gt;/*.jsonl
+~/.claude/projects/&lt;project&gt;/&lt;session&gt;/*.jsonl
+~/.claude/projects/&lt;project&gt;/&lt;session&gt;/subagents/agent-*.jsonl</pre>
 <button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Under budget shows remaining amount:</p>
-<div class="code-block-wrap">
-<pre class="code-block" id="cb-5">  Budget: $100.00 | Remaining: $48.13 | Used: 52%</pre>
+<p>Subagent spend lives in that last tier. <code>releve-scan.py</code> walks all three; <code>--no-subagents</code> excludes them deliberately, which is different from missing them.</p>
+<h2 id="budget-alerts">Budget alerts</h2>
+<p><code>--budget</code> exits 1 when the window is over the threshold, so it works as a cron guard:</p>
+<div class="code-block-wrap" data-lang="bash">
+<pre class="code-block" id="cb-5">python3 releve-scan.py --days 7 --budget 100 --quiet</pre>
 <button class="code-copy-btn" data-target="cb-5" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Over budget shows a warning:</p>
-<div class="code-block-wrap">
-<pre class="code-block" id="cb-6">  *** OVER BUDGET by $11.87 (budget: $100.00, spent: $111.87) ***</pre>
-<button class="code-copy-btn" data-target="cb-6" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<h2 id="os-notifications">OS notifications</h2>
-<p>Add <code>--notify</code> to send a system notification when over budget:</p>
-<div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-7">python3 claude-costs.py --budget 50 --notify</pre>
-<button class="code-copy-btn" data-target="cb-7" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Works on macOS (osascript) and Linux (notify-send). The notification only fires when the budget is exceeded.</p>
+<p><code>--notify</code> sends a desktop notification with the total (macOS <code>osascript</code>, Linux <code>notify-send</code>).</p>
 <h2 id="automate-with-cron">Automate with cron</h2>
-<p>Run the check daily at 9 AM and get a notification if you go over:</p>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-8">crontab -e</pre>
-<button class="code-copy-btn" data-target="cb-8" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Add this line:</p>
+<pre class="code-block" id="cb-6">crontab -e</pre>
+<button class="code-copy-btn" data-target="cb-6" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <div class="code-block-wrap">
-<pre class="code-block" id="cb-9">0 9 * * * /usr/bin/python3 /path/to/claude-costs.py --days 7 --budget 100 --notify</pre>
-<button class="code-copy-btn" data-target="cb-9" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>On macOS, you can also use launchd for persistence across reboots. Create <code>~/Library/LaunchAgents/com.claude.costs.plist</code>:</p>
+<pre class="code-block" id="cb-7">0 9 * * * /usr/bin/python3 /path/to/releve-scan.py --days 7 --budget 100 --notify --quiet</pre>
+<button class="code-copy-btn" data-target="cb-7" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>On macOS, launchd survives reboots. Create <code>~/Library/LaunchAgents/com.releve.costs.plist</code>:</p>
 <div class="code-block-wrap" data-lang="xml">
-<pre class="code-block" id="cb-10">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre class="code-block" id="cb-8">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot;
   &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
 &lt;plist version=&quot;1.0&quot;&gt;
 &lt;dict&gt;
   &lt;key&gt;Label&lt;/key&gt;
-  &lt;string&gt;com.claude.costs&lt;/string&gt;
+  &lt;string&gt;com.releve.costs&lt;/string&gt;
   &lt;key&gt;ProgramArguments&lt;/key&gt;
   &lt;array&gt;
     &lt;string&gt;/usr/bin/python3&lt;/string&gt;
-    &lt;string&gt;/path/to/claude-costs.py&lt;/string&gt;
+    &lt;string&gt;/path/to/releve-scan.py&lt;/string&gt;
     &lt;string&gt;--days&lt;/string&gt;
     &lt;string&gt;7&lt;/string&gt;
     &lt;string&gt;--budget&lt;/string&gt;
     &lt;string&gt;100&lt;/string&gt;
     &lt;string&gt;--notify&lt;/string&gt;
+    &lt;string&gt;--quiet&lt;/string&gt;
   &lt;/array&gt;
   &lt;key&gt;StartCalendarInterval&lt;/key&gt;
   &lt;dict&gt;
@@ -238,25 +242,26 @@ python3 claude-costs.py --days 7 --budget 100    # weekly $100 cap</pre>
   &lt;/dict&gt;
 &lt;/dict&gt;
 &lt;/plist&gt;</pre>
-<button class="code-copy-btn" data-target="cb-10" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<button class="code-copy-btn" data-target="cb-8" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>Load it:</p>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-11">launchctl load ~/Library/LaunchAgents/com.claude.costs.plist</pre>
-<button class="code-copy-btn" data-target="cb-11" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<h2 id="model-pricing-march-2026">Model pricing (March 2026)</h2>
-<p>The script includes rates for all current Claude models:</p>
-<div class="table-wrap"><table>
-<thead><tr><th>Model</th><th>Input</th><th>Output</th><th>Cache write</th><th>Cache read</th></tr></thead>
-<tbody><tr><td>Opus 4.6 / 4.5</td><td>\$5</td><td>\$25</td><td>\$6.25</td><td>\$0.50</td></tr><tr><td>Opus 4.1 / 4</td><td>\$15</td><td>\$75</td><td>\$18.75</td><td>\$1.50</td></tr><tr><td>Sonnet 4.x</td><td>\$3</td><td>\$15</td><td>\$3.75</td><td>\$0.30</td></tr><tr><td>Haiku 4.5</td><td>\$1</td><td>\$5</td><td>\$1.25</td><td>\$0.10</td></tr><tr><td>Haiku 3.5</td><td>\$0.80</td><td>\$4</td><td>\$1.00</td><td>\$0.08</td></tr></tbody>
-</table></div>
-<p>Prices are per million tokens. Source: <a href="https://docs.anthropic.com/en/docs/about-claude/pricing" target="_blank" rel="noopener noreferrer">docs.anthropic.com/en/docs/about-claude/pricing</a></p>
+<pre class="code-block" id="cb-9">launchctl load ~/Library/LaunchAgents/com.releve.costs.plist</pre>
+<button class="code-copy-btn" data-target="cb-9" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<h2 id="reading-the-breakdown">Reading the breakdown</h2>
+<p><code>releve-scan.py --out releve.json</code> writes aggregates only, no prompt or response text. Drop that file on <a href="https://releve.neorgon.com/" target="_blank" rel="noopener noreferrer">releve.neorgon.com</a> and the same total is cut by model, project, skill, effort, git branch, main thread against subagent, service tier and Claude Code version. Nothing is uploaded: the file is read in the browser.</p>
+<p>Add <code>--anonymize</code> before sharing one. It hashes project labels and drops <code>cwd</code>, <code>gitBranch</code>, <code>title</code> and <code>slug</code>.</p>
+<p>The rate card is editable on the page, so you can reprice the whole window against a rate you have verified yourself rather than trusting the one shipped.</p>
 <h2 id="limitations">Limitations</h2>
 <ul>
-<li>Estimates only — actual Bedrock/Vertex charges may differ slightly
+<li><strong>Not an invoice.</strong> Every figure is tokens multiplied by a published list rate. Nothing here reads a bill or the Admin API.
 </li>
-<li>Max plan users see what sessions &quot;would cost&quot; at API rates (subscription covers actual use)
+<li><strong>Subscription users</strong> see what the work would have cost through the API. The plan number is whatever you type in.
 </li>
-<li>Does not track web search tool costs (\$10 per 1,000 searches) or code execution time
+<li><strong>Bedrock and Vertex rates differ</strong> and are left null rather than guessed. A wrong rate presented confidently is worse than a stated gap.
+</li>
+<li>Web search (\$10 per 1,000 searches) and code execution time are not counted.
+</li>
+<li>Thinking tokens are already inside <code>output_tokens</code>. Report them as a label, never add them to cost.
 </li></ul>
       </div>
     </article>

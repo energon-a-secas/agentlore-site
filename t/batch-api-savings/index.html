@@ -193,7 +193,7 @@ client = anthropic.Anthropic()
 batch = client.messages.batches.create(
     requests=[
         {
-            &quot;custom_id&quot;: f&quot;ticket-{t['id']}&quot;,
+            &quot;custom_id&quot;: f&quot;ticket-{t[&#39;id&#39;]}&quot;,
             &quot;params&quot;: {
                 &quot;model&quot;: &quot;claude-haiku-4-5-20251001&quot;,
                 &quot;max_tokens&quot;: 512,

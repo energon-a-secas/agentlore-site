@@ -164,7 +164,7 @@
 </li>
 <li>It does its own exploration, often re-reading files the parent already read.
 </li>
-<li>Its result comes back into the parent's context, which the parent then re-sends on every subsequent turn.
+<li>Its result comes back into the parent&#39;s context, which the parent then re-sends on every subsequent turn.
 </li></ol>
 <p>Three agents exploring a codebase in parallel do not cost one-third each. They cost roughly <strong>three full explorations</strong>, plus the summaries flowing back.</p>
 <h2 id="when-the-arithmetic-works">When the arithmetic works</h2>
@@ -179,7 +179,7 @@ In a subagent:     8,000 tokens once, 300-token summary returns
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>That is a 16× saving, and it grows with session length.</p>
 <p><strong>Good trade — genuine parallelism.</strong> Four independent investigations that would otherwise run in sequence. You pay four times the tokens to save three-quarters of the wall-clock time. Whether that is worth it depends on what your time costs.</p>
-<p><strong>Bad trade — sequential dependency.</strong> If agent B needs agent A's output, you have paid for two cold starts to do one job. Keep it in one context.</p>
+<p><strong>Bad trade — sequential dependency.</strong> If agent B needs agent A&#39;s output, you have paid for two cold starts to do one job. Keep it in one context.</p>
 <p><strong>Bad trade — trivial work.</strong> Spawning an agent to read one file costs more in setup than doing it inline.</p>
 <h2 id="routing-subagents-down-a-tier">Routing subagents down a tier</h2>
 <p>The strongest cost move: subagents doing mechanical work do not need the frontier tier.</p>

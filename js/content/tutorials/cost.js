@@ -69,31 +69,28 @@ This shows input, output, and cache tokens after each turn. Useful for spotting 
 
 Claude Code stores token usage in session files at \`~/.claude/projects/\`. A Python script can read them and estimate costs across all billing methods.
 
-Full script: [claude-costs.py on GitHub](https://github.com/energon-a-secas/agentlore-site/blob/main/scripts/claude-costs.py)
+Full scripts and the dashboard: [releve.neorgon.com](https://releve.neorgon.com/)
 
 \`\`\`bash
-python3 claude-costs.py                          # API pricing, last 30 days
-python3 claude-costs.py --days 7                 # last week
-python3 claude-costs.py --pricing bedrock        # AWS Bedrock global
-python3 claude-costs.py --pricing vertex         # Google Vertex global
-python3 claude-costs.py --pricing bedrock --regional  # Bedrock +10% regional
+curl -O https://releve.neorgon.com/scripts/releve-mini.py
+python3 releve-mini.py --days 7
 \`\`\`
 
-The script matches each session's model (Opus 4.6, Sonnet 4, Haiku 3.5, etc.) to its published per-token rate and applies the correct provider multiplier. Output looks like:
+One number, no dependencies:
 
 \`\`\`
-  Pricing: BEDROCK regional | Period: 7 days | Sessions: 42
-
-Date              Project         Model                       Cost
-------------------------------------------------------------------
-2026-03-08 12:55  myapp           claude-opus-4-6         \$ 17.72
-2026-03-07 15:38  myapp           claude-sonnet-4-6       \$  3.21
-...
-------------------------------------------------------------------
-Total (42 sessions, 7d)                                 \$156.8300
+Releve  ·  7 days  ·  22 sessions  ·  13,621 turns
+API-equivalent   \$2,659.18
+  excluded       113 turns, never billed
+rates as of 2026-08-27. A counterfactual at list rates, not an invoice.
 \`\`\`
+
+For the breakdown by model, project, skill and effort, \`releve-scan.py\` writes a JSON file you drop on the dashboard. Full walkthrough: [/t/session-cost-report/](/t/session-cost-report/).
 
 Costs are estimates. Max plan users see theoretical API-rate costs. Check your actual billing dashboard for real charges.
+
+> [!warn] Resolve the rate per turn, not per session
+> The obvious version of this script keeps the last model it saw in a file and prices the whole session with it. Sessions switch models, so that mis-prices the lot. Worse, a rate table that falls back to a "close enough" model when it finds no match will silently price a new model at an old model's rate and never tell you. Match exactly, or report the model as unpriced.
 
 ## Cursor costs
 
@@ -132,93 +129,98 @@ Source: [docs.cursor.com/account/plans-and-usage](https://docs.cursor.com/accoun
   {
     id: 'session-cost-report',
     title: 'Session Cost Report Script',
-    description: 'Track per-session Claude Code spending with a Python script — supports API, Bedrock, and Vertex pricing with budget alerts',
+    description: 'Price your Claude Code transcripts at real API rates, and the six rules that decide whether the number is right',
     category: 'cost',
     tools: ['claude'],
     difficulty: 'beginner',
     content: `## What it does
 
-This script reads Claude Code session files from \`~/.claude/projects/\` and calculates estimated costs per session. It supports API, Bedrock, and Vertex pricing with optional budget alerts and OS notifications.
+Claude Code writes a JSONL transcript for every session under \`~/.claude/projects/\`, and every assistant turn in it carries a \`usage\` object: input, output, thinking, cache writes split by TTL, and cache reads. That is enough to price the work at published API rates without an account, an API key, or a network call.
 
-Claude Code stores token usage (input, output, cache write, cache read) in JSONL files for every session. The script parses those files, matches each session's model to its published per-token rate, and outputs a cost report.
+[Releve](https://releve.neorgon.com/) is that, as three Python scripts and a dashboard. The scripts are standard library only.
+
+> [!warn] This page used to teach a script that got the answer wrong
+> The earlier version of this guide shipped \`claude-costs.py\`. Its rate table had no entry for the current model generation, and it fell back to the nearest substring match, so every session was priced at an older, cheaper model's rate and nothing said so. It is retired. The rules below are the ones it broke.
 
 ## Download
 
 \`\`\`bash
-curl -o claude-costs.py https://raw.githubusercontent.com/energon-a-secas/agentlore-site/main/scripts/claude-costs.py
-chmod +x claude-costs.py
+# one number
+curl -O https://releve.neorgon.com/scripts/releve-mini.py
+python3 releve-mini.py --days 30
+
+# the full scan, which writes the file the dashboard loads
+curl -O https://releve.neorgon.com/scripts/releve-scan.py
+curl -O https://releve.neorgon.com/scripts/releve_cost.py
+python3 releve-scan.py --days 30 --out releve.json
 \`\`\`
 
-Or copy the full script from the [source file](https://github.com/energon-a-secas/agentlore-site/blob/main/scripts/claude-costs.py).
-
-Requires Python 3.8+. No external dependencies.
+Requires Python 3.8+. No external dependencies. Each script prints the date of the rate card it used.
 
 ## Basic usage
 
 \`\`\`bash
-python3 claude-costs.py                # last 30 days, API pricing
-python3 claude-costs.py --days 7       # last week only
-python3 claude-costs.py --days 1       # today only
+python3 releve-mini.py --days 7        # last week
+python3 releve-mini.py --days 1        # today only
 \`\`\`
 
-## Provider pricing
-
-The default uses Anthropic API rates. Switch to Bedrock or Vertex:
-
-\`\`\`bash
-python3 claude-costs.py --pricing bedrock       # AWS Bedrock global endpoint
-python3 claude-costs.py --pricing vertex        # Google Vertex global endpoint
-python3 claude-costs.py --pricing bedrock --regional  # +10% regional premium
+\`\`\`
+Releve  ·  7 days  ·  22 sessions  ·  13,621 turns
+API-equivalent   \$2,659.18
+  excluded       113 turns, never billed
+rates as of 2026-08-27. A counterfactual at list rates, not an invoice.
 \`\`\`
 
-Regional endpoints on Bedrock and Vertex charge 10% more for Claude 4.5+ models. Use \`--regional\` to include that premium in the estimate.
+## The six rules
+
+Reading a transcript naively is wrong in six specific ways. Each of these is a real defect the first attempt shipped.
+
+| | Rule |
+|---|---|
+| 1 | Resolve the rate **per turn**, from that turn's own \`message.model\`. A session that switched models is not priced by whichever model appears last in the file. |
+| 2 | **Never substitute another model's rates.** Exact id, then longest declared prefix, then *unpriced*. An unpriced model is named and counted in its own bucket, never folded into a total and never rendered as zero. |
+| 3 | **Split the cache writes.** A 5-minute write bills at 1.25x base input, a 1-hour write at 2x. A turn carrying only the flat counter is an assumption, and should be flagged as one. |
+| 4 | **Honour \`usage.speed\`.** Fast mode bills double, so a fast session must not be priced as standard. |
+| 5 | A non-empty \`usage.iterations\` **replaces** the top-level counters rather than adding to them. Adding double-counts; ignoring it under-reports every multi-iteration turn. |
+| 6 | **Count each response once, keyed on \`message.id\`.** A response is written one entry per content block and every entry repeats the same \`usage\`, so a turn that thought, spoke and called a tool appears three times and is billed once. |
+
+Rule 6 decides whether the answer is right or roughly triple. On one real machine, 116,402 transcript entries are 52,078 responses, and counting entries reports 30.0B cache-read tokens against a true 12.9B.
+
+Rule 3 is the one people skip, and the cache is usually most of the bill: cache reads at 0.1x base input are cheap per token and enormous in aggregate.
+
+## The whole tree, not one directory deep
+
+Transcripts nest three ways, and a single-level glob misses the third:
+
+\`\`\`
+~/.claude/projects/<project>/*.jsonl
+~/.claude/projects/<project>/<session>/*.jsonl
+~/.claude/projects/<project>/<session>/subagents/agent-*.jsonl
+\`\`\`
+
+Subagent spend lives in that last tier. \`releve-scan.py\` walks all three; \`--no-subagents\` excludes them deliberately, which is different from missing them.
 
 ## Budget alerts
 
-Set a spending threshold. The script prints a warning and exits with code 1 if exceeded:
+\`--budget\` exits 1 when the window is over the threshold, so it works as a cron guard:
 
 \`\`\`bash
-python3 claude-costs.py --budget 50              # warn if over $50
-python3 claude-costs.py --days 7 --budget 100    # weekly $100 cap
+python3 releve-scan.py --days 7 --budget 100 --quiet
 \`\`\`
 
-Under budget shows remaining amount:
-
-\`\`\`
-  Budget: $100.00 | Remaining: $48.13 | Used: 52%
-\`\`\`
-
-Over budget shows a warning:
-
-\`\`\`
-  *** OVER BUDGET by $11.87 (budget: $100.00, spent: $111.87) ***
-\`\`\`
-
-## OS notifications
-
-Add \`--notify\` to send a system notification when over budget:
-
-\`\`\`bash
-python3 claude-costs.py --budget 50 --notify
-\`\`\`
-
-Works on macOS (osascript) and Linux (notify-send). The notification only fires when the budget is exceeded.
+\`--notify\` sends a desktop notification with the total (macOS \`osascript\`, Linux \`notify-send\`).
 
 ## Automate with cron
-
-Run the check daily at 9 AM and get a notification if you go over:
 
 \`\`\`bash
 crontab -e
 \`\`\`
 
-Add this line:
-
 \`\`\`
-0 9 * * * /usr/bin/python3 /path/to/claude-costs.py --days 7 --budget 100 --notify
+0 9 * * * /usr/bin/python3 /path/to/releve-scan.py --days 7 --budget 100 --notify --quiet
 \`\`\`
 
-On macOS, you can also use launchd for persistence across reboots. Create \`~/Library/LaunchAgents/com.claude.costs.plist\`:
+On macOS, launchd survives reboots. Create \`~/Library/LaunchAgents/com.releve.costs.plist\`:
 
 \`\`\`xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -227,16 +229,17 @@ On macOS, you can also use launchd for persistence across reboots. Create \`~/Li
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.claude.costs</string>
+  <string>com.releve.costs</string>
   <key>ProgramArguments</key>
   <array>
     <string>/usr/bin/python3</string>
-    <string>/path/to/claude-costs.py</string>
+    <string>/path/to/releve-scan.py</string>
     <string>--days</string>
     <string>7</string>
     <string>--budget</string>
     <string>100</string>
     <string>--notify</string>
+    <string>--quiet</string>
   </array>
   <key>StartCalendarInterval</key>
   <dict>
@@ -252,28 +255,24 @@ On macOS, you can also use launchd for persistence across reboots. Create \`~/Li
 Load it:
 
 \`\`\`bash
-launchctl load ~/Library/LaunchAgents/com.claude.costs.plist
+launchctl load ~/Library/LaunchAgents/com.releve.costs.plist
 \`\`\`
 
-## Model pricing (March 2026)
+## Reading the breakdown
 
-The script includes rates for all current Claude models:
+\`releve-scan.py --out releve.json\` writes aggregates only, no prompt or response text. Drop that file on [releve.neorgon.com](https://releve.neorgon.com/) and the same total is cut by model, project, skill, effort, git branch, main thread against subagent, service tier and Claude Code version. Nothing is uploaded: the file is read in the browser.
 
-| Model | Input | Output | Cache write | Cache read |
-|-------|-------|--------|-------------|------------|
-| Opus 4.6 / 4.5 | \\$5 | \\$25 | \\$6.25 | \\$0.50 |
-| Opus 4.1 / 4 | \\$15 | \\$75 | \\$18.75 | \\$1.50 |
-| Sonnet 4.x | \\$3 | \\$15 | \\$3.75 | \\$0.30 |
-| Haiku 4.5 | \\$1 | \\$5 | \\$1.25 | \\$0.10 |
-| Haiku 3.5 | \\$0.80 | \\$4 | \\$1.00 | \\$0.08 |
+Add \`--anonymize\` before sharing one. It hashes project labels and drops \`cwd\`, \`gitBranch\`, \`title\` and \`slug\`.
 
-Prices are per million tokens. Source: [docs.anthropic.com/en/docs/about-claude/pricing](https://docs.anthropic.com/en/docs/about-claude/pricing)
+The rate card is editable on the page, so you can reprice the whole window against a rate you have verified yourself rather than trusting the one shipped.
 
 ## Limitations
 
-- Estimates only — actual Bedrock/Vertex charges may differ slightly
-- Max plan users see what sessions "would cost" at API rates (subscription covers actual use)
-- Does not track web search tool costs (\\$10 per 1,000 searches) or code execution time`,
+- **Not an invoice.** Every figure is tokens multiplied by a published list rate. Nothing here reads a bill or the Admin API.
+- **Subscription users** see what the work would have cost through the API. The plan number is whatever you type in.
+- **Bedrock and Vertex rates differ** and are left null rather than guessed. A wrong rate presented confidently is worse than a stated gap.
+- Web search (\\$10 per 1,000 searches) and code execution time are not counted.
+- Thinking tokens are already inside \`output_tokens\`. Report them as a label, never add them to cost.`,
   },
 
   {
@@ -583,7 +582,8 @@ Pull the ratio from your own usage before you decide anything:
 
 \`\`\`bash
 # Claude Code session costs, if you use it
-python3 scripts/claude-costs.py
+curl -O https://releve.neorgon.com/scripts/releve-mini.py
+python3 releve-mini.py --days 30
 \`\`\`
 
 If output tokens are under 10% of input, you are already disciplined and caching is your lever. If output is 30%+ of input, start here.

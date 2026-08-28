@@ -179,8 +179,8 @@
 <p>Or use the AWS CLI:</p>
 <div class="code-block-wrap" data-lang="bash">
 <pre class="code-block" id="cb-4">aws ce get-cost-and-usage --time-period Start=2026-03-01,End=2026-03-09 \
-  --granularity DAILY --filter '{&quot;Dimensions&quot;:{&quot;Key&quot;:&quot;SERVICE&quot;,&quot;Values&quot;:[&quot;Amazon Bedrock&quot;]}}' \
-  --metrics BlendedCost --query 'ResultsByTime[].Total.BlendedCost'</pre>
+  --granularity DAILY --filter &#39;{&quot;Dimensions&quot;:{&quot;Key&quot;:&quot;SERVICE&quot;,&quot;Values&quot;:[&quot;Amazon Bedrock&quot;]}}&#39; \
+  --metrics BlendedCost --query &#39;ResultsByTime[].Total.BlendedCost&#39;</pre>
 <button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <h3 id="google-vertex-ai">Google Vertex AI</h3>
 <p>Costs go through GCP billing:</p>
@@ -195,27 +195,21 @@
 <p>This shows input, output, and cache tokens after each turn. Useful for spotting expensive operations in real time.</p>
 <h2 id="session-cost-report">Session cost report</h2>
 <p>Claude Code stores token usage in session files at <code>~/.claude/projects/</code>. A Python script can read them and estimate costs across all billing methods.</p>
-<p>Full script: <a href="https://github.com/energon-a-secas/agentlore-site/blob/main/scripts/claude-costs.py" target="_blank" rel="noopener noreferrer">claude-costs.py on GitHub</a></p>
+<p>Full scripts and the dashboard: <a href="https://releve.neorgon.com/" target="_blank" rel="noopener noreferrer">releve.neorgon.com</a></p>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-7">python3 claude-costs.py                          # API pricing, last 30 days
-python3 claude-costs.py --days 7                 # last week
-python3 claude-costs.py --pricing bedrock        # AWS Bedrock global
-python3 claude-costs.py --pricing vertex         # Google Vertex global
-python3 claude-costs.py --pricing bedrock --regional  # Bedrock +10% regional</pre>
+<pre class="code-block" id="cb-7">curl -O https://releve.neorgon.com/scripts/releve-mini.py
+python3 releve-mini.py --days 7</pre>
 <button class="code-copy-btn" data-target="cb-7" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>The script matches each session's model (Opus 4.6, Sonnet 4, Haiku 3.5, etc.) to its published per-token rate and applies the correct provider multiplier. Output looks like:</p>
+<p>One number, no dependencies:</p>
 <div class="code-block-wrap">
-<pre class="code-block" id="cb-8">  Pricing: BEDROCK regional | Period: 7 days | Sessions: 42
-
-Date              Project         Model                       Cost
-------------------------------------------------------------------
-2026-03-08 12:55  myapp           claude-opus-4-6         $ 17.72
-2026-03-07 15:38  myapp           claude-sonnet-4-6       $  3.21
-...
-------------------------------------------------------------------
-Total (42 sessions, 7d)                                 $156.8300</pre>
+<pre class="code-block" id="cb-8">Releve  ·  7 days  ·  22 sessions  ·  13,621 turns
+API-equivalent   $2,659.18
+  excluded       113 turns, never billed
+rates as of 2026-08-27. A counterfactual at list rates, not an invoice.</pre>
 <button class="code-copy-btn" data-target="cb-8" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
+<p>For the breakdown by model, project, skill and effort, <code>releve-scan.py</code> writes a JSON file you drop on the dashboard. Full walkthrough: <a href="/t/session-cost-report/">/t/session-cost-report/</a>.</p>
 <p>Costs are estimates. Max plan users see theoretical API-rate costs. Check your actual billing dashboard for real charges.</p>
+<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Resolve the rate per turn, not per session</p><p>The obvious version of this script keeps the last model it saw in a file and prices the whole session with it. Sessions switch models, so that mis-prices the lot. Worse, a rate table that falls back to a &quot;close enough&quot; model when it finds no match will silently price a new model at an old model&#39;s rate and never tell you. Match exactly, or report the model as unpriced.</p></aside>
 <h2 id="cursor-costs">Cursor costs</h2>
 <h3 id="subscription">Subscription</h3>
 <p>Cursor Pro includes a monthly allowance of &quot;premium&quot; requests. Check remaining:</p>

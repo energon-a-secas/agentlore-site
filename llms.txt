@@ -3,7 +3,7 @@
 > Practical reference for working with AI coding agents: 66 guides for Claude Code, Cursor and local AI, a model comparison with verified pricing and a cost calculator, and patterns for building grounded agent skills.
 
 Site: https://agentlore.neorgon.com/
-Updated: 2026-08-04
+Updated: 2026-08-28
 
 ## Sections
 
@@ -38,7 +38,7 @@ Updated: 2026-08-04
 ### Cost
 
 - [Check Your AI Costs](https://agentlore.neorgon.com/t/check-ai-costs/): Where to monitor usage and spending in Claude and Cursor
-- [Session Cost Report Script](https://agentlore.neorgon.com/t/session-cost-report/): Track per-session Claude Code spending with a Python script — supports API, Bedrock, and Vertex pricing with budget alerts
+- [Session Cost Report Script](https://agentlore.neorgon.com/t/session-cost-report/): Price your Claude Code transcripts at real API rates, and the six rules that decide whether the number is right
 - [Keep AI Costs Low](https://agentlore.neorgon.com/t/keep-ai-costs-low/): Practical strategies to reduce token usage and API spend
 - [Prompt Caching Economics](https://agentlore.neorgon.com/t/prompt-caching-economics/): Why caching is the single biggest lever on an agentic bill, and when it stops paying
 - [Halve the Bill with the Batch API](https://agentlore.neorgon.com/t/batch-api-savings/): A 50% discount on anything that does not need an answer right now

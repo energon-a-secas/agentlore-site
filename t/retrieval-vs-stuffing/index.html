@@ -201,7 +201,7 @@ Retrieved:        $3   (plus an embedding pipeline you now maintain)</pre>
 3. Give the agent a read_file tool so it can pull full context on
    anything that looks relevant</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>This gets retrieval's cost profile with much of stuffing's accuracy, and it degrades gracefully when the embedding misses — the agent can go and look.</p>
+<p>This gets retrieval&#39;s cost profile with much of stuffing&#39;s accuracy, and it degrades gracefully when the embedding misses — the agent can go and look.</p>
 <aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>The failure mode of tight retrieval</p><p>Chunking cuts documents at arbitrary boundaries. A rule and its exception end up in different chunks; you retrieve the rule, miss the exception, and get a confidently wrong answer. If your retrieved context is under a couple of thousand tokens, you are probably losing exceptions.</p></aside>
 <h2 id="start-simple">Start simple</h2>
 <p>Put it in context. Measure. Add retrieval when the numbers say to — not because retrieval is what serious systems do. Most corpora people build pipelines for would fit in a cached prefix.</p>

@@ -158,7 +158,7 @@
 
       <div class="reader-body prose">
 <h2 id="the-failure-this-prevents">The failure this prevents</h2>
-<p>An agent reports: *&quot;I've updated the config and all tests pass.&quot;*</p>
+<p>An agent reports: *&quot;I&#39;ve updated the config and all tests pass.&quot;*</p>
 <p>Three things could be true. It did the work and verified it. It did the work and assumed the tests pass. It did something adjacent and described what it intended.</p>
 <p>The output looks identical in all three cases. Confidence is not evidence, and fluent text is not a receipt.</p>
 <h2 id="make-the-agent-produce-receipts">Make the agent produce receipts</h2>
@@ -173,7 +173,7 @@
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>This costs a few dozen tokens per request and changes the failure mode from silent to visible.</p>
 <h2 id="the-four-checks-cheapest-first">The four checks, cheapest first</h2>
-<p><strong>1. Does it cite?</strong> A claim about your code should carry <code>file:line</code>. If it doesn't, the model is probably recalling a pattern rather than reading your repo. Ask for the citation — the answer often changes.</p>
+<p><strong>1. Does it cite?</strong> A claim about your code should carry <code>file:line</code>. If it doesn&#39;t, the model is probably recalling a pattern rather than reading your repo. Ask for the citation — the answer often changes.</p>
 <p><strong>2. Does the command actually run?</strong> For anything the agent claims works:</p>
 <div class="code-block-wrap" data-lang="bash">
 <pre class="code-block" id="cb-2">git diff --stat          # did it change what it said it changed?

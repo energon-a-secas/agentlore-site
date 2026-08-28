@@ -158,7 +158,7 @@
 
       <div class="reader-body prose">
 <h2 id="when-to-parallelize">When to parallelize</h2>
-<p>Use parallel agents when tasks are independent and don't share state:</p>
+<p>Use parallel agents when tasks are independent and don&#39;t share state:</p>
 <ul>
 <li>Code review on one file + linting another
 </li>
@@ -179,14 +179,14 @@ Agent 2: Explore src/api/ and list all API endpoints</pre>
 <p>Open multiple Composer tabs or use the ask feature in parallel panels. Each operates with its own context.</p>
 <h2 id="anti-patterns">Anti-patterns</h2>
 <ul>
-<li>Launching agents that depend on each other's output (sequential, not parallel)
+<li>Launching agents that depend on each other&#39;s output (sequential, not parallel)
 </li>
 <li>Spawning one agent per file in a 50-file refactor (use a shell loop instead)
 </li>
-<li>Parallelizing trivial tasks (the overhead isn't worth it)
+<li>Parallelizing trivial tasks (the overhead isn&#39;t worth it)
 </li></ul>
 <h2 id="rule-of-thumb">Rule of thumb</h2>
-<p>If two tasks require reading different files and producing independent outputs, parallelize. If task B needs task A's result, run them sequentially.</p>
+<p>If two tasks require reading different files and producing independent outputs, parallelize. If task B needs task A&#39;s result, run them sequentially.</p>
       </div>
     </article>
 

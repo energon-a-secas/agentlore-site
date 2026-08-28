@@ -164,11 +164,11 @@
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>Or set it per request:</p>
 <div class="code-block-wrap" data-lang="bash">
-<pre class="code-block" id="cb-2">curl http://localhost:11434/api/generate -d '{
+<pre class="code-block" id="cb-2">curl http://localhost:11434/api/generate -d &#39;{
   &quot;model&quot;: &quot;llama3.2&quot;,
   &quot;prompt&quot;: &quot;Hello&quot;,
   &quot;keep_alive&quot;: &quot;24h&quot;
-}'</pre>
+}&#39;</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <h2 id="set-gpu-layers-and-context">Set GPU layers and context</h2>
 <p>In a Modelfile or API call:</p>
@@ -176,7 +176,7 @@
 <pre class="code-block" id="cb-3">PARAMETER num_ctx 8192
 PARAMETER num_gpu 35</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Match num_gpu to your GPU's layer capacity.</p>
+<p>Match num_gpu to your GPU&#39;s layer capacity.</p>
 <h2 id="run-as-a-service">Run as a service</h2>
 <h3 id="macos-launchd">macOS (launchd)</h3>
 <p>Ollama already runs as a launch agent. To customize:</p>
