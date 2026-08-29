@@ -53,9 +53,9 @@ A set of thirty easy cases that every model passes tells you nothing. You want a
 
 ## The three check types
 
-**Exact** — deterministic output. Extraction, classification, structured data. Cheap and unambiguous.
+**Exact**: deterministic output. Extraction, classification, structured data. Cheap and unambiguous.
 
-**Command** — the output is code, and the check is whether it works.
+**Command**: the output is code, and the check is whether it works.
 
 \`\`\`bash
 npm test -- parser.test.js
@@ -63,7 +63,7 @@ npm test -- parser.test.js
 
 This is the strongest check available. Where you can express the expectation as a passing command, do.
 
-**Contains** — the output is prose and you are checking that key points appear. Weakest and the most prone to false passes, but sometimes the only option.
+**Contains**: the output is prose and you are checking that key points appear. Weakest and the most prone to false passes, but sometimes the only option.
 
 > [!warn] Be sceptical of model-graded evals
 > Using a model to grade another model's output is convenient and correlates poorly with what you actually care about, especially near the decision boundary. Use it as a first-pass filter, never as the thing you make a model-selection decision on.
@@ -150,7 +150,7 @@ That second case is worth dwelling on. It asserts the agent says *"I couldn't fi
 
 ## Assertions that hold up
 
-**Structural, not semantic.** Assert the format, the length, the presence of a citation — not the exact prose. Prose varies run to run without anything being wrong.
+**Structural, not semantic.** Assert the format, the length, the presence of a citation, not the exact prose. Prose varies run to run without anything being wrong.
 
 \`\`\`
 Good:  output matches /^(feat|fix|chore)\\(.+\\): /
@@ -199,7 +199,7 @@ Do not immediately fix the prompt. First establish which kind of change it was:
 1. **Re-run.** Once is variance; three times is a change.
 2. **Diff the inputs.** Did \`CLAUDE.md\` grow? Did a skill get installed? Check git.
 3. **Pin harder.** If the model alias moved, that is your answer.
-4. **Only then** adjust the prompt — and add the failing case to the golden set.
+4. **Only then** adjust the prompt: and add the failing case to the golden set.
 
 See also: [Build a Golden Task Set](/t/golden-task-set/) · [Write an Effective CLAUDE.md](/t/write-effective-claude-md/)`,
   },
@@ -236,7 +236,7 @@ This costs a few dozen tokens per request and changes the failure mode from sile
 
 ## The four checks, cheapest first
 
-**1. Does it cite?** A claim about your code should carry \`file:line\`. If it doesn't, the model is probably recalling a pattern rather than reading your repo. Ask for the citation — the answer often changes.
+**1. Does it cite?** A claim about your code should carry \`file:line\`. If it doesn't, the model is probably recalling a pattern rather than reading your repo. Ask for the citation. The answer often changes.
 
 **2. Does the command actually run?** For anything the agent claims works:
 
@@ -261,7 +261,7 @@ A test that passes both ways is testing nothing. This catches the single most co
 
 ## Automate the check into the loop
 
-The strongest version is not checking afterwards — it is making the agent unable to finish without checking. That is what a validator in a skill does:
+The strongest version is not checking afterwards. It is making the agent unable to finish without checking. That is what a validator in a skill does:
 
 \`\`\`markdown
 After generating the migration, run scripts/validate-migration.sh.
@@ -272,7 +272,7 @@ Do not report success until it exits zero. Paste the final output.
 See [The Armory](/#/armory) for the full pattern.
 
 > [!warn] Watch for hedging vocabulary
-> "Typically", "usually", "generally", "should", "in most cases" — when these appear in an answer about *your specific codebase*, the model has stopped reading and started generalising. It is the most reliable tell there is. Ask it to cite the file.
+> "Typically", "usually", "generally", "should", "in most cases", when these appear in an answer about *your specific codebase*, the model has stopped reading and started generalising. It is the most reliable tell there is. Ask it to cite the file.
 
 ## Where to spend the effort
 

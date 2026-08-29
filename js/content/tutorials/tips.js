@@ -19,7 +19,7 @@ Claude Code offers three levels of context management.
 
 Triggers automatically when you approach the context limit. Claude summarizes the conversation, preserving key decisions, code patterns, and recent changes while condensing older history.
 
-You can see when it happens — Claude prints a compaction notice in the terminal.
+You can see when it happens: Claude prints a compaction notice in the terminal.
 
 ### Micro-compact
 
@@ -33,7 +33,7 @@ Run \`/compact\` to trigger compaction on demand. Add instructions to control wh
 /compact
 /compact only keep the architecture decisions
 /compact preserve the API schema we designed
-/compact forget the debugging — keep the final solution
+/compact forget the debugging: keep the final solution
 \`\`\`
 
 This is useful mid-session when you finish one phase (e.g., debugging) and want to reclaim context for the next phase (e.g., writing tests).
@@ -52,19 +52,19 @@ Cursor does not offer compaction. When context fills up, you see a warning and m
 
 ### Workarounds
 
-**Notepads** — Store key decisions, schemas, or context in Notepads. They persist across chats and load on demand with \`@notepad-name\`.
+**Notepads**: Store key decisions, schemas, or context in Notepads. They persist across chats and load on demand with \`@notepad-name\`.
 
-**Rules files** — Put project conventions in \`.cursor/rules/\` as \`.mdc\` files. These load automatically based on glob patterns, so every new chat starts with the right context.
+**Rules files**: Put project conventions in \`.cursor/rules/\` as \`.mdc\` files. These load automatically based on glob patterns, so every new chat starts with the right context.
 
-**Manual summary** — Before closing a long chat, ask the AI to summarize the conversation. Copy the summary and paste it into a new chat as the first message.
+**Manual summary**: Before closing a long chat, ask the AI to summarize the conversation. Copy the summary and paste it into a new chat as the first message.
 
-**Shorter chats** — Start a new chat for each distinct task. This is the most reliable way to keep context manageable.
+**Shorter chats**: Start a new chat for each distinct task. This is the most reliable way to keep context manageable.
 
 ## Side-by-side comparison
 
 | Feature | Claude Code | Cursor |
 |---------|------------|--------|
-| Auto-compaction | Yes — triggers near context limit | No |
+| Auto-compaction | Yes: triggers near context limit | No |
 | Manual compaction | \`/compact [instructions]\` | No |
 | Selective trimming | Micro-compact (tool results) | No |
 | Clear conversation | \`/clear\` | Start new chat |
@@ -73,10 +73,10 @@ Cursor does not offer compaction. When context fills up, you see a warning and m
 
 ## Best practices for both tools
 
-1. **One task per chat** — the single most effective cost-saving habit
-2. **Front-load context** — put important info in CLAUDE.md or rules files, not repeated messages
-3. **Compact before pivoting** — in Claude Code, run \`/compact\` when switching from exploration to implementation
-4. **Don't fight context limits** — if a conversation feels sluggish or unfocused, start fresh`,
+1. **One task per chat**: the single most effective cost-saving habit
+2. **Front-load context**: put important info in CLAUDE.md or rules files, not repeated messages
+3. **Compact before pivoting**: in Claude Code, run \`/compact\` when switching from exploration to implementation
+4. **Don't fight context limits**: if a conversation feels sluggish or unfocused, start fresh`,
   },
 
   {
@@ -261,7 +261,7 @@ Ask the agent to help with branch operations:
 
 - Stage specific files before asking for commit messages (smaller diff = better message)
 - Use \`-p\` mode for quick git operations to avoid starting a full session
-- Both tools can run git commands directly — just ask`,
+- Both tools can run git commands directly: just ask`,
   },
 
 ];

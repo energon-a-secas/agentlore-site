@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Prompt Caching Economics | Agent Lore</title>
 <meta name="description" content="Why caching is the single biggest lever on an agentic bill, and when it stops paying">
-<meta property="og:title" content="Prompt Caching Economics — Agent Lore">
+<meta property="og:title" content="Prompt Caching Economics, Agent Lore">
 <meta property="og:description" content="Why caching is the single biggest lever on an agentic bill, and when it stops paying">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/prompt-caching-economics/">
@@ -17,9 +17,9 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — Prompt Caching Economics">
+<meta property="og:image:alt" content="Agent Lore, Prompt Caching Economics">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Prompt Caching Economics — Agent Lore">
+<meta name="twitter:title" content="Prompt Caching Economics, Agent Lore">
 <meta name="twitter:description" content="Why caching is the single biggest lever on an agentic bill, and when it stops paying">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -193,7 +193,7 @@ break-even:  1.25 / 0.90 ≈ 1.4 hits</pre>
 </li>
 <li><strong>Do not interpolate volatile values into the prefix.</strong> A timestamp, a random id, or a &quot;current time&quot; line at the top of your system prompt invalidates the entire cache on every single call. This is the most common cause of a 0% hit rate.
 </li>
-<li><strong>Watch the 5-minute window.</strong> The cache expires on idle. A developer thinking for ten minutes between prompts pays the write cost again. That is fine — it is still cheaper than not caching.
+<li><strong>Watch the 5-minute window.</strong> The cache expires on idle. A developer thinking for ten minutes between prompts pays the write cost again. That is fine. It is still cheaper than not caching.
 </li>
 <li><strong>Batch your reads.</strong> Reading six files in one turn caches them together. Reading them across six turns writes the cache six times.
 </li></ol>
@@ -210,7 +210,7 @@ break-even:  1.25 / 0.90 ≈ 1.4 hits</pre>
 }</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>Hit rate is <code>cache_read / (cache_read + input_tokens)</code>. Here that is 80%.</p>
-<p>If you see <code>cache_creation</code> high and <code>cache_read</code> near zero on every call, something in your prefix is changing. Find it — it is almost always a timestamp.</p>
+<p>If you see <code>cache_creation</code> high and <code>cache_read</code> near zero on every call, something in your prefix is changing. Find it. It is almost always a timestamp.</p>
 <h2 id="when-caching-does-not-help">When caching does not help</h2>
 <ul>
 <li><strong>Every call is genuinely different.</strong> Bulk classification over unrelated documents shares only the system prompt. Cache that, expect a modest saving, and reach for the Batch API instead.
@@ -237,7 +237,7 @@ break-even:  1.25 / 0.90 ≈ 1.4 hits</pre>
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">Prompt Caching Economics — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">Prompt Caching Economics. A guide for Claude, Cursor. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

@@ -87,7 +87,7 @@ export function renderHome(s) {
     href: '#/armory',
     eyebrow: 'Equip',
     title: 'The Armory',
-    blurb: 'How to build agent skills grounded in sources you control — so they stay right when the model\'s recollection does not.',
+    blurb: 'How to build agent skills grounded in sources you control, so they stay right when the model\'s recollection does not.',
     stat: `${ARMORY_SECTIONS.length} guides · ${SKILL_TEMPLATES.length} templates`,
     footer: '',
     accent: '#a78bfa',

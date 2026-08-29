@@ -52,7 +52,7 @@ function stalenessBanner() {
   Providers change pricing without notice. Confirm at the source before you budget:
   ${Object.entries(PROVIDERS).filter(([key]) => key !== 'local').map(([, p]) =>
     `<a href="${p.source}" target="_blank" rel="noopener noreferrer">${escHtml(p.label)}</a>`).join(' · ')}.</p>
-  ${stale ? '<p class="verify-banner-warn">These figures are past their re-check window — treat them as indicative only.</p>' : ''}
+  ${stale ? '<p class="verify-banner-warn">These figures are past their re-check window, treat them as indicative only.</p>' : ''}
 </aside>`;
 }
 
@@ -93,7 +93,7 @@ function modelRow(model) {
   const change = pendingChange(model);
   const isLocal = model.provider === 'local';
 
-  const money = (v) => (isLocal ? '—' : formatUSD(v, { precise: true }));
+  const money = (v) => (isLocal ? '-' : formatUSD(v, { precise: true }));
 
   return `<tr class="model-row" data-tier="${model.tier}">
   <th scope="row" class="model-cell">
@@ -102,7 +102,7 @@ function modelRow(model) {
     ${model.apiId ? `<code class="model-api-id">${escHtml(model.apiId)}</code>` : ''}
     ${isLocal ? `<span class="model-meta">${escHtml(model.hardware)} · ${escHtml(model.throughput)}</span>` : ''}
   </th>
-  <td class="num">${model.context ? formatTokens(model.context) : '—'}</td>
+  <td class="num">${model.context ? formatTokens(model.context) : '-'}</td>
   <td class="num">${money(price.in)}</td>
   <td class="num">${money(price.out)}</td>
   <td class="num">${money(price.cacheRead)}</td>
@@ -152,7 +152,7 @@ function levers() {
   return `<section class="codex-section" id="levers">
   <div class="section-head">
     <h3 class="section-title">The levers that actually move the bill</h3>
-    <p class="section-sub">These are multipliers, not prices — they stay true longer than any number in the table above.</p>
+    <p class="section-sub">These are multipliers, not prices. They stay true longer than any number in the table above.</p>
   </div>
   <div class="lever-grid">
     ${PRICING_LEVERS.map(l => `<article class="lever-card">
@@ -173,7 +173,7 @@ const ROUTING = [
   },
   {
     q: 'Is it everyday coding across a few files?',
-    a: 'Balanced tier — the default.',
+    a: 'Balanced tier: the default.',
     body: 'Most agentic work lives here: implement a feature, fix a failing test, refactor a module. Do not reach past this tier by reflex; reach past it when this tier demonstrably fails.',
     models: ['Claude Sonnet 5', 'GPT-5.6 Terra', 'Gemini 3.6 Flash'],
   },
@@ -192,7 +192,7 @@ const ROUTING = [
   {
     q: 'Is the data sensitive, or are you offline?',
     a: 'Local.',
-    body: 'The per-token cost is zero and nothing leaves the machine. You pay in hardware, throughput, and capability — a 30B-class model handles bounded, well-specified edits, not long-horizon autonomy.',
+    body: 'The per-token cost is zero and nothing leaves the machine. You pay in hardware, throughput, and capability. A 30B-class model handles bounded, well-specified edits, not long-horizon autonomy.',
     models: ['30B class on a single consumer GPU'],
   },
 ];

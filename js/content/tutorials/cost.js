@@ -375,7 +375,7 @@ Caching only works on an **exact prefix match**. The rules that follow from that
 
 1. **Put stable content first.** System prompt, tool definitions, and long reference documents go at the top. Anything that changes per-turn goes at the bottom.
 2. **Do not interpolate volatile values into the prefix.** A timestamp, a random id, or a "current time" line at the top of your system prompt invalidates the entire cache on every single call. This is the most common cause of a 0% hit rate.
-3. **Watch the 5-minute window.** The cache expires on idle. A developer thinking for ten minutes between prompts pays the write cost again. That is fine — it is still cheaper than not caching.
+3. **Watch the 5-minute window.** The cache expires on idle. A developer thinking for ten minutes between prompts pays the write cost again. That is fine. It is still cheaper than not caching.
 4. **Batch your reads.** Reading six files in one turn caches them together. Reading them across six turns writes the cache six times.
 
 ## Checking your hit rate
@@ -395,7 +395,7 @@ The API reports it per call:
 
 Hit rate is \`cache_read / (cache_read + input_tokens)\`. Here that is 80%.
 
-If you see \`cache_creation\` high and \`cache_read\` near zero on every call, something in your prefix is changing. Find it — it is almost always a timestamp.
+If you see \`cache_creation\` high and \`cache_read\` near zero on every call, something in your prefix is changing. Find it. It is almost always a timestamp.
 
 ## When caching does not help
 
@@ -428,7 +428,7 @@ If no, it is batch-eligible:
 - Bulk classification, extraction, tagging
 - Running an eval suite
 - Nightly report generation
-- Migration work — rewriting a thousand files to a new pattern
+- Migration work: rewriting a thousand files to a new pattern
 - Anything on a cron
 
 If yes, it is not:
@@ -477,7 +477,7 @@ for result in client.messages.batches.results(batch.id):
     handle(result.custom_id, result.result)
 \`\`\`
 
-\`custom_id\` is how you match results back to inputs. Results do not come back in order — always key on it, never on position.
+\`custom_id\` is how you match results back to inputs. Results do not come back in order, always key on it, never on position.
 
 ## It stacks with caching
 
@@ -494,7 +494,7 @@ base:                    $X
 
 ## The failure mode to plan for
 
-Batches are not transactional. Individual requests can fail while the rest succeed — usually on token limits or malformed input.
+Batches are not transactional. Individual requests can fail while the rest succeed, usually on token limits or malformed input.
 
 \`\`\`python
 for result in client.messages.batches.results(batch.id):
@@ -512,7 +512,7 @@ See also: [Prompt Caching Economics](/t/prompt-caching-economics/) · [Choose th
   {
     id: 'output-token-discipline',
     title: 'Output Discipline',
-    description: 'Output costs five to six times input — and it is the part you control most directly',
+    description: 'Output costs five to six times input: and it is the part you control most directly',
     category: 'cost',
     tools: ['claude', 'cursor'],
     difficulty: 'beginner',
@@ -528,7 +528,7 @@ Look down any provider's price list and the same ratio appears:
 | GPT-5.6 Sol | \$5 | \$30 | 6× |
 | Gemini 3.6 Flash | \$1.50 | \$7.50 | 5× |
 
-Output is where the money goes. And unlike input — which is largely determined by your codebase and history — output is set by how you ask.
+Output is where the money goes. And unlike input, which is largely determined by your codebase and history, output is set by how you ask.
 
 ## The single highest-value habit
 
@@ -569,7 +569,7 @@ Answer directly.
 
 ## The counter-case
 
-Reasoning output is not waste. When a model thinks through a hard problem, those tokens are what buys the correct answer — clamping them produces a cheap wrong answer, which is the most expensive kind.
+Reasoning output is not waste. When a model thinks through a hard problem, those tokens are what buys the correct answer, clamping them produces a cheap wrong answer, which is the most expensive kind.
 
 The discipline is: **short output for mechanical work, room to think for hard work.** Not "short output always".
 
@@ -594,7 +594,7 @@ See also: [Session Cost Report Script](/t/session-cost-report/) · [The Codex](/
   {
     id: 'subagent-cost-model',
     title: 'What Subagents Actually Cost',
-    description: 'Fan-out buys you clean context and parallelism — and multiplies your token bill',
+    description: 'Fan-out buys you clean context and parallelism, and multiplies your token bill',
     category: 'cost',
     tools: ['claude'],
     difficulty: 'advanced',
@@ -602,7 +602,7 @@ See also: [Session Cost Report Script](/t/session-cost-report/) · [The Codex](/
 
 A subagent is a fresh context window running its own loop. That means:
 
-1. It re-sends its own system prompt and tool definitions — no sharing with the parent.
+1. It re-sends its own system prompt and tool definitions. No sharing with the parent.
 2. It does its own exploration, often re-reading files the parent already read.
 3. Its result comes back into the parent's context, which the parent then re-sends on every subsequent turn.
 
@@ -612,7 +612,7 @@ Three agents exploring a codebase in parallel do not cost one-third each. They c
 
 Subagents win when the alternative is worse, not when they are cheap.
 
-**Good trade — context isolation.** Searching a large codebase generates thousands of tokens of dead ends. In the main conversation those stay in context and get re-billed on every subsequent turn for the rest of the session. In a subagent, they evaporate and only the answer returns.
+**Good trade: context isolation.** Searching a large codebase generates thousands of tokens of dead ends. In the main conversation those stay in context and get re-billed on every subsequent turn for the rest of the session. In a subagent, they evaporate and only the answer returns.
 
 \`\`\`
 In main context:   8,000 tokens of search noise × 40 remaining turns
@@ -624,11 +624,11 @@ In a subagent:     8,000 tokens once, 300-token summary returns
 
 That is a 16× saving, and it grows with session length.
 
-**Good trade — genuine parallelism.** Four independent investigations that would otherwise run in sequence. You pay four times the tokens to save three-quarters of the wall-clock time. Whether that is worth it depends on what your time costs.
+**Good trade: genuine parallelism.** Four independent investigations that would otherwise run in sequence. You pay four times the tokens to save three-quarters of the wall-clock time. Whether that is worth it depends on what your time costs.
 
-**Bad trade — sequential dependency.** If agent B needs agent A's output, you have paid for two cold starts to do one job. Keep it in one context.
+**Bad trade: sequential dependency.** If agent B needs agent A's output, you have paid for two cold starts to do one job. Keep it in one context.
 
-**Bad trade — trivial work.** Spawning an agent to read one file costs more in setup than doing it inline.
+**Bad trade: trivial work.** Spawning an agent to read one file costs more in setup than doing it inline.
 
 ## Routing subagents down a tier
 
@@ -639,7 +639,7 @@ Main agent (planning, synthesis):   frontier tier
 Search / extraction subagents:      fast tier
 \`\`\`
 
-At a 5× spread between tiers, running fan-out on the fast tier while keeping the orchestrator on the frontier tier usually costs less than doing everything in one frontier context — because you also avoid the context bloat.
+At a 5× spread between tiers, running fan-out on the fast tier while keeping the orchestrator on the frontier tier usually costs less than doing everything in one frontier context, because you also avoid the context bloat.
 
 > [!cost] Rough model
 > A frontier orchestrator plus four fast-tier subagents at 15,000 input tokens each:
@@ -651,7 +651,7 @@ At a 5× spread between tiers, running fan-out on the fast tier while keeping th
 
 ## The rule
 
-Reach for a subagent when the work will generate a lot of output you do not want to keep, or when independent tasks can genuinely run at once. Do not reach for one to save tokens on a single well-scoped question — that is where it costs you.
+Reach for a subagent when the work will generate a lot of output you do not want to keep, or when independent tasks can genuinely run at once. Do not reach for one to save tokens on a single well-scoped question. That is where it costs you.
 
 See also: [Parallel Agents Pattern](/t/parallel-agents-pattern/) · [Single Agent or Subagents?](/t/single-agent-vs-subagents/) · [Context Management](/t/context-management/)`,
   },
@@ -665,7 +665,7 @@ See also: [Parallel Agents Pattern](/t/parallel-agents-pattern/) · [Single Agen
     difficulty: 'intermediate',
     content: `## The naive comparison, and why it misleads
 
-Local inference has no per-token price, so it looks free. It is not — you have just moved the cost from a variable to a fixed one, and added two costs that do not appear on any invoice.
+Local inference has no per-token price, so it looks free. It is not. You have just moved the cost from a variable to a fixed one, and added two costs that do not appear on any invoice.
 
 **The real comparison:**
 
@@ -700,7 +700,7 @@ Run your own numbers in [the calculator](/#/codex).
 
 Cost is rarely the reason. These are:
 
-**1. The data cannot leave.** Regulated environments, client code under NDA, personal material. No amount of API pricing changes this — it is a hard constraint, and local is the only answer.
+**1. The data cannot leave.** Regulated environments, client code under NDA, personal material. No amount of API pricing changes this. It is a hard constraint, and local is the only answer.
 
 **2. You are already offline.** Flights, poor connectivity, air-gapped networks.
 
@@ -712,12 +712,12 @@ Cost is rarely the reason. These are:
 
 ## The capability gap is the real cost
 
-A 30B-class model at Q4 handles bounded, well-specified edits well. It does not handle long-horizon agentic work — multi-file refactors, ambiguous debugging, planning across a session — anywhere near a hosted frontier model.
+A 30B-class model at Q4 handles bounded, well-specified edits well. It does not handle long-horizon agentic work, multi-file refactors, ambiguous debugging, planning across a session, anywhere near a hosted frontier model.
 
 If a local model needs three attempts where a hosted one needs one, and your time is worth anything, the free tokens were expensive.
 
 > [!tip] The hybrid that usually wins
-> Local for the private, bulk, and offline work. Hosted for the hard reasoning. This is not a compromise — it is routing, applied to a constraint that happens to be about data rather than difficulty.
+> Local for the private, bulk, and offline work. Hosted for the hard reasoning. This is not a compromise. It is routing, applied to a constraint that happens to be about data rather than difficulty.
 
 ## Sizing the machine
 

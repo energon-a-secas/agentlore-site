@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Halve the Bill with the Batch API | Agent Lore</title>
 <meta name="description" content="A 50% discount on anything that does not need an answer right now">
-<meta property="og:title" content="Halve the Bill with the Batch API — Agent Lore">
+<meta property="og:title" content="Halve the Bill with the Batch API, Agent Lore">
 <meta property="og:description" content="A 50% discount on anything that does not need an answer right now">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/batch-api-savings/">
@@ -17,9 +17,9 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — Halve the Bill with the Batch API">
+<meta property="og:image:alt" content="Agent Lore, Halve the Bill with the Batch API">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Halve the Bill with the Batch API — Agent Lore">
+<meta name="twitter:title" content="Halve the Bill with the Batch API, Agent Lore">
 <meta name="twitter:description" content="A 50% discount on anything that does not need an answer right now">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -182,7 +182,7 @@
 </li>
 <li>Nightly report generation
 </li>
-<li>Migration work — rewriting a thousand files to a new pattern
+<li>Migration work: rewriting a thousand files to a new pattern
 </li>
 <li>Anything on a cron
 </li></ul>
@@ -230,7 +230,7 @@ while True:
 for result in client.messages.batches.results(batch.id):
     handle(result.custom_id, result.result)</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p><code>custom_id</code> is how you match results back to inputs. Results do not come back in order — always key on it, never on position.</p>
+<p><code>custom_id</code> is how you match results back to inputs. Results do not come back in order, always key on it, never on position.</p>
 <h2 id="it-stacks-with-caching">It stacks with caching</h2>
 <p>Batch and caching are independent discounts and they compose. A bulk job with a large shared system prompt gets both:</p>
 <div class="code-block-wrap">
@@ -240,7 +240,7 @@ for result in client.messages.batches.results(batch.id):
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <aside class="callout callout--tip"><p class="callout-title"><span class="callout-icon" aria-hidden="true">★</span>Order of operations</p><p>Do the model routing first, then batch, then caching. Routing down a tier is usually worth more than either discount, and the discounts apply to whatever tier you land on.</p></aside>
 <h2 id="the-failure-mode-to-plan-for">The failure mode to plan for</h2>
-<p>Batches are not transactional. Individual requests can fail while the rest succeed — usually on token limits or malformed input.</p>
+<p>Batches are not transactional. Individual requests can fail while the rest succeed, usually on token limits or malformed input.</p>
 <div class="code-block-wrap" data-lang="python">
 <pre class="code-block" id="cb-4">for result in client.messages.batches.results(batch.id):
     if result.result.type == &quot;succeeded&quot;:
@@ -269,7 +269,7 @@ for result in client.messages.batches.results(batch.id):
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">Halve the Bill with the Batch API — a guide for Claude. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">Halve the Bill with the Batch API. A guide for Claude. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

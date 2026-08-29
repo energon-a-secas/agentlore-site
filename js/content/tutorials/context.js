@@ -259,7 +259,7 @@ In Cursor chat or Composer, type \`@\` to attach specific context to your messag
 
 - Use \`@file\` for targeted questions about specific code
 - Use \`@folder\` when the AI needs to understand a module
-- Use \`@codebase\` sparingly — it uses more tokens
+- Use \`@codebase\` sparingly: it uses more tokens
 - Combine references: \`@auth.ts @types.ts fix the type mismatch\`
 
 Source: [docs.cursor.com/context/@-symbols](https://docs.cursor.com/context/@-symbols)`,
@@ -274,7 +274,7 @@ Source: [docs.cursor.com/context/@-symbols](https://docs.cursor.com/context/@-sy
     difficulty: 'intermediate',
     content: `## What are Notepads?
 
-Notepads are saved text snippets in Cursor that you can attach to any chat with \`@notepads\`. Reusable context blocks — like bookmarks for instructions.
+Notepads are saved text snippets in Cursor that you can attach to any chat with \`@notepads\`. Reusable context blocks, like bookmarks for instructions.
 
 ## When to use Notepads vs Rules
 
@@ -345,7 +345,7 @@ one 6,000-token file read early in a 40-turn session
 = 216,000 input tokens
 \`\`\`
 
-At \$2/M that is \$0.43 for one file, most of which you stopped needing thirty turns ago. With caching it is a tenth of that — which is exactly why caching matters so much here.
+At \$2/M that is \$0.43 for one file, most of which you stopped needing thirty turns ago. With caching it is a tenth of that, which is exactly why caching matters so much here.
 
 ## Cutting the right things
 
@@ -374,7 +374,7 @@ A 1M-token window is permission to include more, not an instruction to. Two thin
 2. **Attention is finite.** Signal buried in 800,000 tokens of noise gets less weight than the same signal in 40,000. More context can produce worse answers.
 
 > [!tip] The diagnostic
-> When answers start getting vaguer as a session goes on, that is not the model degrading — it is your signal-to-noise ratio degrading. Start a fresh session with a short written summary of where you got to. It is almost always faster than pushing on.
+> When answers start getting vaguer as a session goes on, that is not the model degrading. It is your signal-to-noise ratio degrading. Start a fresh session with a short written summary of where you got to. It is almost always faster than pushing on.
 
 See also: [Context Management & Compaction](/t/context-management/) · [Compaction or a Fresh Session?](/t/compaction-vs-fresh-session/) · [Prompt Caching Economics](/t/prompt-caching-economics/)`,
   },
@@ -392,7 +392,7 @@ See also: [Context Management & Compaction](/t/context-management/) · [Compacti
 
 **A fresh session** starts empty. Nothing is preserved except what you deliberately carry over.
 
-The difference that matters: compaction decides for you what was important. A fresh session makes you decide — which is worse when you are in flow, and better when you are stuck.
+The difference that matters: compaction decides for you what was important. A fresh session makes you decide, which is worse when you are in flow, and better when you are stuck.
 
 ## When to compact
 
@@ -427,7 +427,7 @@ Wire billing.ts:88 to the new parser, keep the legacy path behind
 a flag until #412 lands.
 
 ## Do not
-Touch reports.ts yet — it has its own test gap.
+Touch reports.ts yet: it has its own test gap.
 \`\`\`
 
 Then a fresh session starts with: *"Read notes/current-task.md and continue."* That costs a few hundred tokens and carries more usable state than a compaction of fifty turns.
@@ -466,7 +466,7 @@ See also: [Context Management & Compaction](/t/context-management/) · [What Act
     difficulty: 'intermediate',
     content: `## The decision changed
 
-When windows were 8K tokens, retrieval was mandatory. At 1M tokens, stuffing everything in is often simpler, more accurate, and — accounting for engineering time — cheaper.
+When windows were 8K tokens, retrieval was mandatory. At 1M tokens, stuffing everything in is often simpler, more accurate, and, accounting for engineering time, cheaper.
 
 But not always, and the boundary is worth knowing.
 
@@ -514,14 +514,14 @@ Retrieve generously, then let the model read properly. Instead of 5 tight chunks
    anything that looks relevant
 \`\`\`
 
-This gets retrieval's cost profile with much of stuffing's accuracy, and it degrades gracefully when the embedding misses — the agent can go and look.
+This gets retrieval's cost profile with much of stuffing's accuracy, and it degrades gracefully when the embedding misses. The agent can go and look.
 
 > [!warn] The failure mode of tight retrieval
 > Chunking cuts documents at arbitrary boundaries. A rule and its exception end up in different chunks; you retrieve the rule, miss the exception, and get a confidently wrong answer. If your retrieved context is under a couple of thousand tokens, you are probably losing exceptions.
 
 ## Start simple
 
-Put it in context. Measure. Add retrieval when the numbers say to — not because retrieval is what serious systems do. Most corpora people build pipelines for would fit in a cached prefix.
+Put it in context. Measure. Add retrieval when the numbers say to, not because retrieval is what serious systems do. Most corpora people build pipelines for would fit in a cached prefix.
 
 See also: [Local Embeddings](/t/ollama-embeddings/) · [What Actually Fills a Context Window](/t/what-fills-context/) · [Prompt Caching Economics](/t/prompt-caching-economics/)`,
   },

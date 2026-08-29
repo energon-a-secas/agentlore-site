@@ -46,9 +46,9 @@ You can mix them later. LM Studio and Ollama can both expose the same local mode
 
 Three numbers decide your local AI experience:
 
-1. **VRAM** on your GPU — the fast memory models live in.
-2. **System RAM** — used when a model does not fit in VRAM.
-3. **Storage** — model weights are 4 GB to 30 GB each.
+1. **VRAM** on your GPU: the fast memory models live in.
+2. **System RAM**: used when a model does not fit in VRAM.
+3. **Storage**: model weights are 4 GB to 30 GB each.
 
 ## Quick checks
 
@@ -117,9 +117,9 @@ Available for macOS, Windows, and Linux.
 
 Open the **Search** tab and pick a starter model:
 
-- **Qwen 2.5 7B** — fast, capable coding helper
-- **Llama 3.1 8B** — general purpose, well supported
-- **DeepSeek-R1-Distill-Qwen 7B** — reasoning model
+- **Qwen 2.5 7B**: fast, capable coding helper
+- **Llama 3.1 8B**: general purpose, well supported
+- **DeepSeek-R1-Distill-Qwen 7B**: reasoning model
 
 Click **Download**. Models are stored under:
 
@@ -157,10 +157,10 @@ Disconnect from the internet and send another prompt. If it still works, your mo
 
 After loading a model in LM Studio, the right panel shows:
 
-- **System prompt** — persistent instructions for every turn
-- **Temperature** — lower for code, higher for creativity
-- **Max tokens** — cap the response length
-- **Context length** — how much conversation history to keep
+- **System prompt**: persistent instructions for every turn
+- **Temperature**: lower for code, higher for creativity
+- **Max tokens**: cap the response length
+- **Context length**: how much conversation history to keep
 
 ## Recommended starter settings for coding
 
@@ -859,10 +859,10 @@ Diffusion models learn to turn random noise into images matching a text descript
 
 ## Model families
 
-- **SD 1.5** — old, fast, lots of community models
-- **SDXL** — better quality, needs more VRAM
-- **Flux** — current open-source leader, very capable
-- **Stable Diffusion 3** — strong text rendering
+- **SD 1.5**: old, fast, lots of community models
+- **SDXL**: better quality, needs more VRAM
+- **Flux**: current open-source leader, very capable
+- **Stable Diffusion 3**: strong text rendering
 
 ## Hardware primer
 
@@ -941,9 +941,9 @@ a small robot reading a book in a sunny library, digital art
 
 ## Common first-run errors
 
-- **CUDA out of memory** — reduce image size or use a smaller model
-- **Model not found** — check the checkpoint path
-- **Black output** — ensure the VAE is loaded correctly`,
+- **CUDA out of memory**: reduce image size or use a smaller model
+- **Model not found**: check the checkpoint path
+- **Black output**: ensure the VAE is loaded correctly`,
   },
 
   {

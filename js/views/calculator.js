@@ -33,7 +33,7 @@ function resultRow(model, workload, maxMonthly) {
     return `<tr class="calc-row calc-row--local">
   <th scope="row"><span class="calc-dot" style="background:${provider.accent}"></span>${escHtml(model.name)}</th>
   <td class="calc-bar-cell"><span class="calc-local-note">no per-token cost · needs ${model.vramGb} GB VRAM</span></td>
-  <td class="num">—</td>
+  <td class="num">-</td>
   <td class="num strong">$0</td>
 </tr>`;
   }
@@ -111,7 +111,7 @@ export function renderCalculator(s) {
   return `<section class="codex-section" id="calculator">
   <div class="section-head">
     <h3 class="section-title">What will it actually cost?</h3>
-    <p class="section-sub">Pick a workload shape, adjust it to match yours, and compare. The absolute numbers depend on your usage — the spread between models is the part that holds.</p>
+    <p class="section-sub">Pick a workload shape, adjust it to match yours, and compare. The absolute numbers depend on your usage. The spread between models is the part that holds.</p>
   </div>
 
   <div class="calc-presets" id="calc-presets" role="group" aria-label="Workload presets">${presetsMarkup(s)}</div>

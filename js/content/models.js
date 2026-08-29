@@ -55,7 +55,7 @@ export const MODELS = [
     priceChange: {
       on: '2026-09-01',
       price: { in: 3, out: 15, cacheRead: 0.3, cacheWrite: 3.75, batchIn: 1.5, batchOut: 7.5 },
-      note: 'Introductory pricing ends — input rises 50%.',
+      note: 'Introductory pricing ends: input rises 50%.',
     },
     bestAt: ['Everyday agentic coding', 'Tool-calling loops', 'The default choice for most work'],
     avoidFor: ['Research-grade reasoning where a wrong answer is costly'],
@@ -128,7 +128,7 @@ export const MODELS = [
     price: { in: 0.2, out: 1.2, cacheRead: 0.02, batchIn: 0.1, batchOut: 0.6 },
     bestAt: ['Very high volume', 'Cheapest frontier-family option', 'Routing and triage'],
     avoidFor: ['Work needing deep multi-step reasoning'],
-    note: 'The cheapest hosted model here by a wide margin — a tenth of Terra\'s input price.',
+    note: 'The cheapest hosted model here by a wide margin. A tenth of Terra\'s input price.',
     verified: VERIFIED,
   },
 
@@ -259,13 +259,13 @@ export const PRICING_LEVERS = [
     id: 'cache',
     name: 'Prompt caching',
     effect: 'Cache hits cost ~10% of the input price',
-    detail: 'The largest single lever on an agentic workload. A coding session re-sends the same system prompt, file tree, and history on every turn — cache it and that input bill drops by ~90%. Anthropic charges 1.25× to write a 5-minute cache and 2× for an hour, so a 5-minute cache pays for itself after one hit.',
+    detail: 'The largest single lever on an agentic workload. A coding session re-sends the same system prompt, file tree, and history on every turn, cache it and that input bill drops by ~90%. Anthropic charges 1.25× to write a 5-minute cache and 2× for an hour, so a 5-minute cache pays for itself after one hit.',
   },
   {
     id: 'batch',
     name: 'Batch API',
     effect: '50% off input and output',
-    detail: 'Available from all three hosted providers. If the work is not interactive — backfills, migrations, bulk classification, evals — this is a free halving. It stacks with caching.',
+    detail: 'Available from all three hosted providers. If the work is not interactive, backfills, migrations, bulk classification, evals. This is a free halving. It stacks with caching.',
   },
   {
     id: 'tokenizer',

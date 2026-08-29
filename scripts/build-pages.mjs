@@ -89,7 +89,7 @@ function page(t) {
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>${escHtml(t.title)} | Agent Lore</title>
 <meta name="description" content="${escHtml(t.description)}">
-<meta property="og:title" content="${escHtml(t.title)} — Agent Lore">
+<meta property="og:title" content="${escHtml(t.title)}, Agent Lore">
 <meta property="og:description" content="${escHtml(t.description)}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="${ORIGIN}/t/${t.id}/">
@@ -98,9 +98,9 @@ function page(t) {
 <meta property="og:image" content="${ORIGIN}/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — ${escHtml(t.title)}">
+<meta property="og:image:alt" content="Agent Lore, ${escHtml(t.title)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="${escHtml(t.title)} — Agent Lore">
+<meta name="twitter:title" content="${escHtml(t.title)}, Agent Lore">
 <meta name="twitter:description" content="${escHtml(t.description)}">
 <meta name="twitter:image" content="${ORIGIN}/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -146,7 +146,7 @@ ${jsonLd(t)}
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -207,7 +207,7 @@ ${body}
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">${escHtml(t.title)} — a guide for ${escHtml(toolNames)}. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">${escHtml(t.title)}. A guide for ${escHtml(toolNames)}. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>
@@ -336,8 +336,8 @@ async function main() {
   await writeFile(join(ROOT, 'llms.txt'), llmsTxt());
 
   console.log(`✓ ${tutorials.length} reader pages → t/<id>/index.html`);
-  console.log(`✓ search-index.json — ${index.count} entries`);
-  console.log(`✓ sitemap.xml — ${tutorials.length + 1} URLs`);
+  console.log(`✓ search-index.json: ${index.count} entries`);
+  console.log(`✓ sitemap.xml: ${tutorials.length + 1} URLs`);
   console.log(`✓ llms.txt`);
 }
 

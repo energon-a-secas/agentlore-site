@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Context Management &amp; Compaction | Agent Lore</title>
 <meta name="description" content="How to manage conversation context in Claude Code and Cursor to save tokens and stay productive">
-<meta property="og:title" content="Context Management &amp; Compaction — Agent Lore">
+<meta property="og:title" content="Context Management &amp; Compaction, Agent Lore">
 <meta property="og:description" content="How to manage conversation context in Claude Code and Cursor to save tokens and stay productive">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/context-management/">
@@ -17,9 +17,9 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — Context Management &amp; Compaction">
+<meta property="og:image:alt" content="Agent Lore, Context Management &amp; Compaction">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Context Management &amp; Compaction — Agent Lore">
+<meta name="twitter:title" content="Context Management &amp; Compaction, Agent Lore">
 <meta name="twitter:description" content="How to manage conversation context in Claude Code and Cursor to save tokens and stay productive">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -173,7 +173,7 @@
 <p>Claude Code offers three levels of context management.</p>
 <h3 id="auto-compact">Auto-compact</h3>
 <p>Triggers automatically when you approach the context limit. Claude summarizes the conversation, preserving key decisions, code patterns, and recent changes while condensing older history.</p>
-<p>You can see when it happens — Claude prints a compaction notice in the terminal.</p>
+<p>You can see when it happens: Claude prints a compaction notice in the terminal.</p>
 <h3 id="micro-compact">Micro-compact</h3>
 <p>A lighter pass that removes old tool call results (file reads, command outputs) without summarizing the conversation itself. Frees space with minimal information loss.</p>
 <h3 id="manual-compact">Manual /compact</h3>
@@ -182,7 +182,7 @@
 <pre class="code-block" id="cb-1">/compact
 /compact only keep the architecture decisions
 /compact preserve the API schema we designed
-/compact forget the debugging — keep the final solution</pre>
+/compact forget the debugging: keep the final solution</pre>
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>This is useful mid-session when you finish one phase (e.g., debugging) and want to reclaim context for the next phase (e.g., writing tests).</p>
 <h3 id="other-context-commands">Other context commands</h3>
@@ -193,24 +193,24 @@
 <h2 id="cursor-no-compaction">Cursor: no compaction</h2>
 <p>Cursor does not offer compaction. When context fills up, you see a warning and must start a new chat. You cannot summarize mid-conversation or selectively trim context.</p>
 <h3 id="workarounds">Workarounds</h3>
-<p><strong>Notepads</strong> — Store key decisions, schemas, or context in Notepads. They persist across chats and load on demand with <code>@notepad-name</code>.</p>
-<p><strong>Rules files</strong> — Put project conventions in <code>.cursor/rules/</code> as <code>.mdc</code> files. These load automatically based on glob patterns, so every new chat starts with the right context.</p>
-<p><strong>Manual summary</strong> — Before closing a long chat, ask the AI to summarize the conversation. Copy the summary and paste it into a new chat as the first message.</p>
-<p><strong>Shorter chats</strong> — Start a new chat for each distinct task. This is the most reliable way to keep context manageable.</p>
+<p><strong>Notepads</strong>: Store key decisions, schemas, or context in Notepads. They persist across chats and load on demand with <code>@notepad-name</code>.</p>
+<p><strong>Rules files</strong>: Put project conventions in <code>.cursor/rules/</code> as <code>.mdc</code> files. These load automatically based on glob patterns, so every new chat starts with the right context.</p>
+<p><strong>Manual summary</strong>: Before closing a long chat, ask the AI to summarize the conversation. Copy the summary and paste it into a new chat as the first message.</p>
+<p><strong>Shorter chats</strong>: Start a new chat for each distinct task. This is the most reliable way to keep context manageable.</p>
 <h2 id="side-by-side-comparison">Side-by-side comparison</h2>
 <div class="table-wrap"><table>
 <thead><tr><th>Feature</th><th>Claude Code</th><th>Cursor</th></tr></thead>
-<tbody><tr><td>Auto-compaction</td><td>Yes — triggers near context limit</td><td>No</td></tr><tr><td>Manual compaction</td><td><code>/compact [instructions]</code></td><td>No</td></tr><tr><td>Selective trimming</td><td>Micro-compact (tool results)</td><td>No</td></tr><tr><td>Clear conversation</td><td><code>/clear</code></td><td>Start new chat</td></tr><tr><td>Persist across chats</td><td>Memory files, CLAUDE.md</td><td>Notepads, rules files</td></tr><tr><td>Context limit signal</td><td>Auto-compact kicks in</td><td>Warning banner</td></tr></tbody>
+<tbody><tr><td>Auto-compaction</td><td>Yes, triggers near context limit</td><td>No</td></tr><tr><td>Manual compaction</td><td><code>/compact [instructions]</code></td><td>No</td></tr><tr><td>Selective trimming</td><td>Micro-compact (tool results)</td><td>No</td></tr><tr><td>Clear conversation</td><td><code>/clear</code></td><td>Start new chat</td></tr><tr><td>Persist across chats</td><td>Memory files, CLAUDE.md</td><td>Notepads, rules files</td></tr><tr><td>Context limit signal</td><td>Auto-compact kicks in</td><td>Warning banner</td></tr></tbody>
 </table></div>
 <h2 id="best-practices-for-both-tools">Best practices for both tools</h2>
 <ol>
-<li><strong>One task per chat</strong> — the single most effective cost-saving habit
+<li><strong>One task per chat</strong>: the single most effective cost-saving habit
 </li>
-<li><strong>Front-load context</strong> — put important info in CLAUDE.md or rules files, not repeated messages
+<li><strong>Front-load context</strong>: put important info in CLAUDE.md or rules files, not repeated messages
 </li>
-<li><strong>Compact before pivoting</strong> — in Claude Code, run <code>/compact</code> when switching from exploration to implementation
+<li><strong>Compact before pivoting</strong>, in Claude Code, run <code>/compact</code> when switching from exploration to implementation
 </li>
-<li><strong>Don&#39;t fight context limits</strong> — if a conversation feels sluggish or unfocused, start fresh
+<li><strong>Don&#39;t fight context limits</strong>, if a conversation feels sluggish or unfocused, start fresh
 </li></ol>
       </div>
     </article>
@@ -231,7 +231,7 @@
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">Context Management &amp; Compaction — a guide for Claude, Cursor. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">Context Management &amp; Compaction. A guide for Claude, Cursor. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

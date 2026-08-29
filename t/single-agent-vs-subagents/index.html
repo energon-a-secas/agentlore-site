@@ -7,9 +7,9 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Single Agent or Subagents? | Agent Lore</title>
-<meta name="description" content="The one question that decides it — and it is not &quot;is this task big?&quot;">
-<meta property="og:title" content="Single Agent or Subagents? — Agent Lore">
-<meta property="og:description" content="The one question that decides it — and it is not &quot;is this task big?&quot;">
+<meta name="description" content="The one question that decides it, and it is not &quot;is this task big?&quot;">
+<meta property="og:title" content="Single Agent or Subagents?, Agent Lore">
+<meta property="og:description" content="The one question that decides it, and it is not &quot;is this task big?&quot;">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/single-agent-vs-subagents/">
 <meta property="og:site_name" content="Neorgon">
@@ -17,10 +17,10 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — Single Agent or Subagents?">
+<meta property="og:image:alt" content="Agent Lore, Single Agent or Subagents?">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Single Agent or Subagents? — Agent Lore">
-<meta name="twitter:description" content="The one question that decides it — and it is not &quot;is this task big?&quot;">
+<meta name="twitter:title" content="Single Agent or Subagents?, Agent Lore">
+<meta name="twitter:description" content="The one question that decides it, and it is not &quot;is this task big?&quot;">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://agentlore.neorgon.com/t/single-agent-vs-subagents/">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -149,7 +149,7 @@
           <span class="badge badge-difficulty intermediate">Intermediate</span>
         </div>
         <h2 class="reader-title">Single Agent or Subagents?</h2>
-        <p class="reader-desc">The one question that decides it — and it is not &quot;is this task big?&quot;</p>
+        <p class="reader-desc">The one question that decides it, and it is not &quot;is this task big?&quot;</p>
         <div class="reader-actions">
           <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -168,11 +168,11 @@
 
       <div class="reader-body prose">
 <h2 id="the-question">The question</h2>
-<p>Not *&quot;is this task large?&quot;* — large tasks often belong in one context. The question is:</p>
+<p>Not *&quot;is this task large?&quot;*: large tasks often belong in one context. The question is:</p>
 <blockquote><p><strong>Will this work produce a lot of output I do not want to keep?</strong></p></blockquote>
 <p>If yes, isolate it. If no, keep it inline.</p>
 <h2 id="why-that-is-the-right-question">Why that is the right question</h2>
-<p>Everything in your context window is re-sent on every subsequent turn. A search that generates 8,000 tokens of dead ends does not cost you 8,000 tokens — it costs you 8,000 tokens multiplied by every remaining turn in the session.</p>
+<p>Everything in your context window is re-sent on every subsequent turn. A search that generates 8,000 tokens of dead ends does not cost you 8,000 tokens. It costs you 8,000 tokens multiplied by every remaining turn in the session.</p>
 <p>A subagent is a disposable context. It does the messy work, and only the conclusion comes back.</p>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-1">Inline:     8,000 tokens of noise, re-sent across 40 remaining turns
@@ -192,11 +192,11 @@ Subagent:   8,000 tokens once, a 300-token answer returns</pre>
 Good:  &quot;Find every place a session token is created or validated.
         Search src/ and services/. Return a list of file:line with a
         one-line description of each. Do not propose changes.
-        If you find nothing, say so — do not infer where it might be.&quot;</pre>
+        If you find nothing, say so: do not infer where it might be.&quot;</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>The good version specifies scope, output shape, and — critically — what to do on failure. A vague brief produces an agent that explores broadly, burns tokens, and returns something unusable.</p>
+<p>The good version specifies scope, output shape, and, critically, what to do on failure. A vague brief produces an agent that explores broadly, burns tokens, and returns something unusable.</p>
 <h2 id="parallel-fan-out">Parallel fan-out</h2>
-<p>Independent work runs at once. The constraint is genuine independence — if you find yourself wanting agent 2 to know what agent 1 found, they were never parallel.</p>
+<p>Independent work runs at once. The constraint is genuine independence, if you find yourself wanting agent 2 to know what agent 1 found, they were never parallel.</p>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-3">Orchestrator (frontier tier)
 ├── Agent A: map the data layer        ─┐
@@ -206,7 +206,7 @@ Good:  &quot;Find every place a session token is created or validated.
         ↓
 Orchestrator synthesises the four reports</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Route the fan-out down a tier. Searching and extracting is mechanical work — the fast tier does it fine at a fifth of the price, and the orchestrator that has to reason across four reports is where the frontier tier earns its keep.</p>
+<p>Route the fan-out down a tier. Searching and extracting is mechanical work. The fast tier does it fine at a fifth of the price, and the orchestrator that has to reason across four reports is where the frontier tier earns its keep.</p>
 <aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>The most common mistake</p><p>Spawning subagents to &quot;go faster&quot; on work that is actually sequential. You pay for N cold starts, get N partial answers built on incomplete context, and then spend the orchestrator&#39;s turn reconciling contradictions. Sequential work belongs in one context.</p></aside>
 <h2 id="signals-you-should-have-isolated">Signals you should have isolated</h2>
 <ul>
@@ -238,7 +238,7 @@ Orchestrator synthesises the four reports</pre>
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">Single Agent or Subagents? — a guide for Claude. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">Single Agent or Subagents?. A guide for Claude. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

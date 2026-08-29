@@ -7,9 +7,9 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>What Subagents Actually Cost | Agent Lore</title>
-<meta name="description" content="Fan-out buys you clean context and parallelism — and multiplies your token bill">
-<meta property="og:title" content="What Subagents Actually Cost — Agent Lore">
-<meta property="og:description" content="Fan-out buys you clean context and parallelism — and multiplies your token bill">
+<meta name="description" content="Fan-out buys you clean context and parallelism, and multiplies your token bill">
+<meta property="og:title" content="What Subagents Actually Cost, Agent Lore">
+<meta property="og:description" content="Fan-out buys you clean context and parallelism, and multiplies your token bill">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/subagent-cost-model/">
 <meta property="og:site_name" content="Neorgon">
@@ -17,10 +17,10 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — What Subagents Actually Cost">
+<meta property="og:image:alt" content="Agent Lore, What Subagents Actually Cost">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="What Subagents Actually Cost — Agent Lore">
-<meta name="twitter:description" content="Fan-out buys you clean context and parallelism — and multiplies your token bill">
+<meta name="twitter:title" content="What Subagents Actually Cost, Agent Lore">
+<meta name="twitter:description" content="Fan-out buys you clean context and parallelism, and multiplies your token bill">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://agentlore.neorgon.com/t/subagent-cost-model/">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -149,7 +149,7 @@
           <span class="badge badge-difficulty advanced">Advanced</span>
         </div>
         <h2 class="reader-title">What Subagents Actually Cost</h2>
-        <p class="reader-desc">Fan-out buys you clean context and parallelism — and multiplies your token bill</p>
+        <p class="reader-desc">Fan-out buys you clean context and parallelism, and multiplies your token bill</p>
         <div class="reader-actions">
           <button id="mark-done" class="done-btn" type="button" aria-pressed="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -170,7 +170,7 @@
 <h2 id="why-subagents-cost-more-than-they-look">Why subagents cost more than they look</h2>
 <p>A subagent is a fresh context window running its own loop. That means:</p>
 <ol>
-<li>It re-sends its own system prompt and tool definitions — no sharing with the parent.
+<li>It re-sends its own system prompt and tool definitions. No sharing with the parent.
 </li>
 <li>It does its own exploration, often re-reading files the parent already read.
 </li>
@@ -179,7 +179,7 @@
 <p>Three agents exploring a codebase in parallel do not cost one-third each. They cost roughly <strong>three full explorations</strong>, plus the summaries flowing back.</p>
 <h2 id="when-the-arithmetic-works">When the arithmetic works</h2>
 <p>Subagents win when the alternative is worse, not when they are cheap.</p>
-<p><strong>Good trade — context isolation.</strong> Searching a large codebase generates thousands of tokens of dead ends. In the main conversation those stay in context and get re-billed on every subsequent turn for the rest of the session. In a subagent, they evaporate and only the answer returns.</p>
+<p><strong>Good trade: context isolation.</strong> Searching a large codebase generates thousands of tokens of dead ends. In the main conversation those stay in context and get re-billed on every subsequent turn for the rest of the session. In a subagent, they evaporate and only the answer returns.</p>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-1">In main context:   8,000 tokens of search noise × 40 remaining turns
                    = 320,000 re-sent input tokens
@@ -188,19 +188,19 @@ In a subagent:     8,000 tokens once, 300-token summary returns
                    = 8,000 + (300 × 40) = 20,000</pre>
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>That is a 16× saving, and it grows with session length.</p>
-<p><strong>Good trade — genuine parallelism.</strong> Four independent investigations that would otherwise run in sequence. You pay four times the tokens to save three-quarters of the wall-clock time. Whether that is worth it depends on what your time costs.</p>
-<p><strong>Bad trade — sequential dependency.</strong> If agent B needs agent A&#39;s output, you have paid for two cold starts to do one job. Keep it in one context.</p>
-<p><strong>Bad trade — trivial work.</strong> Spawning an agent to read one file costs more in setup than doing it inline.</p>
+<p><strong>Good trade: genuine parallelism.</strong> Four independent investigations that would otherwise run in sequence. You pay four times the tokens to save three-quarters of the wall-clock time. Whether that is worth it depends on what your time costs.</p>
+<p><strong>Bad trade: sequential dependency.</strong> If agent B needs agent A&#39;s output, you have paid for two cold starts to do one job. Keep it in one context.</p>
+<p><strong>Bad trade: trivial work.</strong> Spawning an agent to read one file costs more in setup than doing it inline.</p>
 <h2 id="routing-subagents-down-a-tier">Routing subagents down a tier</h2>
 <p>The strongest cost move: subagents doing mechanical work do not need the frontier tier.</p>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-2">Main agent (planning, synthesis):   frontier tier
 Search / extraction subagents:      fast tier</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>At a 5× spread between tiers, running fan-out on the fast tier while keeping the orchestrator on the frontier tier usually costs less than doing everything in one frontier context — because you also avoid the context bloat.</p>
+<p>At a 5× spread between tiers, running fan-out on the fast tier while keeping the orchestrator on the frontier tier usually costs less than doing everything in one frontier context, because you also avoid the context bloat.</p>
 <aside class="callout callout--cost"><p class="callout-title"><span class="callout-icon" aria-hidden="true">$</span>Rough model</p><p>A frontier orchestrator plus four fast-tier subagents at 15,000 input tokens each:</p><p>- All-frontier, single context: exploration noise persists and compounds</p><p>- Split: 4 × 15,000 × $1/M ≈ $0.06 for the fan-out, and the main context stays lean</p><p>The fan-out is nearly free. The saving is in what does *not* enter the main window.</p></aside>
 <h2 id="the-rule">The rule</h2>
-<p>Reach for a subagent when the work will generate a lot of output you do not want to keep, or when independent tasks can genuinely run at once. Do not reach for one to save tokens on a single well-scoped question — that is where it costs you.</p>
+<p>Reach for a subagent when the work will generate a lot of output you do not want to keep, or when independent tasks can genuinely run at once. Do not reach for one to save tokens on a single well-scoped question. That is where it costs you.</p>
 <p>See also: <a href="/t/parallel-agents-pattern/">Parallel Agents Pattern</a> · <a href="/t/single-agent-vs-subagents/">Single Agent or Subagents?</a> · <a href="/t/context-management/">Context Management</a></p>
       </div>
     </article>
@@ -221,7 +221,7 @@ Search / extraction subagents:      fast tier</pre>
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">What Subagents Actually Cost — a guide for Claude. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">What Subagents Actually Cost. A guide for Claude. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

@@ -15,9 +15,9 @@ const VIEWS = {
 const TITLES = {
   home: 'Agent Lore | Learn the agents, pick the model, ship the skill',
   browse: 'Browse all guides | Agent Lore',
-  learn: 'The Path — training tracks | Agent Lore',
-  codex: 'The Codex — model comparison and cost calculator | Agent Lore',
-  armory: 'The Armory — grounded agent skills | Agent Lore',
+  learn: 'The Path: training tracks | Agent Lore',
+  codex: 'The Codex: model comparison and cost calculator | Agent Lore',
+  armory: 'The Armory: grounded agent skills | Agent Lore',
 };
 
 export function render(s) {

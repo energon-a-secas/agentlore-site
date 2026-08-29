@@ -92,8 +92,8 @@ const CALLOUTS = {
 };
 
 /**
- * Render markdown-like content to HTML. Deliberately small — no dependency,
- * no build step — but the block set is fixed by what the content needs:
+ * Render markdown-like content to HTML. Deliberately small: no dependency,
+ * no build step: but the block set is fixed by what the content needs:
  * headings, fenced code, tables, nested lists, blockquotes, callouts, rules.
  *
  * Code-block ids are positional, not random, so generated pages are stable

@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Retrieval or Just Put It In Context? | Agent Lore</title>
 <meta name="description" content="Long windows made this a real decision instead of a foregone one">
-<meta property="og:title" content="Retrieval or Just Put It In Context? — Agent Lore">
+<meta property="og:title" content="Retrieval or Just Put It In Context?, Agent Lore">
 <meta property="og:description" content="Long windows made this a real decision instead of a foregone one">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/retrieval-vs-stuffing/">
@@ -17,9 +17,9 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — Retrieval or Just Put It In Context?">
+<meta property="og:image:alt" content="Agent Lore, Retrieval or Just Put It In Context?">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Retrieval or Just Put It In Context? — Agent Lore">
+<meta name="twitter:title" content="Retrieval or Just Put It In Context?, Agent Lore">
 <meta name="twitter:description" content="Long windows made this a real decision instead of a foregone one">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -168,7 +168,7 @@
 
       <div class="reader-body prose">
 <h2 id="the-decision-changed">The decision changed</h2>
-<p>When windows were 8K tokens, retrieval was mandatory. At 1M tokens, stuffing everything in is often simpler, more accurate, and — accounting for engineering time — cheaper.</p>
+<p>When windows were 8K tokens, retrieval was mandatory. At 1M tokens, stuffing everything in is often simpler, more accurate, and, accounting for engineering time, cheaper.</p>
 <p>But not always, and the boundary is worth knowing.</p>
 <h2 id="just-put-it-in-context-when">Just put it in context when…</h2>
 <ul>
@@ -211,10 +211,10 @@ Retrieved:        $3   (plus an embedding pipeline you now maintain)</pre>
 3. Give the agent a read_file tool so it can pull full context on
    anything that looks relevant</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>This gets retrieval&#39;s cost profile with much of stuffing&#39;s accuracy, and it degrades gracefully when the embedding misses — the agent can go and look.</p>
+<p>This gets retrieval&#39;s cost profile with much of stuffing&#39;s accuracy, and it degrades gracefully when the embedding misses. The agent can go and look.</p>
 <aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>The failure mode of tight retrieval</p><p>Chunking cuts documents at arbitrary boundaries. A rule and its exception end up in different chunks; you retrieve the rule, miss the exception, and get a confidently wrong answer. If your retrieved context is under a couple of thousand tokens, you are probably losing exceptions.</p></aside>
 <h2 id="start-simple">Start simple</h2>
-<p>Put it in context. Measure. Add retrieval when the numbers say to — not because retrieval is what serious systems do. Most corpora people build pipelines for would fit in a cached prefix.</p>
+<p>Put it in context. Measure. Add retrieval when the numbers say to, not because retrieval is what serious systems do. Most corpora people build pipelines for would fit in a cached prefix.</p>
 <p>See also: <a href="/t/ollama-embeddings/">Local Embeddings</a> · <a href="/t/what-fills-context/">What Actually Fills a Context Window</a> · <a href="/t/prompt-caching-economics/">Prompt Caching Economics</a></p>
       </div>
     </article>
@@ -235,7 +235,7 @@ Retrieved:        $3   (plus an embedding pipeline you now maintain)</pre>
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">Retrieval or Just Put It In Context? — a guide for Claude, Local AI. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">Retrieval or Just Put It In Context?. A guide for Claude, Local AI. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

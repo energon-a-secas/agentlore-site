@@ -3,13 +3,13 @@ export const architecture = [
   {
     id: 'single-agent-vs-subagents',
     title: 'Single Agent or Subagents?',
-    description: 'The one question that decides it — and it is not "is this task big?"',
+    description: 'The one question that decides it: and it is not "is this task big?"',
     category: 'architecture',
     tools: ['claude'],
     difficulty: 'intermediate',
     content: `## The question
 
-Not *"is this task large?"* — large tasks often belong in one context. The question is:
+Not *"is this task large?"*: large tasks often belong in one context. The question is:
 
 > **Will this work produce a lot of output I do not want to keep?**
 
@@ -17,7 +17,7 @@ If yes, isolate it. If no, keep it inline.
 
 ## Why that is the right question
 
-Everything in your context window is re-sent on every subsequent turn. A search that generates 8,000 tokens of dead ends does not cost you 8,000 tokens — it costs you 8,000 tokens multiplied by every remaining turn in the session.
+Everything in your context window is re-sent on every subsequent turn. A search that generates 8,000 tokens of dead ends does not cost you 8,000 tokens. It costs you 8,000 tokens multiplied by every remaining turn in the session.
 
 A subagent is a disposable context. It does the messy work, and only the conclusion comes back.
 
@@ -50,14 +50,14 @@ Bad:   "Look into the auth thing."
 Good:  "Find every place a session token is created or validated.
         Search src/ and services/. Return a list of file:line with a
         one-line description of each. Do not propose changes.
-        If you find nothing, say so — do not infer where it might be."
+        If you find nothing, say so: do not infer where it might be."
 \`\`\`
 
-The good version specifies scope, output shape, and — critically — what to do on failure. A vague brief produces an agent that explores broadly, burns tokens, and returns something unusable.
+The good version specifies scope, output shape, and, critically, what to do on failure. A vague brief produces an agent that explores broadly, burns tokens, and returns something unusable.
 
 ## Parallel fan-out
 
-Independent work runs at once. The constraint is genuine independence — if you find yourself wanting agent 2 to know what agent 1 found, they were never parallel.
+Independent work runs at once. The constraint is genuine independence, if you find yourself wanting agent 2 to know what agent 1 found, they were never parallel.
 
 \`\`\`
 Orchestrator (frontier tier)
@@ -69,7 +69,7 @@ Orchestrator (frontier tier)
 Orchestrator synthesises the four reports
 \`\`\`
 
-Route the fan-out down a tier. Searching and extracting is mechanical work — the fast tier does it fine at a fifth of the price, and the orchestrator that has to reason across four reports is where the frontier tier earns its keep.
+Route the fan-out down a tier. Searching and extracting is mechanical work. The fast tier does it fine at a fifth of the price, and the orchestrator that has to reason across four reports is where the frontier tier earns its keep.
 
 > [!warn] The most common mistake
 > Spawning subagents to "go faster" on work that is actually sequential. You pay for N cold starts, get N partial answers built on incomplete context, and then spend the orchestrator's turn reconciling contradictions. Sequential work belongs in one context.
@@ -95,7 +95,7 @@ See also: [Parallel Agents Pattern](/t/parallel-agents-pattern/) · [What Subage
 
 Most multi-step agent work is one of these. Picking the wrong one is where systems get slow, expensive, or unreliable.
 
-### 1. Chain — each step feeds the next
+### 1. Chain: each step feeds the next
 
 \`\`\`
 extract → normalise → validate → write
@@ -111,7 +111,7 @@ assert data.get("total") is not None, "extraction produced no total"
 clean = normalise(data)
 \`\`\`
 
-### 2. Fan-out / fan-in — independent work, then synthesis
+### 2. Fan-out / fan-in: independent work, then synthesis
 
 \`\`\`
         ┌── analyse security  ──┐
@@ -119,7 +119,7 @@ plan ───┼── analyse perf      ──┼── synthesise
         └── analyse tests     ──┘
 \`\`\`
 
-Use when subtasks are genuinely independent. The synthesis step is the one that needs capability — run the branches on a cheap tier and the join on a good one.
+Use when subtasks are genuinely independent. The synthesis step is the one that needs capability, run the branches on a cheap tier and the join on a good one.
 
 The failure mode is **contradictory branches**. Two agents reach opposite conclusions from different slices. The synthesiser must be told to surface disagreement rather than average it:
 
@@ -129,7 +129,7 @@ stronger evidence. Do not merge contradictory claims into a single
 confident answer.
 \`\`\`
 
-### 3. Loop with a critic — generate, check, revise
+### 3. Loop with a critic: generate, check, revise
 
 \`\`\`
 generate → validate ──fail──> revise ──┐
@@ -139,7 +139,7 @@ generate → validate ──fail──> revise ──┐
             done
 \`\`\`
 
-The most reliable shape for anything that must be correct. The critic should be a **program**, not a model, wherever possible — a test suite, a linter, a schema validator. A deterministic critic cannot be talked around.
+The most reliable shape for anything that must be correct. The critic should be a **program**, not a model, wherever possible. A test suite, a linter, a schema validator. A deterministic critic cannot be talked around.
 
 \`\`\`python
 for attempt in range(3):
@@ -152,7 +152,7 @@ raise PipelineError(f"failed after 3 attempts: {last_error}")
 
 Always bound the loop. An unbounded revise cycle is how a \$0.40 task becomes a \$40 one.
 
-### 4. Router — classify first, then dispatch
+### 4. Router: classify first, then dispatch
 
 \`\`\`
                 ┌── simple  → fast tier
@@ -168,7 +168,7 @@ model = TIERS[tier]
 return run(model, request)
 \`\`\`
 
-The failure mode is **misrouting downward** — a hard request sent to the fast tier returns a confident wrong answer. Build in escalation:
+The failure mode is **misrouting downward**. A hard request sent to the fast tier returns a confident wrong answer. Build in escalation:
 
 \`\`\`python
 result = run(TIERS[tier], request)
@@ -184,7 +184,7 @@ if result.low_confidence or validation_failed(result):
 | Steps are independent | Fan-out / fan-in |
 | Correctness is checkable by a program | Loop with a critic |
 | Requests vary a lot in difficulty | Router |
-| Two of the above apply | Compose them — router in front of a critic loop is very common |
+| Two of the above apply | Compose them: router in front of a critic loop is very common |
 
 ## Rules that apply to all four
 

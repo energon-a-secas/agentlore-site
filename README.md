@@ -17,15 +17,15 @@
 
 ## Overview
 
-**Agent Lore** is a working reference for developers who use AI agents seriously. It covers the tools people actually run — **Claude Code**, **Cursor**, and **local AI stacks** — and answers the three questions that come up over and over: *how do I do this*, *which model should I use and what will it cost*, and *how do I make this reliable enough to trust*.
+**Agent Lore** is a working reference for developers who use AI agents seriously. It covers the tools people actually run, **Claude Code**, **Cursor**, and **local AI stacks**, and answers the three questions that come up over and over: *how do I do this*, *which model should I use and what will it cost*, and *how do I make this reliable enough to trust*.
 
 Three sections, one for each question:
 
 | | |
 |---|---|
-| **The Path** | 66 practical guides across 11 categories, organised into four training tracks — from installing a tool to running agents you can trust. |
+| **The Path** | 66 practical guides across 11 categories, organised into four training tracks, from installing a tool to running agents you can trust. |
 | **The Codex** | 13 models compared on context, capability and real price, with a cost calculator, a routing guide, and the levers that actually move a bill. Every price carries the date it was verified against the provider's own documentation. |
-| **The Armory** | How to build agent skills that stay right — grounded in sources you control rather than in what the model half-remembers. Four working templates included. |
+| **The Armory** | How to build agent skills that stay right: grounded in sources you control rather than in what the model half-remembers. Four working templates included. |
 
 Every guide is a real page at its own URL, readable without JavaScript, with prev/next across the whole corpus so you are never at a dead end.
 
@@ -34,15 +34,15 @@ Every guide is a real page at its own URL, readable without JavaScript, with pre
 ## Features
 
 - **66 guides** across Setup, Context, Cost, Skills, Commands, MCPs, Architecture, Evaluation, Tips, Diagrams and Local AI
-- **Model comparison** — sortable matrix of context windows, input/output/cache pricing, and what each model is genuinely good and bad at
-- **Cost calculator** — pick a workload shape, adjust it, and see monthly spend across models side by side, with local break-even
-- **Dated pricing** — every row stamped with its verification date and source link; the UI flags anything past its re-check window
-- **Price-change warnings** — scheduled provider changes surface as a countdown before they hit your bill
-- **Command palette** — `/` or `⌘K` across guides, models, skill patterns and a 28-term glossary
-- **Static reader pages** — one indexable HTML page per guide, no JavaScript required to read
-- **Four training tracks** — Core Agent Skills, Cost & Efficiency, Reliable Agents, Local AI, with progress tracking shared across the whole site
-- **Shareable filters** — browse state lives in the URL
-- **Keyboard navigation** — `←`/`→` between guides, `/` to search, one-key copy on every code block
+- **Model comparison**: sortable matrix of context windows, input/output/cache pricing, and what each model is genuinely good and bad at
+- **Cost calculator**: pick a workload shape, adjust it, and see monthly spend across models side by side, with local break-even
+- **Dated pricing**: every row stamped with its verification date and source link; the UI flags anything past its re-check window
+- **Price-change warnings**: scheduled provider changes surface as a countdown before they hit your bill
+- **Command palette**: `/` or `⌘K` across guides, models, skill patterns and a 28-term glossary
+- **Static reader pages**: one indexable HTML page per guide, no JavaScript required to read
+- **Four training tracks**: Core Agent Skills, Cost & Efficiency, Reliable Agents, Local AI, with progress tracking shared across the whole site
+- **Shareable filters**: browse state lives in the URL
+- **Keyboard navigation**: `←`/`→` between guides, `/` to search, one-key copy on every code block
 
 ## Running locally
 
@@ -96,7 +96,7 @@ agentlore-site/
 └── CNAME                   # agentlore.neorgon.com
 ```
 
-`scripts/build-pages.mjs` imports the site's own `renderMarkdown` rather than reimplementing it — the generated page and the in-app rendering come from the same code. Output is committed, so serving stays zero-build.
+`scripts/build-pages.mjs` imports the site's own `renderMarkdown` rather than reimplementing it. The generated page and the in-app rendering come from the same code. Output is committed, so serving stays zero-build.
 
 ## A note on the pricing data
 

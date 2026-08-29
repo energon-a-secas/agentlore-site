@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Agent Pipelines | Agent Lore</title>
 <meta name="description" content="Four shapes for composing agent steps, and when each one is the right one">
-<meta property="og:title" content="Agent Pipelines — Agent Lore">
+<meta property="og:title" content="Agent Pipelines, Agent Lore">
 <meta property="og:description" content="Four shapes for composing agent steps, and when each one is the right one">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/agent-pipeline-patterns/">
@@ -17,9 +17,9 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — Agent Pipelines">
+<meta property="og:image:alt" content="Agent Lore, Agent Pipelines">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agent Pipelines — Agent Lore">
+<meta name="twitter:title" content="Agent Pipelines, Agent Lore">
 <meta name="twitter:description" content="Four shapes for composing agent steps, and when each one is the right one">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -162,14 +162,14 @@
       <nav class="reader-outline" aria-label="On this page">
   <p class="outline-title">On this page</p>
   <ul class="outline-list">
-    <li class="outline-item outline-item--h2"><a class="outline-link" href="#four-shapes">Four shapes</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#1-chain-each-step-feeds-the-next">1. Chain — each step feeds the next</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#2-fan-out-fan-in-independent-work-then-synthesis">2. Fan-out / fan-in — independent work, then synthesis</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#3-loop-with-a-critic-generate-check-revise">3. Loop with a critic — generate, check, revise</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#4-router-classify-first-then-dispatch">4. Router — classify first, then dispatch</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#choosing">Choosing</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#rules-that-apply-to-all-four">Rules that apply to all four</a></li>
+    <li class="outline-item outline-item--h2"><a class="outline-link" href="#four-shapes">Four shapes</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#1-chain-each-step-feeds-the-next">1. Chain. Each step feeds the next</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#2-fan-out-fan-in-independent-work-then-synthesis">2. Fan-out / fan-in, independent work, then synthesis</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#3-loop-with-a-critic-generate-check-revise">3. Loop with a critic, generate, check, revise</a></li><li class="outline-item outline-item--h3"><a class="outline-link" href="#4-router-classify-first-then-dispatch">4. Router, classify first, then dispatch</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#choosing">Choosing</a></li><li class="outline-item outline-item--h2"><a class="outline-link" href="#rules-that-apply-to-all-four">Rules that apply to all four</a></li>
   </ul>
 </nav>
 
       <div class="reader-body prose">
 <h2 id="four-shapes">Four shapes</h2>
 <p>Most multi-step agent work is one of these. Picking the wrong one is where systems get slow, expensive, or unreliable.</p>
-<h3 id="1-chain-each-step-feeds-the-next">1. Chain — each step feeds the next</h3>
+<h3 id="1-chain-each-step-feeds-the-next">1. Chain. Each step feeds the next</h3>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-1">extract → normalise → validate → write</pre>
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
@@ -180,20 +180,20 @@
 assert data.get(&quot;total&quot;) is not None, &quot;extraction produced no total&quot;
 clean = normalise(data)</pre>
 <button class="code-copy-btn" data-target="cb-2" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<h3 id="2-fan-out-fan-in-independent-work-then-synthesis">2. Fan-out / fan-in — independent work, then synthesis</h3>
+<h3 id="2-fan-out-fan-in-independent-work-then-synthesis">2. Fan-out / fan-in, independent work, then synthesis</h3>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-3">        ┌── analyse security  ──┐
 plan ───┼── analyse perf      ──┼── synthesise
         └── analyse tests     ──┘</pre>
 <button class="code-copy-btn" data-target="cb-3" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>Use when subtasks are genuinely independent. The synthesis step is the one that needs capability — run the branches on a cheap tier and the join on a good one.</p>
+<p>Use when subtasks are genuinely independent. The synthesis step is the one that needs capability, run the branches on a cheap tier and the join on a good one.</p>
 <p>The failure mode is <strong>contradictory branches</strong>. Two agents reach opposite conclusions from different slices. The synthesiser must be told to surface disagreement rather than average it:</p>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-4">If the reports conflict, say so explicitly and state which one has
 stronger evidence. Do not merge contradictory claims into a single
 confident answer.</pre>
 <button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<h3 id="3-loop-with-a-critic-generate-check-revise">3. Loop with a critic — generate, check, revise</h3>
+<h3 id="3-loop-with-a-critic-generate-check-revise">3. Loop with a critic, generate, check, revise</h3>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-5">generate → validate ──fail──&gt; revise ──┐
               │                        │
@@ -201,7 +201,7 @@ confident answer.</pre>
               ↓
             done</pre>
 <button class="code-copy-btn" data-target="cb-5" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>The most reliable shape for anything that must be correct. The critic should be a <strong>program</strong>, not a model, wherever possible — a test suite, a linter, a schema validator. A deterministic critic cannot be talked around.</p>
+<p>The most reliable shape for anything that must be correct. The critic should be a <strong>program</strong>, not a model, wherever possible. A test suite, a linter, a schema validator. A deterministic critic cannot be talked around.</p>
 <div class="code-block-wrap" data-lang="python">
 <pre class="code-block" id="cb-6">for attempt in range(3):
     code = generate(spec, feedback=last_error)
@@ -211,7 +211,7 @@ confident answer.</pre>
 raise PipelineError(f&quot;failed after 3 attempts: {last_error}&quot;)</pre>
 <button class="code-copy-btn" data-target="cb-6" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>Always bound the loop. An unbounded revise cycle is how a $0.40 task becomes a $40 one.</p>
-<h3 id="4-router-classify-first-then-dispatch">4. Router — classify first, then dispatch</h3>
+<h3 id="4-router-classify-first-then-dispatch">4. Router, classify first, then dispatch</h3>
 <div class="code-block-wrap">
 <pre class="code-block" id="cb-7">                ┌── simple  → fast tier
 request ── classify ── standard → balanced tier
@@ -223,7 +223,7 @@ request ── classify ── standard → balanced tier
 model = TIERS[tier]
 return run(model, request)</pre>
 <button class="code-copy-btn" data-target="cb-8" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
-<p>The failure mode is <strong>misrouting downward</strong> — a hard request sent to the fast tier returns a confident wrong answer. Build in escalation:</p>
+<p>The failure mode is <strong>misrouting downward</strong>. A hard request sent to the fast tier returns a confident wrong answer. Build in escalation:</p>
 <div class="code-block-wrap" data-lang="python">
 <pre class="code-block" id="cb-9">result = run(TIERS[tier], request)
 if result.low_confidence or validation_failed(result):
@@ -232,7 +232,7 @@ if result.low_confidence or validation_failed(result):
 <h2 id="choosing">Choosing</h2>
 <div class="table-wrap"><table>
 <thead><tr><th>If…</th><th>Use</th></tr></thead>
-<tbody><tr><td>Steps depend on each other</td><td>Chain</td></tr><tr><td>Steps are independent</td><td>Fan-out / fan-in</td></tr><tr><td>Correctness is checkable by a program</td><td>Loop with a critic</td></tr><tr><td>Requests vary a lot in difficulty</td><td>Router</td></tr><tr><td>Two of the above apply</td><td>Compose them — router in front of a critic loop is very common</td></tr></tbody>
+<tbody><tr><td>Steps depend on each other</td><td>Chain</td></tr><tr><td>Steps are independent</td><td>Fan-out / fan-in</td></tr><tr><td>Correctness is checkable by a program</td><td>Loop with a critic</td></tr><tr><td>Requests vary a lot in difficulty</td><td>Router</td></tr><tr><td>Two of the above apply</td><td>Compose them, router in front of a critic loop is very common</td></tr></tbody>
 </table></div>
 <h2 id="rules-that-apply-to-all-four">Rules that apply to all four</h2>
 <p><strong>Bound everything.</strong> Max attempts, max tokens, max wall-clock. An agent pipeline without limits will eventually find a way to spend all your money on one request.</p>
@@ -259,7 +259,7 @@ if result.low_confidence or validation_failed(result):
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">Agent Pipelines — a guide for Claude, Local AI. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">Agent Pipelines. A guide for Claude, Local AI. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

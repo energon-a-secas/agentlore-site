@@ -41,7 +41,7 @@ export function renderArmory() {
   <div class="prose">${renderMarkdown(s.content)}</div>
 </section>`).join('');
 
-  return `${pageHead('The Armory', 'How to build agent skills that stay right — anchored to sources you control, not to what the model half-remembers.', 'Equip')}
+  return `${pageHead('The Armory', 'How to build agent skills that stay right, anchored to sources you control, not to what the model half-remembers.', 'Equip')}
 
 <nav class="armory-nav" aria-label="Armory sections">${nav}</nav>
 

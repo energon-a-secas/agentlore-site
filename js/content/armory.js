@@ -59,7 +59,7 @@ That is three tiers, and it is the entire performance argument for skills: a 40-
     tagline: 'A skill that restates what the model already half-knows is worse than no skill.',
     content: `Most published skills are a summary of something the model was already trained on. They add tokens, they add a maintenance burden, and when the underlying facts move they are confidently wrong.
 
-A **grounded** skill is one whose output traces back to something checkable — a file you control, a command's real output, or a validator that fails loudly.
+A **grounded** skill is one whose output traces back to something checkable. A file you control, a command's real output, or a validator that fails loudly.
 
 ## Four ways to ground a skill
 
@@ -85,7 +85,7 @@ Do not guess which services exist. Run:
     kubectl get deploy -o name
 
 Work only from what that returns. If the command fails, stop and
-report the failure — do not substitute an assumed service list.
+report the failure: do not substitute an assumed service list.
 \`\`\`
 
 ### 3. Ship a validator
@@ -106,14 +106,14 @@ For anything research-shaped, force the answer to carry its evidence.
 
 \`\`\`markdown
 Every claim about the codebase must cite file:line.
-If you cannot cite it, say you could not find it — do not infer it.
+If you cannot cite it, say you could not find it, do not infer it.
 \`\`\`
 
 ## The test
 
 Before you ship a skill, ask: **would a competent agent without this skill produce a materially different answer?**
 
-If the answer is no, you have written documentation for a model that already read the docs. Delete it. If the answer is yes, ask *why* — and whatever that reason is, that is the part worth grounding.
+If the answer is no, you have written documentation for a model that already read the docs. Delete it. If the answer is yes, ask *why*, and whatever that reason is, that is the part worth grounding.
 
 > [!warn] The staleness trap
 > Any specific version number, price, or API signature you hardcode in a skill will eventually be wrong, and the skill will assert it with full confidence. Either point at the live source, or stamp the file with a verification date and treat it as expiring.`,
@@ -149,7 +149,7 @@ For the current per-tool breakdown, see [Skill Discovery: Claude vs Cursor](/t/s
 
 ## Testing that it fires
 
-Do not assume. Open a fresh session and phrase the request three different ways — the way you'd say it, the way a teammate would, and the way someone unfamiliar with the codebase would. If it fails to load on any of them, the description is missing a trigger phrase.`,
+Do not assume. Open a fresh session and phrase the request three different ways. The way you'd say it, the way a teammate would, and the way someone unfamiliar with the codebase would. If it fails to load on any of them, the description is missing a trigger phrase.`,
   },
 
   {
@@ -176,10 +176,10 @@ Do not assume. Open a fresh session and phrase the request three different ways 
 
 ## The most common mistake
 
-Putting in \`CLAUDE.md\` what belongs in a skill. \`CLAUDE.md\` is loaded on every request in the project — a 400-line one is a tax on every trivial question. Detail that only matters for *some* tasks belongs in a skill, where it costs a description line until it's needed.
+Putting in \`CLAUDE.md\` what belongs in a skill. \`CLAUDE.md\` is loaded on every request in the project. A 400-line one is a tax on every trivial question. Detail that only matters for *some* tasks belongs in a skill, where it costs a description line until it's needed.
 
 > [!cost] Do the arithmetic
-> A 400-line \`CLAUDE.md\` is roughly 5,000 tokens on every request. At 1,500 requests a month that is 7.5M input tokens — real money at any tier, and it buys nothing on the requests that didn't need it.`,
+> A 400-line \`CLAUDE.md\` is roughly 5,000 tokens on every request. At 1,500 requests a month that is 7.5M input tokens, real money at any tier, and it buys nothing on the requests that didn't need it.`,
   },
 
   {
@@ -190,7 +190,7 @@ Putting in \`CLAUDE.md\` what belongs in a skill. \`CLAUDE.md\` is loaded on eve
 
 A skill that explains what REST is, or how git branching works. The model knows. You have added tokens and a maintenance burden for nothing.
 
-**Fix:** delete it, or narrow it to the part that is specific to *you* — your endpoint conventions, your branching rules.
+**Fix:** delete it, or narrow it to the part that is specific to *you*, your endpoint conventions, your branching rules.
 
 ### 2. The vague description
 
@@ -212,7 +212,7 @@ A 900-line \`SKILL.md\` covering everything about the deployment pipeline. It lo
 
 ### 5. The unverifiable output
 
-The skill produces a migration, a config, a manifest — and nothing checks it. You have automated the production of plausible-looking artifacts.
+The skill produces a migration, a config, a manifest, and nothing checks it. You have automated the production of plausible-looking artifacts.
 
 **Fix:** ship a validator and instruct the agent to run it and to keep going until it passes.
 
@@ -222,11 +222,11 @@ The skill produces a migration, a config, a manifest — and nothing checks it. 
 
 Run this against any skill you already have:
 
-1. Would a good agent without it answer differently? If no — delete it.
-2. Does its description contain the words someone would actually type? If no — rewrite it.
-3. Does anything in it go stale? If yes — is it dated or pointed at a live source?
-4. Is \`SKILL.md\` under ~100 lines? If no — move detail to \`references/\`.
-5. Can its output be checked automatically? If yes — is it?`,
+1. Would a good agent without it answer differently? If no, delete it.
+2. Does its description contain the words someone would actually type? If no, rewrite it.
+3. Does anything in it go stale? If yes: is it dated or pointed at a live source?
+4. Is \`SKILL.md\` under ~100 lines? If no, move detail to \`references/\`.
+5. Can its output be checked automatically? If yes, is it?`,
   },
 ];
 
@@ -250,7 +250,7 @@ advise, follow the rule.
 
 1. Get the diff: git diff --merge-base origin/main
 2. Check it against every rule in references/standards.md.
-3. Report findings as: file:line — rule violated — suggested fix.
+3. Report findings as: file:line, rule violated, suggested fix.
 4. Cite file:line for every finding. If you cannot cite it, do not report it.
 5. Say plainly when you find nothing. Do not invent findings to seem useful.`,
       },
@@ -367,7 +367,7 @@ Do not assume which services exist. Establish the facts first:
 3. Recent deploys: kubectl rollout history deploy/<name>
 
 Work only from what those return. If a command fails, report the failure
-and stop — do not substitute an assumed topology.
+and stop: do not substitute an assumed topology.
 
 Then, and only then, form a hypothesis. State it as a hypothesis, name the
 single observation that would disprove it, and check that observation next.

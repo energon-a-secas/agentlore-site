@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>When Local Actually Beats the API | Agent Lore</title>
 <meta name="description" content="Running the numbers on hardware, throughput, and the capability gap">
-<meta property="og:title" content="When Local Actually Beats the API — Agent Lore">
+<meta property="og:title" content="When Local Actually Beats the API, Agent Lore">
 <meta property="og:description" content="Running the numbers on hardware, throughput, and the capability gap">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/local-vs-api-breakeven/">
@@ -17,9 +17,9 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — When Local Actually Beats the API">
+<meta property="og:image:alt" content="Agent Lore, When Local Actually Beats the API">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="When Local Actually Beats the API — Agent Lore">
+<meta name="twitter:title" content="When Local Actually Beats the API, Agent Lore">
 <meta name="twitter:description" content="Running the numbers on hardware, throughput, and the capability gap">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -168,7 +168,7 @@
 
       <div class="reader-body prose">
 <h2 id="the-naive-comparison-and-why-it-misleads">The naive comparison, and why it misleads</h2>
-<p>Local inference has no per-token price, so it looks free. It is not — you have just moved the cost from a variable to a fixed one, and added two costs that do not appear on any invoice.</p>
+<p>Local inference has no per-token price, so it looks free. It is not. You have just moved the cost from a variable to a fixed one, and added two costs that do not appear on any invoice.</p>
 <p><strong>The real comparison:</strong></p>
 <div class="table-wrap"><table>
 <thead><tr><th></th><th>Hosted API</th><th>Local</th></tr></thead>
@@ -187,15 +187,15 @@
 <p>Run your own numbers in <a href="/#/codex">the calculator</a>.</p>
 <h2 id="when-local-genuinely-wins">When local genuinely wins</h2>
 <p>Cost is rarely the reason. These are:</p>
-<p><strong>1. The data cannot leave.</strong> Regulated environments, client code under NDA, personal material. No amount of API pricing changes this — it is a hard constraint, and local is the only answer.</p>
+<p><strong>1. The data cannot leave.</strong> Regulated environments, client code under NDA, personal material. No amount of API pricing changes this. It is a hard constraint, and local is the only answer.</p>
 <p><strong>2. You are already offline.</strong> Flights, poor connectivity, air-gapped networks.</p>
 <p><strong>3. Volume is enormous and the task is simple.</strong> Classifying ten million documents with an 8B model. Here the arithmetic does flip, decisively.</p>
 <p><strong>4. You want to learn how the stack works.</strong> A real reason. Just do not file it under cost savings.</p>
 <p><strong>5. You already own the GPU.</strong> If the hardware is sunk cost from gaming or ML work, the marginal cost really is close to zero and the break-even question disappears.</p>
 <h2 id="the-capability-gap-is-the-real-cost">The capability gap is the real cost</h2>
-<p>A 30B-class model at Q4 handles bounded, well-specified edits well. It does not handle long-horizon agentic work — multi-file refactors, ambiguous debugging, planning across a session — anywhere near a hosted frontier model.</p>
+<p>A 30B-class model at Q4 handles bounded, well-specified edits well. It does not handle long-horizon agentic work, multi-file refactors, ambiguous debugging, planning across a session, anywhere near a hosted frontier model.</p>
 <p>If a local model needs three attempts where a hosted one needs one, and your time is worth anything, the free tokens were expensive.</p>
-<aside class="callout callout--tip"><p class="callout-title"><span class="callout-icon" aria-hidden="true">★</span>The hybrid that usually wins</p><p>Local for the private, bulk, and offline work. Hosted for the hard reasoning. This is not a compromise — it is routing, applied to a constraint that happens to be about data rather than difficulty.</p></aside>
+<aside class="callout callout--tip"><p class="callout-title"><span class="callout-icon" aria-hidden="true">★</span>The hybrid that usually wins</p><p>Local for the private, bulk, and offline work. Hosted for the hard reasoning. This is not a compromise. It is routing, applied to a constraint that happens to be about data rather than difficulty.</p></aside>
 <h2 id="sizing-the-machine">Sizing the machine</h2>
 <p>VRAM is the binding constraint. Rough arithmetic:</p>
 <div class="code-block-wrap">
@@ -225,7 +225,7 @@
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">When Local Actually Beats the API — a guide for Local AI. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">When Local Actually Beats the API. A guide for Local AI. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>

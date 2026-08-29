@@ -38,7 +38,7 @@ MCP (Model Context Protocol) is a standard for connecting AI agents to external 
 
 MCPs extend what an agent *can do* (new capabilities). Skills guide *how* the agent works (new behaviors). Start with skills; add MCPs when you need external integrations.
 
-Source: [modelcontextprotocol.io](https://modelcontextprotocol.io) — the full MCP specification and server registry.`,
+Source: [modelcontextprotocol.io](https://modelcontextprotocol.io). The full MCP specification and server registry.`,
   },
 
   {

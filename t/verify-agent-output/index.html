@@ -8,7 +8,7 @@
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <title>Verify What the Agent Tells You | Agent Lore</title>
 <meta name="description" content="Cheap checks that separate &quot;the model believes this&quot; from &quot;this is true&quot;">
-<meta property="og:title" content="Verify What the Agent Tells You — Agent Lore">
+<meta property="og:title" content="Verify What the Agent Tells You, Agent Lore">
 <meta property="og:description" content="Cheap checks that separate &quot;the model believes this&quot; from &quot;this is true&quot;">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://agentlore.neorgon.com/t/verify-agent-output/">
@@ -17,9 +17,9 @@
 <meta property="og:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Agent Lore — Verify What the Agent Tells You">
+<meta property="og:image:alt" content="Agent Lore, Verify What the Agent Tells You">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Verify What the Agent Tells You — Agent Lore">
+<meta name="twitter:title" content="Verify What the Agent Tells You, Agent Lore">
 <meta name="twitter:description" content="Cheap checks that separate &quot;the model believes this&quot; from &quot;this is true&quot;">
 <meta name="twitter:image" content="https://agentlore.neorgon.com/og-preview.jpg">
 <meta name="robots" content="index, follow">
@@ -112,7 +112,7 @@
       <a class="nav-tab" href="/#/armory">Armory</a>
       <a class="nav-tab" href="/#/browse">Browse</a>
     </nav>
-    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search — / or ⌘K">
+    <button id="open-palette" class="header-btn palette-btn" data-keep-mobile type="button" aria-label="Search (press / or Command K)" title="Search, / or ⌘K">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       <kbd>/</kbd>
     </button>
@@ -183,7 +183,7 @@
 <button class="code-copy-btn" data-target="cb-1" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>This costs a few dozen tokens per request and changes the failure mode from silent to visible.</p>
 <h2 id="the-four-checks-cheapest-first">The four checks, cheapest first</h2>
-<p><strong>1. Does it cite?</strong> A claim about your code should carry <code>file:line</code>. If it doesn&#39;t, the model is probably recalling a pattern rather than reading your repo. Ask for the citation — the answer often changes.</p>
+<p><strong>1. Does it cite?</strong> A claim about your code should carry <code>file:line</code>. If it doesn&#39;t, the model is probably recalling a pattern rather than reading your repo. Ask for the citation. The answer often changes.</p>
 <p><strong>2. Does the command actually run?</strong> For anything the agent claims works:</p>
 <div class="code-block-wrap" data-lang="bash">
 <pre class="code-block" id="cb-2">git diff --stat          # did it change what it said it changed?
@@ -199,14 +199,14 @@ git stash pop &amp;&amp; npm test # expect pass</pre>
 <p>A test that passes both ways is testing nothing. This catches the single most common form of fake work.</p>
 <p><strong>4. Is it internally consistent?</strong> Ask the same question a different way in a fresh session. Confident answers that change between phrasings were never grounded.</p>
 <h2 id="automate-the-check-into-the-loop">Automate the check into the loop</h2>
-<p>The strongest version is not checking afterwards — it is making the agent unable to finish without checking. That is what a validator in a skill does:</p>
+<p>The strongest version is not checking afterwards. It is making the agent unable to finish without checking. That is what a validator in a skill does:</p>
 <div class="code-block-wrap" data-lang="markdown">
 <pre class="code-block" id="cb-4">After generating the migration, run scripts/validate-migration.sh.
 If it exits non-zero, fix it and run again.
 Do not report success until it exits zero. Paste the final output.</pre>
 <button class="code-copy-btn" data-target="cb-4" title="Copy" aria-label="Copy code" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></div>
 <p>See <a href="/#/armory">The Armory</a> for the full pattern.</p>
-<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Watch for hedging vocabulary</p><p>&quot;Typically&quot;, &quot;usually&quot;, &quot;generally&quot;, &quot;should&quot;, &quot;in most cases&quot; — when these appear in an answer about *your specific codebase*, the model has stopped reading and started generalising. It is the most reliable tell there is. Ask it to cite the file.</p></aside>
+<aside class="callout callout--warn"><p class="callout-title"><span class="callout-icon" aria-hidden="true">!</span>Watch for hedging vocabulary</p><p>&quot;Typically&quot;, &quot;usually&quot;, &quot;generally&quot;, &quot;should&quot;, &quot;in most cases&quot;, when these appear in an answer about *your specific codebase*, the model has stopped reading and started generalising. It is the most reliable tell there is. Ask it to cite the file.</p></aside>
 <h2 id="where-to-spend-the-effort">Where to spend the effort</h2>
 <p>You cannot verify everything, and you should not try. Scale the check to the blast radius:</p>
 <div class="table-wrap"><table>
@@ -234,7 +234,7 @@ Do not report success until it exits zero. Paste the final output.</pre>
 </main>
 
 <footer class="neo-footer" data-footer-mode="content">
-  <p class="neo-footer-note">Verify What the Agent Tells You — a guide for Claude, Cursor, Local AI. Part of the Agent Lore archive.</p>
+  <p class="neo-footer-note">Verify What the Agent Tells You. A guide for Claude, Cursor, Local AI. Part of the Agent Lore archive.</p>
 </footer>
 
 <script type="module" src="/js/reader.js"></script>
