@@ -62,12 +62,13 @@
 
   <header class="header-bar" data-header-mode="content">
     <div class="header-logo">
-      <a href="https://neorgon.com/" target="_blank" rel="noopener noreferrer" aria-label="Neorgon home (opens in new tab)">
-        <img src="/energon-classic-logo.png" class="header-logo-img" alt="Neorgon" width="36" height="36">
-      </a>
       <a href="/#/" class="header-title-link">
+        <img src="/energon-classic-logo.png" class="header-logo-img" alt="" width="36" height="36">
+        <div class="header-title-wrap">
         <h1>Agent Lore</h1>
         <div class="header-subtitle">Learn the agents. Pick the model. Ship the skill.</div>
+      
+        </div>
       </a>
     </div>
     <div class="header-right">
@@ -82,8 +83,15 @@
         <kbd>/</kbd>
       </button>
       <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Neorgon home">
-        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        <svg class="nh-hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.4"/>
+          <ellipse cx="12" cy="12" rx="8.4" ry="3" transform="rotate(-18 12 12)"/>
+          <g class="nh-orbit">
+            <path d="M17.5 4.2 14.2 2.7l.9 1.4-.6 1.1z" fill="currentColor" stroke="none"/>
+            <circle cx="12.6" cy="3" r=".7" fill="currentColor" stroke="none" opacity=".55"/>
+            <circle cx="11.1" cy="3.3" r=".55" fill="currentColor" stroke="none" opacity=".35"/>
+            <circle cx="9.8" cy="3.7" r=".4" fill="currentColor" stroke="none" opacity=".2"/>
+          </g>
         </svg>
       </a>
     </div>
