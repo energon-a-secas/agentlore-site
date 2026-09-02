@@ -47,7 +47,7 @@ function costSnapshot() {
       </tbody>
     </table>
   </div>
-  ${change ? `<p class="snapshot-alert"><strong>Heads up:</strong> ${escHtml(change.m.name)} pricing changes in ${change.c.daysAway} days — ${escHtml(change.c.note.toLowerCase())} <a href="#/codex">See what it does to your bill</a>.</p>` : ''}
+  ${change ? `<p class="snapshot-alert"><strong>Heads up:</strong> ${escHtml(change.m.name)} pricing changes in ${change.c.daysAway} days, ${escHtml(change.c.note.toLowerCase())} <a href="#/codex">See what it does to your bill</a>.</p>` : ''}
   <p class="snapshot-note">A cache hit costs roughly a tenth of fresh input. On an agentic loop that re-sends the same context every turn, that one column is the difference between a comfortable bill and a surprising one.</p>
 </section>`;
 }
