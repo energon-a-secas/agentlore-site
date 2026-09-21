@@ -41,11 +41,11 @@ Everything lives in `js/content/`:
 ```
 js/content/
 ├── index.js          # taxonomy, aggregation, TUTORIAL_BY_ID, neighbours()
-├── paths.js          # PATHS — the training tracks
-├── models.js         # MODELS — the Codex, with per-row `verified` dates
+├── paths.js          # PATHS: the training tracks
+├── models.js         # MODELS: the Codex, with per-row `verified` dates
 ├── workloads.js      # calculator presets + the cost formula
 ├── armory.js         # ARMORY_SECTIONS + SKILL_TEMPLATES
-├── glossary.js       # GLOSSARY — feeds the command palette
+├── glossary.js       # GLOSSARY: feeds the command palette
 └── tutorials/        # one file per category
 ```
 
@@ -53,7 +53,7 @@ js/content/
 
 ```js
 {
-  id: 'kebab-case-slug',      // becomes /t/<id>/ — unique, never reused
+  id: 'kebab-case-slug',      // becomes /t/<id>/; unique, never reused
   title: 'Title Case',
   description: 'One line, no trailing period',
   category: 'cost',           // must exist in CATEGORY_META
@@ -71,7 +71,7 @@ Then add it to a track in `paths.js` and run `make pages`.
 
 `content` is a template literal. Two traps:
 
-- Backticks must be escaped: `` \` `` — including markdown code fences, which become ``\`\`\` ``
+- Backticks must be escaped: `` \` ``, including markdown code fences, which become ``\`\`\` ``
 - A literal `${` must be escaped as `\${`
 
 `node scripts/build-pages.mjs` fails loudly on a syntax error, so a mistake here surfaces immediately.
